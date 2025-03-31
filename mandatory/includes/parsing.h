@@ -2,8 +2,6 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-char	**get_file(char *file);
-
 typedef struct s_color
 {
 	int r_color;
@@ -12,7 +10,7 @@ typedef struct s_color
 }	t_color;
 
 
-typedef struct s_pars
+typedef struct s_element
 {
 	char *no_texture;
 	char *so_texture;
@@ -21,6 +19,9 @@ typedef struct s_pars
 	t_color	*floor;
 	t_color	*ceiling;
 
-}	t_pars;
+}	t_element;
+
+char	**get_file(char *file);
+void	init_element(char **str, t_element *element);
 
 #endif
