@@ -15,6 +15,5 @@ int main(int argc, char *argv[])
 	mlx->map = init_map(map);
 	while (mlx->map->map[i])
 		ft_printf("%s", mlx->map->map[i++]);
-	ft_freef("%d", mlx->map->map);
 	return (0);
 }
