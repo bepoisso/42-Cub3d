@@ -2,7 +2,6 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-char	**get_file(char *file);
 
 typedef struct s_color
 {
@@ -22,5 +21,7 @@ typedef struct s_pars
 	t_color	*ceiling;
 
 }	t_pars;
+
+char	**get_file(char *file);
 
 #endif
