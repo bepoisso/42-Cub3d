@@ -11,6 +11,8 @@
 # include "parsing.h"
 # include "utiles.h"
 # include "map.h"
+# include "../minilibx-linux/mlx.h"
+# 
 
 /* Color */
 # define BLUE "\001\033[0;34m\002"
@@ -20,5 +22,12 @@
 # define CYAN "\001\033[0;36m\002"
 # define VIOLET "\001\033[0;35m\002"
 # define RESET "\001\033[0m\002"
+
+typedef struct	s_mlx
+{
+	void	*link;
+	void	*screen;
+	t_map	*map;
+}	t_mlx;
 
 #endif
