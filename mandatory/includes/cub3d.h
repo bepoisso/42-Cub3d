@@ -3,10 +3,14 @@
 
 # include <fcntl.h>
 # include <stdbool.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <limits.h>
 # include "../libft/includes/libft.h"
 # include "map.h"
 # include "parsing.h"
 # include "utiles.h"
+# include "map.h"
 
 /* Color */
 # define BLUE "\001\033[0;34m\002"
