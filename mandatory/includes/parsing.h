@@ -21,3 +21,5 @@ typedef struct s_pars
 	t_color	*ceiling;
 
 }	t_pars;
+
+#endif
