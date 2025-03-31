@@ -26,13 +26,16 @@ MLX_DIR	= ./minilibx-linux/
 
 #_________________FILES_________________
 
-SRC_FILES	=	main.c\
-				
+SRC_FILES	=	main/main.c\
+				parsing/line.c\
+				parsing/parsing.c\
+				map/map.c\
+				utiles/error.c\
+
 
 LIBSX		=	$(addprefix $(MLX_DIR),$(MLX_NAME))
 SRCS		=	$(addprefix $(SRC_DIR),$(SRC_FILES))
-OBJS		=	$(addprefix $(OBJ_DIR),$(SRC_FILES:.c=.o))
-
+OBJS		=	$(addprefix $(OBJ_DIR),$(notdir $(SRC_FILES:.c=.o)))
 #_________________RULES_________________
 
 all: $(NAME)
@@ -41,7 +44,7 @@ $(NAME): $(OBJS) $(LIBFT_LIB) $(LIBSX)
 	@$(CC) $(CFLAGS) -o $@ $(OBJS) -L$(LIBFT_DIR) -lft -L$(MLX_DIR) $(MLX_FLAGS) -lm > /dev/null 2>&1
 	@echo "Cub3D executable :			✅"
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
+$(OBJ_DIR)%.o: $(SRC_DIR)*/%.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -I$(INC_DIR) -I$(MLX_DIR) -c $< -o $@
 
 $(OBJ_DIR):

@@ -1,9 +1,12 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include <fcntl.h>
-#include <stdbool.h>
-#include "../libft/includes/libft.h"
+# include <fcntl.h>
+# include <stdbool.h>
+# include "../libft/includes/libft.h"
+# include "map.h"
+# include "parsing.h"
+# include "utiles.h"
 
 /* Color */
 # define BLUE "\001\033[0;34m\002"
