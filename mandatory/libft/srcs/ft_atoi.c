@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: afontan <afontan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 00:29:30 by bepoisso          #+#    #+#             */
-/*   Updated: 2024/11/12 10:27:24 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:51:08 by afontan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,22 @@ int	ft_atoi(const char *nptr)
 	neg = 0;
 	result = 0;
 	i = 0;
-	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	if (nptr[i] == '-')
 	{
-		if (nptr[i] == '-')
-			neg = 1;
+		neg = 1;
 		i++;
 	}
-	while (nptr[i] >= '0' && nptr[i] <= '9')
+	while (nptr[i])
 	{
-		result = (result * 10) + (nptr[i] - '0');
-		i++;
+		if (nptr[i] < '0' || nptr[i] > '9')
+			return (-2147483647);
+		while (nptr[i] >= '0' && nptr[i] <= '9')
+		{
+			result = (result * 10) + (nptr[i] - '0');
+			i++;
+		}
+		if(nptr[i])
+			i++;
 	}
 	if (neg)
 		return (-result);
