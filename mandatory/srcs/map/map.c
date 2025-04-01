@@ -22,6 +22,7 @@ char	**get_map(char **file)
 	int		i;
 	int		j;
 
+
 	i = 0;
 	j = count_map_size(file);
 	map = (char **)malloc(sizeof(char *) * (j + 1));
@@ -38,6 +39,5 @@ char	**get_map(char **file)
 		i--;
 		j--;
 	}
-	ft_freef("%d", file);
 	return (map);
 }

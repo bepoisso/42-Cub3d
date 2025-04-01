@@ -22,6 +22,6 @@
 # define VIOLET "\001\033[0;35m\002"
 # define RESET "\001\033[0m\002"
 
-# define ELEM "01SONE "
+# define ELEM "01SONE \n"
 
 #endif

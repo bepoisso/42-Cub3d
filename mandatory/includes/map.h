@@ -13,8 +13,8 @@ typedef struct	s_map
 	t_mlx	*mlx;
 }	t_map;
 
-t_map	*init_map(char **file);
+t_map	*init_map(char **file, t_mlx *mlx);
 char	**get_map(char **file);
-void		check_map(t_mlx *mlx);
+void	check_map(t_mlx *mlx);
 
 #endif

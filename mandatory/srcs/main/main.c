@@ -61,16 +61,18 @@ void init_mlx(t_mlx *mlx)
 int main(int argc, char *argv[])
 {
 	t_mlx	*mlx;
+	char	**file;
 	int		i;
 
 	mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	ft_memset(mlx, 0, sizeof(t_mlx));
 	if (argc != 2)
 		ft_error("invalid argument\n", true, mlx);
-	mlx->map = get_file(argv[1], mlx);
+	file = get_file(argv[1], mlx);
+	mlx->map = init_map(file, mlx);
 	check_map(mlx);
 	i = 0;
-	init_element(mlx->map->map, mlx);
+	init_element(file, mlx);
 	init_mlx(mlx);
-	return (0);
+	return (ft_freef("%s", file), 0);
 }
