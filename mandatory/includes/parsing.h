@@ -39,5 +39,7 @@ typedef struct	s_mlx
 
 char	**get_file(char *file, t_mlx *mlx);
 void	init_element(char **str, t_mlx *mlx);
+void	flood_fill(char **map, int x, int y, t_mlx *mlx, int len);
+void	check_map_ff(char **map, t_mlx *mlx);
 
 #endif

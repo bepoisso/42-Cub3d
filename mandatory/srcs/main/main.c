@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 {
 	t_mlx	*mlx;
 	char	**file;
-	int		i;
+	//int		i;
 
 	mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	ft_memset(mlx, 0, sizeof(t_mlx));
@@ -71,7 +71,8 @@ int main(int argc, char *argv[])
 	file = get_file(argv[1], mlx);
 	mlx->map = init_map(file, mlx);
 	check_map(mlx);
-	i = 0;
+	check_map_ff(mlx->map->map, mlx);	
+	//i = 0;
 	init_element(file, mlx);
 	init_mlx(mlx);
 	return (ft_freef("%s", file), 0);
