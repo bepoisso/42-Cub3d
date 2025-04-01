@@ -23,6 +23,7 @@ int	close_cross(t_mlx *mlx)
 	//free();
 	exit(0);
 }
+
 void init_texture(t_element *element, t_mlx *mlx)
 {
 	int width;
@@ -43,6 +44,7 @@ void init_texture(t_element *element, t_mlx *mlx)
 	if (!element->ea_img)
 		ft_error("failed to load NEA texture\n", true, mlx);
 }
+
 void init_mlx(t_mlx *mlx)
 {
 	mlx->link = mlx_init();
@@ -65,7 +67,7 @@ int main(int argc, char *argv[])
 	ft_memset(mlx, 0, sizeof(t_mlx));
 	if (argc != 2)
 		ft_error("invalid argument\n", true, mlx);
-	mlx->map = get_file(argv[1]);
+	mlx->map = get_file(argv[1], mlx);
 	check_map(mlx);
 	i = 0;
 	init_element(mlx->map->map, mlx);
