@@ -11,7 +11,7 @@ static void cpy_no_texture(char *str, t_element *element)
 	element->no_texture = ft_substr(str, i, ft_strlen(str) - i - 1);
 	fd = open(element->no_texture, O_RDONLY);
 	if (fd < 0)
-		ft_error("wrong NO texture\n", true);
+		ft_error("wrong NO texture\n", true, element->mlx);
 	close(fd);
 	element->flag_element++;
 }
@@ -27,7 +27,7 @@ static void cpy_so_texture(char *str, t_element *element)
 	element->so_texture = ft_substr(str, i, ft_strlen(str) - i - 1);
 	fd = open(element->so_texture, O_RDONLY);
 	if (fd < 0)
-		ft_error("wrong SO texture\n", true);
+		ft_error("wrong SO texture\n", true, element->mlx);
 	close(fd);
 	element->flag_element++;
 }
@@ -43,7 +43,7 @@ static void cpy_we_texture(char *str, t_element *element)
 	element->we_texture = ft_substr(str, i, ft_strlen(str) - i - 1);
 	fd = open(element->we_texture, O_RDONLY);
 	if (fd < 0)
-		ft_error("wrong WE texture\n", true);
+		ft_error("wrong WE texture\n", true, element->mlx);
 	close(fd);
 	element->flag_element++;
 }
@@ -59,44 +59,44 @@ static void cpy_ea_texture(char *str, t_element *element)
 	element->ea_texture = ft_substr(str, i, ft_strlen(str) - i - 1);
 	fd = open(element->ea_texture, O_RDONLY);
 	if (fd < 0)
-		ft_error("wrong EA texture\n", true);
+		ft_error("wrong EA texture\n", true, element->mlx);
 	close(fd);
 	element->flag_element++;
 }
 
-void check_color(t_color *color)
+void	check_color(t_color *color, t_element *element)
 {
 	if (color->r_color == INT_MIN || color->g_color == INT_MIN
 		|| color->b_color == INT_MIN)
-		ft_error("wrong color\n", true);
+		ft_error("wrong color\n", true, element->mlx);
 	if (color->r_color > 255)
 	{		
-		ft_error("bad nb of color\n", false);
+		ft_error("bad nb of color\n", false, element->mlx);
 		color->r_color = 255;
 	}
 	if (color->g_color > 255)
 	{		
-		ft_error("bad nb of color\n", false);
+		ft_error("bad nb of color\n", false, element->mlx);
 		color->g_color = 255;
 	}
 	if (color->b_color > 255)
 	{		
-		ft_error("bad nb of color\n", false);
+		ft_error("bad nb of color\n", false, element->mlx);
 		color->b_color = 255;
 	}
 	if (color->r_color < 0)
 	{		
-		ft_error("bad nb of color\n", false);
+		ft_error("bad nb of color\n", false, element->mlx);
 		color->r_color = 0;
 	}
 	if (color->g_color < 0)
 	{		
-		ft_error("bad nb of color\n", false);
+		ft_error("bad nb of color\n", false, element->mlx);
 		color->g_color = 0;
 	}
 	if (color->b_color < 0)
 	{		
-		ft_error("bad nb of color\n", false);
+		ft_error("bad nb of color\n", false, element->mlx);
 		color->b_color = 0;
 	}
 }
@@ -117,7 +117,7 @@ void init_color(char *str, t_color *color, t_element *element)
 	while (colors[i])
 		free(colors[i++]);
 	free(colors);
-	check_color(color);
+	check_color(color, element);
 	element->flag_element++;
 }
 
@@ -151,7 +151,7 @@ void init_element(char **str, t_mlx *mlx)
 		i++;
 	}
 	if (mlx->element->flag_element != 6)
-		ft_error("bad type of elements\n", true);
+		ft_error("bad type of elements\n", true, mlx);
 	//init_texture(mlx->element, mlx);
 	ft_printf("texture NO = %s\n", mlx->element->no_texture);
 	ft_printf("texture SO = %s\n", mlx->element->so_texture);
