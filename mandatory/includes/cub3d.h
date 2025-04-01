@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <limits.h>
 # include "../libft/includes/libft.h"
+# include "../minilibx-linux/mlx.h"
 # include "map.h"
 # include "parsing.h"
 # include "utiles.h"
@@ -25,9 +26,10 @@
 
 typedef struct	s_mlx
 {
-	void	*link;
-	void	*screen;
-	t_map	*map;
+	void		*link;
+	void		*screen;
+	t_map		*map;
+	t_element	*element;
 }	t_mlx;
 
 #endif

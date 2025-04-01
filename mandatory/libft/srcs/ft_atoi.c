@@ -6,7 +6,7 @@
 /*   By: afontan <afontan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 00:29:30 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/03/31 13:51:08 by afontan          ###   ########.fr       */
+/*   Updated: 2025/04/01 09:27:32 by afontan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_atoi(const char *nptr)
 	while (nptr[i])
 	{
 		if (nptr[i] < '0' || nptr[i] > '9')
-			return (-2147483647);
+			return (-2147483648);
 		while (nptr[i] >= '0' && nptr[i] <= '9')
 		{
 			result = (result * 10) + (nptr[i] - '0');
