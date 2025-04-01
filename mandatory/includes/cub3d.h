@@ -22,12 +22,4 @@
 # define VIOLET "\001\033[0;35m\002"
 # define RESET "\001\033[0m\002"
 
-typedef struct	s_mlx
-{
-	void		*link;
-	void		*screen;
-	t_map		*map;
-	t_element	*element;
-}	t_mlx;
-
 #endif

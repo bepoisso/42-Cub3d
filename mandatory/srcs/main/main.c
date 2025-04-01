@@ -23,7 +23,26 @@ int	close_cross(t_mlx *mlx)
 	//free();
 	exit(0);
 }
+void init_texture(t_element *element, t_mlx *mlx)
+{
+	int width;
+	int height;
 
+	// width = 128;
+	// height = 128;
+	element->no_img = mlx_xpm_file_to_image(mlx->link, element->no_texture, &width, &height);
+	if (!element->no_img)
+		ft_error("failed to load NO texture\n", true);
+	element->so_img = mlx_xpm_file_to_image(mlx->link, element->so_texture, &width, &height);
+	if (!element->so_img)
+		ft_error("failed to load SO texture\n", true);
+	element->we_img = mlx_xpm_file_to_image(mlx->link, element->we_texture, &width, &height);
+	if (!element->we_img)
+		ft_error("failed to load WE texture\n", true);
+	element->ea_img = mlx_xpm_file_to_image(mlx->link, element->ea_texture, &width, &height);
+	if (!element->ea_img)
+		ft_error("failed to load NEA texture\n", true);
+}
 void init_mlx(t_mlx *mlx)
 {
 	mlx->link = mlx_init();
@@ -49,8 +68,9 @@ int main(int argc, char *argv[])
 		ft_error("invalid argument\n", true);
 	map = get_file(argv[1]);
 	i = 0;
-	init_element(map, mlx->element);
+	init_element(map, mlx);
 	init_mlx(mlx);
+	init_texture(mlx->element, mlx);
 	// while (map[i])
 	// {
 	// 	ft_printf("map[%d] = %s", i, map[i]);

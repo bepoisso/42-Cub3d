@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void cpy_no_texture(char *str, t_element *element)
+static void cpy_no_texture(char *str, t_element *element)
 {
 	int fd;
 	int i;
@@ -13,9 +13,10 @@ void cpy_no_texture(char *str, t_element *element)
 	if (fd < 0)
 		ft_error("wrong NO texture\n", true);
 	close(fd);
+	element->flag_element++;
 }
 
-void cpy_so_texture(char *str, t_element *element)
+static void cpy_so_texture(char *str, t_element *element)
 {
 	int fd;
 	int i;
@@ -28,9 +29,10 @@ void cpy_so_texture(char *str, t_element *element)
 	if (fd < 0)
 		ft_error("wrong SO texture\n", true);
 	close(fd);
+	element->flag_element++;
 }
 
-void cpy_we_texture(char *str, t_element *element)
+static void cpy_we_texture(char *str, t_element *element)
 {
 	int fd;
 	int i;
@@ -43,9 +45,10 @@ void cpy_we_texture(char *str, t_element *element)
 	if (fd < 0)
 		ft_error("wrong WE texture\n", true);
 	close(fd);
+	element->flag_element++;
 }
 
-void cpy_ea_texture(char *str, t_element *element)
+static void cpy_ea_texture(char *str, t_element *element)
 {
 	int fd;
 	int i;
@@ -58,6 +61,7 @@ void cpy_ea_texture(char *str, t_element *element)
 	if (fd < 0)
 		ft_error("wrong EA texture\n", true);
 	close(fd);
+	element->flag_element++;
 }
 
 void check_color(t_color *color)
@@ -66,20 +70,38 @@ void check_color(t_color *color)
 		|| color->b_color == INT_MIN)
 		ft_error("wrong color\n", true);
 	if (color->r_color > 255)
+	{		
+		ft_error("bad nb of color\n", false);
 		color->r_color = 255;
+	}
 	if (color->g_color > 255)
+	{		
+		ft_error("bad nb of color\n", false);
 		color->g_color = 255;
+	}
 	if (color->b_color > 255)
+	{		
+		ft_error("bad nb of color\n", false);
 		color->b_color = 255;
+	}
 	if (color->r_color < 0)
+	{		
+		ft_error("bad nb of color\n", false);
 		color->r_color = 0;
+	}
 	if (color->g_color < 0)
+	{		
+		ft_error("bad nb of color\n", false);
 		color->g_color = 0;
+	}
 	if (color->b_color < 0)
+	{		
+		ft_error("bad nb of color\n", false);
 		color->b_color = 0;
+	}
 }
 
-void init_color(char *str, t_color *color)
+void init_color(char *str, t_color *color, t_element *element)
 {
 	char **colors;
 	int i;
@@ -96,39 +118,46 @@ void init_color(char *str, t_color *color)
 		free(colors[i++]);
 	free(colors);
 	check_color(color);
+	element->flag_element++;
 }
 
-void init_element(char **str, t_element *element)
+
+
+void init_element(char **str, t_mlx *mlx)
 {
 	int i;
 
 	i = 0;
-	element = (t_element *)malloc(sizeof(t_element));
-	element->ceiling = (t_color *)malloc(sizeof(t_color));
-	element->floor = (t_color *)malloc(sizeof(t_color));
-	ft_bzero(element->floor, sizeof(t_color));
-	ft_bzero(element->ceiling, sizeof(t_color));
+	mlx->element = (t_element *)malloc(sizeof(t_element));
+	mlx->element->flag_element = 0;
+	mlx->element->ceiling = (t_color *)malloc(sizeof(t_color));
+	mlx->element->floor = (t_color *)malloc(sizeof(t_color));
+	ft_bzero(mlx->element->floor, sizeof(t_color));
+	ft_bzero(mlx->element->ceiling, sizeof(t_color));
 	while (str[i])
 	{
 		if ((ft_strncmp(str[i], "NO", 2) == 0))
-			cpy_no_texture(str[i], element);
+			cpy_no_texture(str[i], mlx->element);
 		if ((ft_strncmp(str[i], "SO", 2) == 0))
-			cpy_so_texture(str[i], element);
+			cpy_so_texture(str[i], mlx->element);
 		if ((ft_strncmp(str[i], "WE", 2) == 0))
-			cpy_we_texture(str[i], element);
+			cpy_we_texture(str[i], mlx->element);
 		if ((ft_strncmp(str[i], "EA", 2) == 0))
-			cpy_ea_texture(str[i], element);
+			cpy_ea_texture(str[i], mlx->element);
 		if ((ft_strncmp(str[i], "F", 1) == 0))
-			init_color(str[i], element->floor);
+			init_color(str[i], mlx->element->floor, mlx->element);
 		if ((ft_strncmp(str[i], "C", 1) == 0))
-			init_color(str[i], element->ceiling);
+			init_color(str[i], mlx->element->ceiling, mlx->element);
 		i++;
 	}
-	ft_printf("texture NO = %s\n", element->no_texture);
-	ft_printf("texture SO = %s\n", element->so_texture);
-	ft_printf("texture WE = %s\n", element->we_texture);
-	ft_printf("texture EA = %s\n", element->ea_texture);
-	ft_printf("floor : %d,%d,%d\n", element->floor->r_color, element->floor->g_color, element->floor->b_color);
-	ft_printf("cieling : %d,%d,%d\n", element->ceiling->r_color, element->ceiling->g_color, element->ceiling->b_color);
+	if (mlx->element->flag_element != 6)
+		ft_error("bad type of elements\n", true);
+	//init_texture(mlx->element, mlx);
+	ft_printf("texture NO = %s\n", mlx->element->no_texture);
+	ft_printf("texture SO = %s\n", mlx->element->so_texture);
+	ft_printf("texture WE = %s\n", mlx->element->we_texture);
+	ft_printf("texture EA = %s\n", mlx->element->ea_texture);
+	ft_printf("floor : %d,%d,%d\n", mlx->element->floor->r_color, mlx->element->floor->g_color, mlx->element->floor->b_color);
+	ft_printf("cieling : %d,%d,%d\n", mlx->element->ceiling->r_color, mlx->element->ceiling->g_color, mlx->element->ceiling->b_color);
 	
 }

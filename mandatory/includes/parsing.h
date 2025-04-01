@@ -4,24 +4,38 @@
 
 typedef struct s_color
 {
-	int r_color;
-	int g_color;
-	int b_color;
+	int	r_color;
+	int	g_color;
+	int	b_color;
 }	t_color;
 
 
 typedef struct s_element
 {
-	char *no_texture;
-	char *so_texture;
-	char *we_texture;
-	char *ea_texture;
+	char	*no_texture;
+	char	*so_texture;
+	char	*we_texture;
+	char	*ea_texture;
+	void	*no_img;
+	void	*so_img;
+	void	*we_img;
+	void	*ea_img;
+	int		flag_element;
 	t_color	*floor;
 	t_color	*ceiling;
 
 }	t_element;
 
+
+typedef struct	s_mlx
+{
+	void		*link;
+	void		*screen;
+	t_map		*map;
+	t_element	*element;
+}	t_mlx;
+
 char	**get_file(char *file);
-void	init_element(char **str, t_element *element);
+void	init_element(char **str, t_mlx *mlx);
 
 #endif
