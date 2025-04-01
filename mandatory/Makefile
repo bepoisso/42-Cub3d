@@ -32,7 +32,9 @@ SRC_FILES	=	main/main.c\
 				parsing/parsing.c\
 				map/map.c\
 				utiles/error.c\
+				utiles/utiles.c\
 				map/init.c\
+				map/m_error.c\
 
 
 LIBSX		=	$(addprefix $(MLX_DIR),$(MLX_NAME))
@@ -68,7 +70,7 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo "Cub3D executable file delete :		✅"
 	@make fclean -C $(LIBFT_DIR) > /dev/null 2>&1
-	@echo "Libft lib.a delete :			✅"
+	@echo "Libft libft.a delete :			✅"
 
 re: fclean all
 

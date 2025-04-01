@@ -21,6 +21,15 @@ typedef struct s_element
 
 }	t_element;
 
-char	**get_file(char *file);
+typedef struct	s_mlx
+{
+	void		*link;
+	void		*screen;
+	t_map		*map;
+	t_element	*element;
+}	t_mlx;
+
+t_map	*get_file(char *file);
+void	init_element(char **str, t_element *element);
 
 #endif

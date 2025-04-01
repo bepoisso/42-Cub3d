@@ -43,21 +43,23 @@ static char **file_to_char(int fd, int size)
 	return (res);
 }
 
-char	**get_file(char *file)
+t_map *get_file(char *file)
 {
-	char	**res;
+	t_map	*map;
 	int		size;
 	int		fd;
 
 	if (!file || file[0] == '\0')
 		ft_error("invalid map\n", true);
+	map = (t_map *)malloc(sizeof(t_map));
+	ft_memset(map, 0, sizeof(t_map));
 	size = files_count_line(file) + 1;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		ft_error("permission denid or file dosen't exist\n", true);
 	if (size <= 0)
 		ft_error("map is empty\n", true);
-	res = file_to_char(fd, size);
+	map->map = file_to_char(fd, size);
 	close (fd);
-	return (res);
+	return (map);
 }

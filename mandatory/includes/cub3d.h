@@ -3,15 +3,15 @@
 
 # include <fcntl.h>
 # include <stdbool.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <limits.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <limits.h>
+
 # include "../libft/includes/libft.h"
 # include "../minilibx-linux/mlx.h"
-# include "map.h"
-# include "parsing.h"
 # include "utiles.h"
 # include "map.h"
+# include "parsing.h"
 
 /* Color */
 # define BLUE "\001\033[0;34m\002"
@@ -22,12 +22,6 @@
 # define VIOLET "\001\033[0;35m\002"
 # define RESET "\001\033[0m\002"
 
-typedef struct	s_mlx
-{
-	void		*link;
-	void		*screen;
-	t_map		*map;
-	t_element	*element;
-}	t_mlx;
+# define ELEM "01SONE "
 
 #endif

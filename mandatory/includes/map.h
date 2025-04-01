@@ -3,6 +3,8 @@
 
 # include "cub3d.h"
 
+typedef struct	s_mlx	t_mlx;
+
 typedef struct	s_map
 {
 	int		x;
@@ -12,5 +14,6 @@ typedef struct	s_map
 
 t_map	*init_map(char **file);
 char	**get_map(char **file);
+void		check_map(t_mlx *mlx);
 
 #endif
