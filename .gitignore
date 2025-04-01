@@ -4,7 +4,6 @@
 *.tmp
 *.test
 *.temp
-test
 
 # Object files
 *.o
