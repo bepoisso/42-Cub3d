@@ -19,6 +19,8 @@ typedef struct s_element
 	t_color	*floor;
 	t_color	*ceiling;
 
-}	t_pars;
+}	t_element;
+
+char	**get_file(char *file);
 
 #endif

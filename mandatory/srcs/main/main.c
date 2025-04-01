@@ -51,11 +51,5 @@ int main(int argc, char *argv[])
 	i = 0;
 	init_element(map, mlx->element);
 	init_mlx(mlx);
-	// while (map[i])
-	// {
-	// 	ft_printf("map[%d] = %s", i, map[i]);
-	// 	i++;
-	// }
-	
 	return (0);
 }

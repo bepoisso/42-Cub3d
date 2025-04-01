@@ -12,8 +12,6 @@
 # include "parsing.h"
 # include "utiles.h"
 # include "map.h"
-# include "../minilibx-linux/mlx.h"
-# 
 
 /* Color */
 # define BLUE "\001\033[0;34m\002"
