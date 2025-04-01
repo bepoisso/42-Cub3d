@@ -59,23 +59,16 @@ void init_mlx(t_mlx *mlx)
 int main(int argc, char *argv[])
 {
 	t_mlx	*mlx;
-	char	**map;
 	int		i;
 
 	mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	ft_memset(mlx, 0, sizeof(t_mlx));
 	if (argc != 2)
 		ft_error("invalid argument\n", true);
-	map = get_file(argv[1]);
+	mlx->map = get_file(argv[1]);
+	check_map(mlx);
 	i = 0;
-	init_element(map, mlx);
+	init_element(mlx->map->map, mlx->element);
 	init_mlx(mlx);
-	init_texture(mlx->element, mlx);
-	// while (map[i])
-	// {
-	// 	ft_printf("map[%d] = %s", i, map[i]);
-	// 	i++;
-	// }
-	
 	return (0);
 }

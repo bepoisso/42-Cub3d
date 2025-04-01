@@ -35,7 +35,7 @@ typedef struct	s_mlx
 	t_element	*element;
 }	t_mlx;
 
-char	**get_file(char *file);
-void	init_element(char **str, t_mlx *mlx);
+t_map	*get_file(char *file);
+void	init_element(char **str, t_element *element);
 
 #endif
