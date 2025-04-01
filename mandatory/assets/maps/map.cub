@@ -1,7 +1,7 @@
-NO ./assets/mur_1.xpm
-SO ./assets/mur_2.xpm
-WE ./assets/mur_3.xpm
-EA ./assets/mur_4.xpm
+NO ./assets/textures/mur_1.xpm
+SO ./assets/textures/mur_2.xpm
+WE ./assets/textures/mur_3.xpm
+EA ./assets/textures/mur_4.xpm
 
 F 180,100,0
 C 200,30,0
