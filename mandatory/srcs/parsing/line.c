@@ -43,14 +43,14 @@ static char **file_to_char(int fd, int size)
 	return (res);
 }
 
-t_map *get_file(char *file)
+t_map *get_file(char *file, t_mlx *mlx)
 {
 	t_map	*map;
 	int		size;
 	int		fd;
 
 	if (!file || file[0] == '\0')
-		ft_error("invalid map\n", true);
+		ft_error("invalid map\n", true, mlx);
 	map = (t_map *)malloc(sizeof(t_map));
 	ft_memset(map, 0, sizeof(t_map));
 	size = files_count_line(file) + 1;

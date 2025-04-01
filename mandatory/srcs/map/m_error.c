@@ -23,5 +23,5 @@ static int	check_validchar(char **map)
 void	check_map(t_mlx *mlx)
 {
 	if (check_validchar(mlx->map->map))
-		ft_error("Invalid character in map\n", true);
+		ft_error("Invalid character in map\n", true, mlx);
 }
