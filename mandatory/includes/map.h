@@ -10,6 +10,7 @@ typedef struct	s_map
 	int		x;
 	int		y;
 	char	**map;
+	t_mlx	*mlx;
 }	t_map;
 
 t_map	*init_map(char **file);

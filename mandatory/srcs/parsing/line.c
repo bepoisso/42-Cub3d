@@ -53,12 +53,13 @@ t_map *get_file(char *file, t_mlx *mlx)
 		ft_error("invalid map\n", true, mlx);
 	map = (t_map *)malloc(sizeof(t_map));
 	ft_memset(map, 0, sizeof(t_map));
+	map->mlx = mlx;
 	size = files_count_line(file) + 1;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		ft_error("permission denid or file dosen't exist\n", true);
+		ft_error("permission denid or file dosen't exist\n", true, mlx);
 	if (size <= 0)
-		ft_error("map is empty\n", true);
+		ft_error("map is empty\n", true, mlx);
 	map->map = file_to_char(fd, size);
 	close (fd);
 	return (map);

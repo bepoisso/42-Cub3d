@@ -151,7 +151,7 @@ void init_element(char **str, t_mlx *mlx)
 		i++;
 	}
 	if (mlx->element->flag_element != 6)
-		ft_error("bad type of elements\n", true);
+		ft_error("bad type of elements\n", true, mlx);
 	//init_texture(mlx->element, mlx);
 	ft_printf("texture NO = %s\n", mlx->element->no_texture);
 	ft_printf("texture SO = %s\n", mlx->element->so_texture);
