@@ -1,7 +1,7 @@
 #include "cub3d.h"
 
 // Count the number of line in a files
-static int	files_count_line(char *file_name)
+static int	files_count_line(char *file_name, t_mlx *mlx)
 {
 	char	buf[1];
 	int		count;
@@ -10,7 +10,9 @@ static int	files_count_line(char *file_name)
 
 	count = 0;
 	readed = 1;
-	fd = open(file_name, O_RDONLY);
+	fd = open(file_name, O_RDWR);
+	if (errno == EISDIR)
+		ft_error("the specified path is a directory, not a file.\n\n", true, mlx);
 	if (fd == -1)
 		return (-1);
 	while (readed != 0)
@@ -51,7 +53,7 @@ char **get_file(char *file, t_mlx *mlx)
 
 	if (!file || file[0] == '\0')
 		ft_error("invalid map\n", true, mlx);
-	size = files_count_line(file) + 1;
+	size = files_count_line(file, mlx) + 1;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		ft_error("permission denid or file dosen't exist\n", true, mlx);

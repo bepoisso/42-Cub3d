@@ -9,6 +9,8 @@ typedef struct	s_map
 {
 	int		x;
 	int		y;
+	int		x_max;
+	int		y_max;
 	char	**map;
 	t_mlx	*mlx;
 }	t_map;
