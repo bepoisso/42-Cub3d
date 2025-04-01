@@ -2,7 +2,7 @@
 
 int	close_window(int keycode, t_mlx *mlx)
 {
-	if (keycode == 65307)
+	if (keycode == XK_Escape)
 	{
 		mlx_destroy_window(mlx->link, mlx->screen);
 		if (mlx->link)
@@ -45,6 +45,20 @@ void init_texture(t_element *element, t_mlx *mlx)
 		ft_error("failed to load NEA texture\n", true, mlx);
 }
 
+int	handling_input(int keysym, t_mlx *mlx)
+{
+	if (keysym == XK_Escape)
+		close_window(keysym, mlx);
+	else if (keysym == XK_Up)
+		ft_printf(BLUE"UP\n"RESET);
+	else if (keysym == XK_Down)
+		ft_printf(BLUE"DOWN\n"RESET);
+	else if (keysym == XK_Left)
+		ft_printf(BLUE"LEFT\n"RESET);
+	else if (keysym == XK_Right)
+		ft_printf(BLUE"RIGHT\n"RESET);
+}
+
 void init_mlx(t_mlx *mlx)
 {
 	mlx->link = mlx_init();
@@ -53,8 +67,9 @@ void init_mlx(t_mlx *mlx)
 	mlx->screen = mlx_new_window(mlx->link, 800, 600, "Cube3D");
 	if(!mlx->screen)
 		ft_error("can't open screen", true, mlx);
-	mlx_key_hook(mlx->screen, &close_window, mlx);
 	mlx_hook(mlx->screen, 17, 0, &close_cross, mlx);
+	// mlx_loop_hook(mlx->link, &aff_map, mlx);
+	mlx_key_hook(mlx->screen, &handling_input, mlx);
 	mlx_loop(mlx->link);
 }
 

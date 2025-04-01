@@ -6,7 +6,9 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <limits.h>
-#include <errno.h>
+# include <errno.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
 
 # include "../libft/includes/libft.h"
 # include "../minilibx-linux/mlx.h"
