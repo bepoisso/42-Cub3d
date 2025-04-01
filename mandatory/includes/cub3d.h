@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <limits.h>
 # include "../libft/includes/libft.h"
+# include "../minilibx-linux/mlx.h"
 # include "map.h"
 # include "parsing.h"
 # include "utiles.h"

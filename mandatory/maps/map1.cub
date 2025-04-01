@@ -1,7 +1,7 @@
-NO ./assets/texture_test.xpm
-SO ./assets/texture_test.xpm
-WE ./assets/texture_test.xpm
-EA ./assets/texture_test.xpm
+NO ./assets/mur_1.xpm
+SO ./assets/mur_2.xpm
+WE ./assets/mur_3.xpm
+EA ./assets/mur_4.xpm
 
 F -880,100,0
 C 300,30,0
