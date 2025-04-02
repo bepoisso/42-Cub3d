@@ -6,6 +6,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <limits.h>
+# include <math.h>
 # include <errno.h>
 # include <X11/keysym.h>
 # include <X11/X.h>

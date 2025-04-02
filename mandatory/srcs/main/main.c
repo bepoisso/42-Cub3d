@@ -68,12 +68,14 @@ int	handling_input(int keysym, t_mlx *mlx)
 void init_mlx(t_mlx *mlx)
 {
 	mlx->link = mlx_init();
-	if(!mlx)
+	if(!mlx->link)
 		ft_error("wrong init mlx", true, mlx);
-	mlx->screen = mlx_new_window(mlx->link, 800, 600, "Cube3D");
+	init_texture(mlx->element, mlx);
+	mlx->screen = mlx_new_window(mlx->link, 2800, 1800, "Cube3D");
 	if(!mlx->screen)
 		ft_error("can't open screen", true, mlx);
 	mlx_hook(mlx->screen, 17, 0, &close_cross, mlx);
+	draw_map(mlx);
 	// mlx_loop_hook(mlx->link, &aff_map, mlx);
 	mlx_key_hook(mlx->screen, &handling_input, mlx);
 	mlx_loop(mlx->link);
@@ -83,7 +85,6 @@ int main(int argc, char *argv[])
 {
 	t_mlx	*mlx;
 	char	**file;
-	int		i;
 
 	mlx = (t_mlx *)malloc(sizeof(t_mlx));
 	ft_memset(mlx, 0, sizeof(t_mlx));
@@ -92,7 +93,8 @@ int main(int argc, char *argv[])
 	file = get_file(argv[1], mlx);
 	mlx->map = init_map(file, mlx);
 	check_map(mlx);
-	i = 0;
+	check_map_ff(mlx->map->map, mlx);	
+
 	init_element(file, mlx);
 	init_mlx(mlx);
 	return (ft_freef("%s", file), 0);
