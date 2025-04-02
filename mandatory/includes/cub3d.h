@@ -26,5 +26,10 @@
 # define RESET "\001\033[0m\002"
 
 # define ELEM "01SONE \n"
+# define TEXTURE 128
+# define W_UNIT TEXTURE
+# define P_UNIT W_UNIT / 2;
+# define FOV 60
+
 
 #endif
