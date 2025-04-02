@@ -48,6 +48,7 @@ typedef struct	s_mlx
 	t_map		*map;
 	t_element	*element;
 	t_player	*player;
+	int	p_unite;
 }	t_mlx;
 
 char	**get_file(char *file, t_mlx *mlx);

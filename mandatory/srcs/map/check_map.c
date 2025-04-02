@@ -110,5 +110,5 @@ void check_map_ff(char **map, t_mlx *mlx)
 	//ft_print_map(map_cpy);
 	flood_fill(map_cpy, 0, 0, mlx);
 	ft_freef("%d", map_cpy);
-	get_player_pos(mlx);
+	//get_player_pos(mlx);
 }

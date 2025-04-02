@@ -47,6 +47,8 @@ void init_texture(t_element *element, t_mlx *mlx)
 
 int	handling_input(int keysym, t_mlx *mlx)
 {
+	mlx_clear_window(mlx->link, mlx->screen);
+	print_wall(mlx, mlx->p_unite);
 	if (keysym == XK_Escape)
 		close_window(keysym, mlx);
 	else if (keysym == XK_Left)
@@ -54,11 +56,17 @@ int	handling_input(int keysym, t_mlx *mlx)
 	else if (keysym == XK_Right)
 		ft_printf(BLUE"RIGHT Rotate\n"RESET);
 	else if (keysym == 119)
+	{
+		mlx->p_unite += 20;
 		ft_printf(BLUE"FORWARD\n"RESET);
+	}
 	else if (keysym == 97)
 		ft_printf(BLUE"LEFT Strafe\n"RESET);
 	else if (keysym == 115)
+	{
+		mlx->p_unite -= 20;
 		ft_printf(BLUE"BACKWARD\n"RESET);
+	}
 	else if (keysym == 100)
 		ft_printf(BLUE"RIGHT Strafe\n"RESET);
 	else
@@ -71,11 +79,11 @@ void init_mlx(t_mlx *mlx)
 	if(!mlx->link)
 		ft_error("wrong init mlx", true, mlx);
 	init_texture(mlx->element, mlx);
-	mlx->screen = mlx_new_window(mlx->link, 2800, 1800, "Cube3D");
+	mlx->screen = mlx_new_window(mlx->link, WIN_WIDTH, WIN_HEIGHT, "Cube3D");
 	if(!mlx->screen)
 		ft_error("can't open screen", true, mlx);
 	mlx_hook(mlx->screen, 17, 0, &close_cross, mlx);
-	draw_map(mlx);
+	// draw_map(mlx);
 	// mlx_loop_hook(mlx->link, &aff_map, mlx);
 	mlx_key_hook(mlx->screen, &handling_input, mlx);
 	mlx_loop(mlx->link);
@@ -94,8 +102,8 @@ int main(int argc, char *argv[])
 	mlx->map = init_map(file, mlx);
 	check_map(mlx);
 	check_map_ff(mlx->map->map, mlx);	
-
 	init_element(file, mlx);
+	mlx->p_unite = 128;
 	init_mlx(mlx);
 	return (ft_freef("%s", file), 0);
 }
