@@ -49,14 +49,20 @@ int	handling_input(int keysym, t_mlx *mlx)
 {
 	if (keysym == XK_Escape)
 		close_window(keysym, mlx);
-	else if (keysym == XK_Up)
-		ft_printf(BLUE"UP\n"RESET);
-	else if (keysym == XK_Down)
-		ft_printf(BLUE"DOWN\n"RESET);
 	else if (keysym == XK_Left)
-		ft_printf(BLUE"LEFT\n"RESET);
+		ft_printf(BLUE"LEFT Rotate\n"RESET);
 	else if (keysym == XK_Right)
-		ft_printf(BLUE"RIGHT\n"RESET);
+		ft_printf(BLUE"RIGHT Rotate\n"RESET);
+	else if (keysym == 119)
+		ft_printf(BLUE"FORWARD\n"RESET);
+	else if (keysym == 97)
+		ft_printf(BLUE"LEFT Strafe\n"RESET);
+	else if (keysym == 115)
+		ft_printf(BLUE"BACKWARD\n"RESET);
+	else if (keysym == 100)
+		ft_printf(BLUE"RIGHT Strafe\n"RESET);
+	else
+		ft_printf(YELLOW"%d key was pressed\n"RESET, keysym);
 }
 
 void init_mlx(t_mlx *mlx)
