@@ -64,63 +64,6 @@ static void cpy_ea_texture(char *str, t_element *element)
 	element->flag_element++;
 }
 
-void	check_color(t_color *color, t_element *element)
-{
-	if (color->r_color == INT_MIN || color->g_color == INT_MIN
-		|| color->b_color == INT_MIN)
-		ft_error("wrong color\n", true, element->mlx);
-	if (color->r_color > 255)
-	{		
-		ft_error("bad nb of color\n", false, element->mlx);
-		color->r_color = 255;
-	}
-	if (color->g_color > 255)
-	{		
-		ft_error("bad nb of color\n", false, element->mlx);
-		color->g_color = 255;
-	}
-	if (color->b_color > 255)
-	{		
-		ft_error("bad nb of color\n", false, element->mlx);
-		color->b_color = 255;
-	}
-	if (color->r_color < 0)
-	{		
-		ft_error("bad nb of color\n", false, element->mlx);
-		color->r_color = 0;
-	}
-	if (color->g_color < 0)
-	{		
-		ft_error("bad nb of color\n", false, element->mlx);
-		color->g_color = 0;
-	}
-	if (color->b_color < 0)
-	{		
-		ft_error("bad nb of color\n", false, element->mlx);
-		color->b_color = 0;
-	}
-}
-
-void init_color(char *str, t_color *color, t_element *element)
-{
-	char **colors;
-	int i;
-
-	i = 1;
-	while (str[i] == ' ')
-		i++;
-	colors = ft_split(str + i, ',');
-	color->r_color = ft_atoi(colors[0]);
-	color->g_color = ft_atoi(colors[1]);
-	color->b_color = ft_atoi(colors[2]);
-	i = 0;
-	while (colors[i])
-		free(colors[i++]);
-	free(colors);
-	check_color(color, element);
-	element->flag_element++;
-}
-
 
 
 void init_element(char **str, t_mlx *mlx)
@@ -152,12 +95,14 @@ void init_element(char **str, t_mlx *mlx)
 	}
 	if (mlx->element->flag_element != 6)
 		ft_error("bad type of elements\n", true, mlx);
-	//init_texture(mlx->element, mlx);
+	set_colors(mlx->element);
 	ft_printf("texture NO = %s\n", mlx->element->no_texture);
 	ft_printf("texture SO = %s\n", mlx->element->so_texture);
 	ft_printf("texture WE = %s\n", mlx->element->we_texture);
 	ft_printf("texture EA = %s\n", mlx->element->ea_texture);
 	ft_printf("floor : %d,%d,%d\n", mlx->element->floor->r_color, mlx->element->floor->g_color, mlx->element->floor->b_color);
 	ft_printf("cieling : %d,%d,%d\n", mlx->element->ceiling->r_color, mlx->element->ceiling->g_color, mlx->element->ceiling->b_color);
+	ft_printf("RGB Cieling = %d\n", mlx->element->cieling_color);
+	ft_printf("RGB Floor = %d\n", mlx->element->floor_color);
 	
 }

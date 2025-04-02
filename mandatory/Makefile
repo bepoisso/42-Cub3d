@@ -30,11 +30,13 @@ MLX_DIR	= ./minilibx-linux/
 SRC_FILES	=	main/main.c\
 				parsing/line.c\
 				parsing/parsing.c\
+				parsing/color.c\
 				map/map.c\
 				utiles/error.c\
 				utiles/utiles.c\
 				map/init.c\
 				map/m_error.c\
+				map/draw_map.c\
 				map/check_map.c\
 
 

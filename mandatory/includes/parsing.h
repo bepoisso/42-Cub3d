@@ -2,6 +2,9 @@
 #ifndef PARSING_H
 # define PARSING_H
 
+# define HEIGHT 128
+# define WIDTH 128
+
 typedef struct	s_mlx	t_mlx;
 
 typedef struct s_color
@@ -10,6 +13,13 @@ typedef struct s_color
 	int	g_color;
 	int	b_color;
 }	t_color;
+
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	angle;
+}	t_player;
 
 
 typedef struct s_element
@@ -23,6 +33,8 @@ typedef struct s_element
 	void	*we_img;
 	void	*ea_img;
 	int		flag_element;
+	int		floor_color;
+	int		cieling_color;
 	t_color	*floor;
 	t_color	*ceiling;
 	t_mlx	*mlx;
@@ -35,11 +47,17 @@ typedef struct	s_mlx
 	void		*screen;
 	t_map		*map;
 	t_element	*element;
+	t_player	*player;
 }	t_mlx;
 
 char	**get_file(char *file, t_mlx *mlx);
 void	init_element(char **str, t_mlx *mlx);
-void	flood_fill(char **map, int x, int y, t_mlx *mlx, int len);
+void	flood_fill(char **map, int x, int y, t_mlx *mlx);
 void	check_map_ff(char **map, t_mlx *mlx);
+
+void	set_colors(t_element *element);
+void	init_color(char *str, t_color *color, t_element *element);
+void	draw_map(t_mlx *mlx);
+void	ft_print_map(char **map);
 
 #endif
