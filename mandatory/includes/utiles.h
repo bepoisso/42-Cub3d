@@ -5,5 +5,6 @@ typedef struct	s_mlx	t_mlx;
 
 void	ft_error(char *s, bool free, t_mlx *mlx);
 int		ft_ischarset(char c, char *charset);
+int		ft_strslen(char **s);
 
 #endif
