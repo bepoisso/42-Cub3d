@@ -5,7 +5,7 @@ typedef struct	s_player
 {
 	float	x;
 	float	y;
-	float	angle;
+	int	angle;
 	t_draw	*circle;
 }	t_player;
 

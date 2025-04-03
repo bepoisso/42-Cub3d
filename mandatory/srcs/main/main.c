@@ -54,12 +54,16 @@ int	handling_input(int keysym, t_mlx *mlx)
 	else if (keysym == XK_Left)
 	{
 		ft_printf(BLUE"LEFT Rotate\n"RESET);
-		mlx->player->angle -= 1;
+		mlx->player->angle -= 5;
+		mlx->player->angle %= 360;
+		if (mlx->player->angle < 0)
+			mlx->player->angle += 360;
 	}
 	else if (keysym == XK_Right)
 	{
 		ft_printf(BLUE"RIGHT Rotate\n"RESET);
-		mlx->player->angle += 1;
+		mlx->player->angle += 5;
+		mlx->player->angle %= 360;
 	}
 	else if (keysym == 119)
 	{
@@ -87,7 +91,7 @@ int	handling_input(int keysym, t_mlx *mlx)
 		ft_printf(YELLOW"%d key was pressed\n"RESET, keysym);
 	draw_map(mlx);
 	print_player(mlx, false);
-	printf(VIOLET"angle of player %f\n"RESET, mlx->player->angle);
+	printf(VIOLET"angle of player %d\n"RESET, mlx->player->angle);
 }
 
 void init_mlx(t_mlx *mlx)
