@@ -6,8 +6,8 @@ void	draw_wall(int x, int y, t_mlx *mlx, char wall)
 	int width;
 	void	*wall_texture;
 
-	height = HEIGHT;
-	width = WIDTH;
+	height = TEXTURE;
+	width = TEXTURE;
 	if (wall == 'N')
 		wall_texture = mlx->element->no_img;
 	else if (wall == 'S')
