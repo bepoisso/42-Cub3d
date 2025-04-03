@@ -47,32 +47,47 @@ void init_texture(t_element *element, t_mlx *mlx)
 
 int	handling_input(int keysym, t_mlx *mlx)
 {
+	print_player(mlx, true);
 	mlx_clear_window(mlx->link, mlx->screen);
 	if (keysym == XK_Escape)
 		close_window(keysym, mlx);
 	else if (keysym == XK_Left)
+	{
 		ft_printf(BLUE"LEFT Rotate\n"RESET);
+		mlx->player->angle -= 1;
+	}
 	else if (keysym == XK_Right)
+	{
 		ft_printf(BLUE"RIGHT Rotate\n"RESET);
+		mlx->player->angle += 1;
+	}
 	else if (keysym == 119)
 	{
+		mlx->player->y -= 5;
 		mlx->p_unite += 20;
 		ft_printf(BLUE"FORWARD\n"RESET);
 	}
 	else if (keysym == 97)
+	{
 		ft_printf(BLUE"LEFT Strafe\n"RESET);
+		mlx->player->x -= 5;
+	}
 	else if (keysym == 115)
 	{
+		mlx->player->y += 5;
 		mlx->p_unite -= 20;
 		ft_printf(BLUE"BACKWARD\n"RESET);
 	}
 	else if (keysym == 100)
+	{
 		ft_printf(BLUE"RIGHT Strafe\n"RESET);
+		mlx->player->x += 5;
+	}
 	else
 		ft_printf(YELLOW"%d key was pressed\n"RESET, keysym);
 	draw_map(mlx);
-	print_player(mlx, true);
 	print_player(mlx, false);
+	printf(VIOLET"angle of player %f\n"RESET, mlx->player->angle);
 }
 
 void init_mlx(t_mlx *mlx)
@@ -86,8 +101,6 @@ void init_mlx(t_mlx *mlx)
 		ft_error("can't open screen", true, mlx);
 	mlx_hook(mlx->screen, 17, 0, &close_cross, mlx);
 	draw_map(mlx);
-	// mlx_loop_hook(mlx->link, &aff_map, mlx);
-	//mlx_hook(mlx->screen, 2, 1L << 0, &handling_input, mlx->link);
 	mlx_hook(mlx->screen, 2, 1L << 0, &handling_input, mlx);
 	mlx_loop(mlx->link);
 }

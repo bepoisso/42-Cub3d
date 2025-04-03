@@ -20,5 +20,6 @@ int		ft_ischarset(char c, char *charset);
 int		ft_strslen(char **s);
 void	mlx_draw_circle(t_mlx *mlx, t_draw *circle);
 void	mlx_draw_rectangle(t_mlx *data, t_draw *draw);
+void	mlx_draw_filled_circle(t_mlx *mlx, t_draw *circle);
 
 #endif

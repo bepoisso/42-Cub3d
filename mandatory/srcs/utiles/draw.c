@@ -36,3 +36,28 @@ void	mlx_draw_circle(t_mlx *mlx, t_draw *circle)
 			i += 0.1;
 	}
 }
+
+void mlx_draw_filled_circle(t_mlx *mlx, t_draw *circle)
+{
+    float i;
+    float angle;
+    float x1, y1;
+    int r;
+
+    i = 0;
+    while (i < 360)
+    {
+        angle = i * PI / 180;
+        
+        // Dessiner pour chaque rayon de 0 à radius
+        for (r = 0; r <= circle->radius; r++)
+        {
+            x1 = circle->x_pos + r * cos(angle);  // Calcul des coordonnées X
+            y1 = circle->y_pos + r * sin(angle);  // Calcul des coordonnées Y
+
+            mlx_pixel_put(mlx->link, mlx->screen, x1, y1, circle->color);  // Dessiner le pixel
+        }
+
+        i += 0.1;  // Incrémenter l'angle pour dessiner sur tout le cercle
+    }
+}

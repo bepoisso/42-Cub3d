@@ -85,9 +85,9 @@ void get_player_pos(t_mlx *mlx)
 		{
 			if(ft_ischarset(mlx->map->map[y][x], "NSOW"))
 			{
-				mlx->player->x = mlx->player->x * TEXTURE;
-				mlx->player->y = mlx->player->y * TEXTURE;
-				printf("Player pose is %f, %f", mlx->player->y, mlx->player->x);
+				mlx->player->x = x * TEXTURE;
+				mlx->player->y = y * TEXTURE;
+				ft_printf("Player pose is %d, %d", (int)floorf(mlx->player->y), (int)floorf(mlx->player->x));
 				if (mlx->map->map[y][x] == 'N')
 					mlx->player->angle = 0;
 				if (mlx->map->map[y][x] == 'S')
