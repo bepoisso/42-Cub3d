@@ -48,7 +48,6 @@ void init_texture(t_element *element, t_mlx *mlx)
 int	handling_input(int keysym, t_mlx *mlx)
 {
 	mlx_clear_window(mlx->link, mlx->screen);
-	print_wall(mlx, mlx->p_unite);
 	if (keysym == XK_Escape)
 		close_window(keysym, mlx);
 	else if (keysym == XK_Left)
@@ -71,6 +70,7 @@ int	handling_input(int keysym, t_mlx *mlx)
 		ft_printf(BLUE"RIGHT Strafe\n"RESET);
 	else
 		ft_printf(YELLOW"%d key was pressed\n"RESET, keysym);
+	draw_map(mlx);
 }
 
 void init_mlx(t_mlx *mlx)
@@ -83,7 +83,7 @@ void init_mlx(t_mlx *mlx)
 	if(!mlx->screen)
 		ft_error("can't open screen", true, mlx);
 	mlx_hook(mlx->screen, 17, 0, &close_cross, mlx);
-	// draw_map(mlx);
+	draw_map(mlx);
 	// mlx_loop_hook(mlx->link, &aff_map, mlx);
 	mlx_key_hook(mlx->screen, &handling_input, mlx);
 	mlx_loop(mlx->link);
