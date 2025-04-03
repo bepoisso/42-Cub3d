@@ -47,7 +47,6 @@ void init_texture(t_element *element, t_mlx *mlx)
 
 int	handling_input(int keysym, t_mlx *mlx)
 {
-	print_player(mlx, true);
 	mlx_clear_window(mlx->link, mlx->screen);
 	if (keysym == XK_Escape)
 		close_window(keysym, mlx);
@@ -72,6 +71,7 @@ int	handling_input(int keysym, t_mlx *mlx)
 	else
 		ft_printf(YELLOW"%d key was pressed\n"RESET, keysym);
 	draw_map(mlx);
+	print_player(mlx, true);
 	print_player(mlx, false);
 }
 
@@ -86,8 +86,7 @@ void init_mlx(t_mlx *mlx)
 		ft_error("can't open screen", true, mlx);
 	mlx_hook(mlx->screen, 17, 0, &close_cross, mlx);
 	draw_map(mlx);
-	// mlx_loop_hook(mlx->link, &aff_map, mlx);
-	mlx_key_hook(mlx->screen, &handling_input, mlx);
+	mlx_hook(mlx->screen, 2, 2L << 0, &handling_input, mlx);
 	mlx_loop(mlx->link);
 }
 
@@ -106,7 +105,7 @@ int main(int argc, char *argv[])
 	check_map_ff(mlx->map->map, mlx);	
 	init_element(file, mlx);
 	mlx->player = init_player(mlx);
-	get_player_pos(mlx);;
+	get_player_pos(mlx);
 	mlx->p_unite = 128;
 	init_mlx(mlx);
 	return (ft_freef("%s", file), 0);

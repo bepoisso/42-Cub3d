@@ -1,18 +1,18 @@
 #include "cub3d.h"
 
-void	mlx_draw_rectangle(t_mlx *data, t_draw draw)
+void	mlx_draw_rectangle(t_mlx *data, t_draw *draw)
 {
 	int	x;
 	int	y;
 
-	x = draw.x_pos;
-	while (x < draw.size_x + draw.x_pos)
+	x = draw->x_pos;
+	while (x < draw->size_x + draw->x_pos)
 	{
-		y = draw.y_pos;
-		while (y < draw.size_y + draw.y_pos)
+		y = draw->y_pos;
+		while (y < draw->size_y + draw->y_pos)
 		{
-			mlx_pixel_put(data->link, data->screen, draw.x_pos,
-				draw.y_pos, draw.color);
+			mlx_pixel_put(data->link, data->screen, draw->x_pos,
+				draw->y_pos, draw->color);
 			y++;
 		}
 		x++;
