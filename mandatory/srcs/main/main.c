@@ -85,7 +85,8 @@ void init_mlx(t_mlx *mlx)
 	mlx_hook(mlx->screen, 17, 0, &close_cross, mlx);
 	// draw_map(mlx);
 	// mlx_loop_hook(mlx->link, &aff_map, mlx);
-	mlx_key_hook(mlx->screen, &handling_input, mlx);
+	//mlx_hook(mlx->screen, 2, 1L << 0, &handling_input, mlx->link);
+	mlx_hook(mlx->screen, 2, 1L << 0, &handling_input, mlx);
 	mlx_loop(mlx->link);
 }
 
