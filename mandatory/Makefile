@@ -39,6 +39,8 @@ SRC_FILES	=	main/main.c\
 				map/draw_map.c\
 				map/check_map.c\
 				raycasting/print.c\
+				player/player.c\
+				utiles/draw.c\
 
 
 LIBSX		=	$(addprefix $(MLX_DIR),$(MLX_NAME))

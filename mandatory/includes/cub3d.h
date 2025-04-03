@@ -17,6 +17,7 @@
 # include "map.h"
 # include "parsing.h"
 # include "raycasting.h"
+# include "player.h"
 
 /* Color */
 # define BLUE "\001\033[0;34m\002"
@@ -35,6 +36,7 @@
 # define	P_UNIT W_UNIT / 2;
 # define	FOV 60
 # define	D_SCREEN 1
+# define	PI 3.141592
 
 
 #endif

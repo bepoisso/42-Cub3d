@@ -5,7 +5,8 @@
 # define HEIGHT 128
 # define WIDTH 128
 
-typedef struct	s_mlx	t_mlx;
+typedef struct	s_mlx		t_mlx;
+typedef struct	s_player	t_player;
 
 typedef struct s_color
 {
@@ -13,14 +14,6 @@ typedef struct s_color
 	int	g_color;
 	int	b_color;
 }	t_color;
-
-typedef struct s_player
-{
-	double	x;
-	double	y;
-	double	angle;
-}	t_player;
-
 
 typedef struct s_element
 {
