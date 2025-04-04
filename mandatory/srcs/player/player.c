@@ -10,6 +10,7 @@ void	print_player(t_mlx *mlx, bool clear)
 	mlx->player->circle->y_pos = ftopix(mlx->player->y);
 	mlx->player->circle->size_x = 10;
 	mlx->player->circle->size_y = 10;
+	mlx->player->mlx = mlx;
 	mlx_draw_filled_circle(mlx, mlx->player->circle);
 	ft_printf("Player was draw, pos %d %d\n", (int)floorf(mlx->player->x), (int)floorf(mlx->player->y));
 }

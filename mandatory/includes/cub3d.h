@@ -34,7 +34,7 @@
 # define	TEXTURE		64
 # define	W_UNIT		TEXTURE
 # define	P_UNIT		W_UNIT / 2;
-# define	FOV			60
+# define	FOV			90
 # define	D_SCREEN	1
 # define	PI			3.141592
 # define 	SPEED		0.1f

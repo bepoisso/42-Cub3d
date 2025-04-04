@@ -7,6 +7,7 @@ typedef struct	s_player
 	float	y;
 	int		angle;
 	t_draw	*circle;
+	t_mlx	*mlx;
 }	t_player;
 
 void	print_player(t_mlx *mlx, bool clear);

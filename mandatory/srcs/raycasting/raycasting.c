@@ -2,6 +2,14 @@
 
 int	find_wall(t_player *player)
 {
+	t_ray	ray;
+	char	**map;
+
+	map = player->mlx->map;
+	ray.x = player->x;
+	ray.y = player->y;
+	ray.slope = tanf(player->angle) * 100;
+
 	
 }
 
