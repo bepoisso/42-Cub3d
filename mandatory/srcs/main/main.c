@@ -67,25 +67,23 @@ int	handling_input(int keysym, t_mlx *mlx)
 	}
 	else if (keysym == 119)
 	{
-		mlx->player->y -= 5;
-		mlx->p_unite += 20;
+		move_player_fb(mlx->player, true);
 		ft_printf(BLUE"FORWARD\n"RESET);
 	}
 	else if (keysym == 97)
 	{
 		ft_printf(BLUE"LEFT Strafe\n"RESET);
-		mlx->player->x -= 5;
+		move_player_lr(mlx->player, false);
 	}
 	else if (keysym == 115)
 	{
-		mlx->player->y += 5;
-		mlx->p_unite -= 20;
+		move_player_fb(mlx->player, false);
 		ft_printf(BLUE"BACKWARD\n"RESET);
 	}
 	else if (keysym == 100)
 	{
 		ft_printf(BLUE"RIGHT Strafe\n"RESET);
-		mlx->player->x += 5;
+		move_player_lr(mlx->player, true);
 	}
 	else
 		ft_printf(YELLOW"%d key was pressed\n"RESET, keysym);

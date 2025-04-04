@@ -28,15 +28,16 @@
 # define VIOLET "\001\033[0;35m\002"
 # define RESET "\001\033[0m\002"
 
-# define	WIN_WIDTH 1920
-# define	WIN_HEIGHT 1080
-# define	ELEM "01SONE \n"
-# define	TEXTURE 64
-# define	W_UNIT TEXTURE
-# define	P_UNIT W_UNIT / 2;
-# define	FOV 60
-# define	D_SCREEN 1
-# define	PI 3.141592
+# define	WIN_WIDTH	1920
+# define	WIN_HEIGHT	1080
+# define	ELEM		"01SONE \n"
+# define	TEXTURE		64
+# define	W_UNIT		TEXTURE
+# define	P_UNIT		W_UNIT / 2;
+# define	FOV			60
+# define	D_SCREEN	1
+# define	PI			3.141592
+# define 	SPEED		0.1f
 
 
 #endif

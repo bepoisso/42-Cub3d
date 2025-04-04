@@ -23,3 +23,22 @@ int	ft_strslen(char **s)
 		i++;
 	return (i);
 }
+
+float	pixtof(int pixel)
+{
+	return ((float)pixel / TEXTURE);
+}
+
+int	ftopix(float pos)
+{
+	int abs = 0;
+	float only = 0;
+	float pix_in = 0;
+	int	pixel = 0;
+
+	abs = (int)floorf(pos);
+	only = pos - (int)floorf(pos);
+	pix_in = only * TEXTURE;
+	pixel = (abs * TEXTURE) + pix_in;
+	return (pixel);
+}
