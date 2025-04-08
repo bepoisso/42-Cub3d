@@ -27,25 +27,14 @@ MLX_DIR	= ./minilibx-linux/
 
 #_________________FILES_________________
 
-SRC_FILES	=	main/main.c\
-				parsing/line.c\
-				parsing/parsing.c\
-				parsing/color.c\
-				map/map.c\
-				utiles/error.c\
-				utiles/utiles.c\
-				map/init.c\
-				map/m_error.c\
-				map/draw_map.c\
-				map/check_map.c\
-				raycasting/print.c\
-				player/player.c\
-				utiles/draw.c\
+SRC_FILES	=	main.c\
+				player.c\
 
 
 LIBSX		=	$(addprefix $(MLX_DIR),$(MLX_NAME))
 SRCS		=	$(addprefix $(SRC_DIR),$(SRC_FILES))
-OBJS		=	$(addprefix $(OBJ_DIR),$(notdir $(SRC_FILES:.c=.o)))
+OBJS		=	$(addprefix $(OBJ_DIR),$(SRC_FILES:.c=.o))
+
 #_________________RULES_________________
 
 all: $(NAME)
