@@ -55,7 +55,7 @@ void	draw_map(t_mlx *mlx)
 	int		x;
 	int		y;
 
-	color = 0x0000FF;
+	color = 0x00FF00;
 	map = mlx->map;
 	
 	y = 0;
@@ -133,7 +133,7 @@ void	init_mlx(t_mlx *mlx)
 	mlx_put_image_to_window(mlx->link, mlx->screen, mlx->img, 0, 0);
 }
 
-void	debug_draw_line(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int i)
+void	no_debug_draw_line(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int i)
 {
 	float	dist;
 	float	height;
@@ -146,7 +146,7 @@ void	debug_draw_line(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int i)
 	end = start_y + height;
 	while (start_y < end)
 	{
-		put_pixel(i, start_y, 255, mlx);
+		put_pixel(i, start_y, 0x00FF00, mlx);
 		start_y++;
 	}
 }
@@ -171,7 +171,7 @@ void	draw_line(t_player *player, t_mlx *mlx, float start_x, int i)
 		ray_y += sin_angle;
 	}
 	if (!DEBUG)
-		debug_draw_line(ray_x, ray_y, mlx, player, i);
+		no_debug_draw_line(ray_x, ray_y, mlx, player, i);
 }
 
 int	draw_loop(t_mlx *mlx)
@@ -184,7 +184,7 @@ int	draw_loop(t_mlx *mlx)
 	clear_image(mlx);
 	if (DEBUG)
 	{
-		draw_square(mlx->player.x, mlx->player.y, 10, 0x00FF00, mlx);
+		draw_square(mlx->player.x, mlx->player.y, 10, 0xFFFFFF, mlx);
 		draw_map(mlx);
 	}
 	fraction = PI / 3 / WIDTH;
