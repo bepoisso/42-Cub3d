@@ -43,7 +43,7 @@ $(NAME): $(OBJS) $(LIBFT_LIB) $(LIBSX)
 	@$(CC) $(CFLAGS) -o $@ $(OBJS) -L$(LIBFT_DIR) -lft -L$(MLX_DIR) $(MLX_FLAGS) -lm
 	@echo "Cub3D executable :			✅"
 
-$(OBJ_DIR)%.o: $(SRC_DIR)*/%.c | $(OBJ_DIR)
+$(OBJ_DIR)%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -I$(INC_DIR) -I$(MLX_DIR) -c $< -o $@
 
 $(OBJ_DIR):
