@@ -2,15 +2,15 @@
 
 static void check_valid_case(t_mlx *mlx, int x, int y, int len)
 {
-	if (y == 0 || y == len - 1 || x == 0 || x == (int)ft_strlen(mlx->map[y]) - 1)
+	if (y == 0 || y == len - 1 || x == 0 || x == (int)ft_strlen(mlx->map->map[y]) - 1)
 		ft_error("invalid map\n", true, mlx);
-	if (ft_ischarset(mlx->map[y + 1][x], " \n"))
+	if (ft_ischarset(mlx->map->map[y + 1][x], " \n"))
 		ft_error("invalid map\n", true, mlx);
-	if (ft_ischarset(mlx->map[y - 1][x], " \n"))
+	if (ft_ischarset(mlx->map->map[y - 1][x], " \n"))
 		ft_error("invalid map\n", true, mlx);
-	if (ft_ischarset(mlx->map[y][x + 1], " \n"))
+	if (ft_ischarset(mlx->map->map[y][x + 1], " \n"))
 		ft_error("invalid map\n", true, mlx);
-	if (ft_ischarset(mlx->map[y][x - 1], " \n"))
+	if (ft_ischarset(mlx->map->map[y][x - 1], " \n"))
 		ft_error("invalid map\n", true, mlx);
 }
 
@@ -45,7 +45,7 @@ static void flood_fill(char **map, int x, int y, t_mlx *mlx)
 		len++;
 	if (!map[y])
 		return;
-	if (x < 0 || y < 0 || x >= (int)ft_strlen(map[y]) || y > len)
+	if (x < 0 || y < 0 || x >= (int)ft_strlen(map[y]) || y >= len)
 		return;
 	if (map[y][x] == 'F')
 		return;

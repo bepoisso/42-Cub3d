@@ -31,6 +31,8 @@ SRC_FILES	=	main.c\
 				player.c\
 				color.c\
 				check_map.c\
+				get_map.c\
+				get_file.c\
 				parsing.c\
 				utils_error.c\
 				utils_utiles.c\
