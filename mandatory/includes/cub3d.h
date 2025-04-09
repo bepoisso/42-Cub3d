@@ -32,6 +32,39 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 
+typedef struct s_color
+{
+	int	r_color;
+	int	g_color;
+	int	b_color;
+}	t_color;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*path;
+	char	*add;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
+typedef struct s_element
+{
+	t_img	no_img;
+	t_img	so_img;
+	t_img	we_img;
+	t_img	ea_img;
+	int		flag_element;
+	int		floor_color;
+	int		cieling_color;
+	t_color	floor;
+	t_color	ceiling;
+	struct s_mlx	*mlx;
+}	t_element;
+
 typedef struct s_player
 {
 	float	x;
@@ -58,10 +91,18 @@ typedef struct s_mlx
 	int			size_line;
 	int			endian;
 	t_player	player;
+	t_element	*element;
 
 	char		**map;
 }	t_mlx;
 
+
+/* PARSING */
+void	is_valid_map(char **map, t_mlx *mlx);
+
+/* UTILS */
+void	ft_error(char *s, bool free, t_mlx *mlx);
+int		ft_ischarset(char c, char *charset);
 
 /* PLAYER */
 void	init_player(t_player *player);

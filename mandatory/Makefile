@@ -29,6 +29,11 @@ MLX_DIR	= ./minilibx-linux/
 
 SRC_FILES	=	main.c\
 				player.c\
+				color.c\
+				check_map.c\
+				parsing.c\
+				utils_error.c\
+				utils_utiles.c\
 
 
 LIBSX		=	$(addprefix $(MLX_DIR),$(MLX_NAME))

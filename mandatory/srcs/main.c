@@ -126,6 +126,7 @@ void	init_mlx(t_mlx *mlx)
 {
 	init_player(&mlx->player);
 	mlx->map = get_map();
+	is_valid_map(mlx->map, mlx);
 	mlx->link = mlx_init();
 	mlx->screen = mlx_new_window(mlx->link, WIDTH, HEIGHT, "CUB3D");
 	mlx->img = mlx_new_image(mlx->link, WIDTH, HEIGHT);
