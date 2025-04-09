@@ -124,8 +124,6 @@ bool	touch(float px, float py, t_mlx *mlx)
 
 void	init_mlx(t_mlx *mlx)
 {
-	mlx->player = init_player(mlx->player);
-	is_valid_map(mlx->map, mlx);
 	mlx->link = mlx_init();
 	mlx->screen = mlx_new_window(mlx->link, WIDTH, HEIGHT, "CUB3D");
 	mlx->img = mlx_new_image(mlx->link, WIDTH, HEIGHT);
@@ -205,7 +203,9 @@ void	init_struct(t_mlx *mlx, char **av)
 	char	**file;
 
 	file = get_file(av[1], mlx);
-	mlx->map = init_map(file, mlx);
+	mlx->map = init_map(file, mlx->map, mlx);
+	mlx->player = init_player(mlx->player);
+	is_valid_map(mlx->map->map, mlx);
 	mlx->element = (t_element *)malloc(sizeof(t_element));
 	mlx->element->no_img = malloc(sizeof(t_img));
 	mlx->element->so_img = malloc(sizeof(t_img));
@@ -231,8 +231,8 @@ int main(int ac, char **av)
 	t_mlx	*mlx;
 
 	mlx = (t_mlx *)malloc(sizeof(t_mlx));
-	init_struct(mlx, av);
 	ft_memset(mlx, 0, sizeof(t_mlx));
+	init_struct(mlx, av);
 	init_mlx(mlx);
 	mlx_hook(mlx->screen, 2, 1L<<0, key_press, mlx->player);
 	mlx_hook(mlx->screen, 3, 1L<<1, key_release, mlx->player);

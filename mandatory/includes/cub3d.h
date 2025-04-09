@@ -110,7 +110,7 @@ typedef struct s_mlx
 void	is_valid_map(char **map, t_mlx *mlx);
 void	init_element(char **str, t_mlx *mlx);
 char	**get_map(char **file);
-t_map	*init_map(char **file, t_mlx *mlx);
+t_map	*init_map(char **file, t_map *map, t_mlx *mlx);
 char	**get_file(char *file, t_mlx *mlx);
 void	init_color(char *str, t_color *color, t_element *element);
 void	set_colors(t_element *element);
