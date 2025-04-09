@@ -31,6 +31,7 @@
 # include <errno.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
+# include "arnaud.h"
 
 typedef struct s_mlx	t_mlx;
 

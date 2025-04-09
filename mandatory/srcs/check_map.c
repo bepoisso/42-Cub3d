@@ -43,15 +43,18 @@ static void flood_fill(char **map, int x, int y, t_mlx *mlx)
 	len = 0;
 	while (map[len])
 		len++;
-	if (!map[y])
+	if (y < 0 || y >= len || x < 0)
 		return;
-	if (x < 0 || y < 0 || x >= (int)ft_strlen(map[y]) || y >= len)
+	if (!map[y])
+	 	return;
+	if (x >= (int)ft_strlen(map[y]))
 		return;
 	if (map[y][x] == 'F')
 		return;
 	if (map[y][x] == '0')
 		check_valid_case(mlx, x, y, len);
 	map[y][x] = 'F';
+	if (x )
 	flood_fill(map, x + 1, y, mlx);
 	flood_fill(map, x - 1, y, mlx);
 	flood_fill(map, x, y + 1, mlx);
