@@ -10,7 +10,7 @@ NAME = cub3D
 
 CC			= cc
 CFLAGS		= -Wall -Wextra -g #-Werror
-ARGS		= maps/map.cub
+ARGS		= assets/maps/map_ray.cub
 MLX_NAME	= libmlx.a
 MLX_FLAGS	= -l mlx -l Xext -l X11
 
