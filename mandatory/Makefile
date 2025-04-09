@@ -36,6 +36,7 @@ SRC_FILES	=	main.c\
 				parsing.c\
 				utils_error.c\
 				utils_utiles.c\
+				tmp_arnaud.c\
 
 
 LIBSX		=	$(addprefix $(MLX_DIR),$(MLX_NAME))

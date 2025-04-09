@@ -73,10 +73,6 @@ void init_element(char **str, t_mlx *mlx)
 
 	i = 0;
 	
-	// mlx->element->ceiling = (t_color *)malloc(sizeof(t_color));
-	// mlx->element->floor = (t_color *)malloc(sizeof(t_color));
-	// ft_bzero(mlx->element->floor, sizeof(t_color));
-	// ft_bzero(mlx->element->ceiling, sizeof(t_color));
 	while (str[i])
 	{
 		printf("%s\n", str[i]);
@@ -96,9 +92,9 @@ void init_element(char **str, t_mlx *mlx)
 	}
 	// if (mlx->element->flag_element != 6)
 	// 	ft_error("bad type of elements\n", true, mlx);
-	printf("path NO texture = %s\n", mlx->element->no_img->path);
-	printf("path SO texture = %s\n", mlx->element->so_img->path);
-	printf("path WE texture = %s\n", mlx->element->we_img->path);
-	printf("path EA texture = %s\n", mlx->element->ea_img->path);
+	// printf("path NO texture = %s\n", mlx->element->no_img->path);
+	// printf("path SO texture = %s\n", mlx->element->so_img->path);
+	// printf("path WE texture = %s\n", mlx->element->we_img->path);
+	// printf("path EA texture = %s\n", mlx->element->ea_img->path);
 	set_colors(mlx->element);
 }

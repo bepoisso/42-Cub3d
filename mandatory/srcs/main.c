@@ -221,8 +221,11 @@ int	close_cross(t_mlx *mlx)
 	//free_all(mlx);
 	mlx_destroy_window(mlx->link, mlx->screen);
 	mlx_destroy_display(mlx->link);
-	//free();
-	//free();
+	free(mlx->element->so_img);
+	free(mlx->element->ea_img);
+	free(mlx->element->we_img);
+	free(mlx->element);
+	free(mlx);
 	exit(0);
 }
 
@@ -234,6 +237,7 @@ int main(int ac, char **av)
 	ft_memset(mlx, 0, sizeof(t_mlx));
 	init_struct(mlx, av);
 	init_mlx(mlx);
+	mlx_hook(mlx->screen, 17, 0, &close_cross, mlx);
 	mlx_hook(mlx->screen, 2, 1L<<0, key_press, mlx->player);
 	mlx_hook(mlx->screen, 3, 1L<<1, key_release, mlx->player);
 	mlx_loop_hook(mlx->link, draw_loop, mlx);
