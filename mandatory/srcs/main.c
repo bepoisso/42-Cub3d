@@ -86,7 +86,7 @@ float	fixed_dist(float x1, float y1, float x2, float y2, t_mlx *mlx)
 
 	delta_x = x2 - x1;
 	delta_y = y2 - y1;
-	angle = atan2(delta_y, delta_x) - mlx->player.angle;
+	angle = atan2(delta_y, delta_x) - mlx->player->angle;
 	fix_dist = distance(delta_x, delta_y) * cos(angle);
 	return (fix_dist);
 }
@@ -124,7 +124,7 @@ char	**get_map(void)
 
 void	init_mlx(t_mlx *mlx)
 {
-	init_player(&mlx->player);
+	mlx->player = init_player(mlx->player);
 	mlx->map = get_map();
 	is_valid_map(mlx->map, mlx);
 	mlx->link = mlx_init();
@@ -181,19 +181,19 @@ int	draw_loop(t_mlx *mlx)
 	float		start_x;
 	int			i;
 	
-	move_player(&mlx->player);
+	move_player(mlx->player);
 	clear_image(mlx);
 	if (DEBUG)
 	{
-		draw_square(mlx->player.x, mlx->player.y, 10, 0xFFFFFF, mlx);
+		draw_square(mlx->player->x, mlx->player->y, 10, 0xFFFFFF, mlx);
 		draw_map(mlx);
 	}
 	fraction = PI / 3 / WIDTH;
-	start_x = mlx->player.angle - PI / 6;
+	start_x = mlx->player->angle - PI / 6;
 	i = 0;
 	while (i < WIDTH)
 	{
-		draw_line(&mlx->player, mlx, start_x, i);
+		draw_line(mlx->player, mlx, start_x, i);
 		start_x += fraction;
 		i++;
 	}
@@ -203,12 +203,14 @@ int	draw_loop(t_mlx *mlx)
 
 int main(void)
 {
-	t_mlx	mlx;
+	t_mlx	*mlx;
 
-	init_mlx(&mlx);
-	mlx_hook(mlx.screen, 2, 1L<<0, key_press, &mlx.player);
-	mlx_hook(mlx.screen, 3, 1L<<1, key_release, &mlx.player);
-	mlx_loop_hook(mlx.link, draw_loop, &mlx);
-	mlx_loop(mlx.link);
+	mlx = (t_mlx *)malloc(sizeof(t_mlx));
+	ft_memset(mlx, 0, sizeof(t_mlx));
+	init_mlx(mlx);
+	mlx_hook(mlx->screen, 2, 1L<<0, key_press, mlx->player);
+	mlx_hook(mlx->screen, 3, 1L<<1, key_release, mlx->player);
+	mlx_loop_hook(mlx->link, draw_loop, mlx);
+	mlx_loop(mlx->link);
 	return (0);
 }

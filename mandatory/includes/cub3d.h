@@ -1,7 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define DEBUG 0
+# define DEBUG 1
 
 # define WIDTH 1280
 # define HEIGHT 720
@@ -90,7 +90,7 @@ typedef struct s_mlx
 	int			bpp;
 	int			size_line;
 	int			endian;
-	t_player	player;
+	t_player	*player;
 	t_element	*element;
 
 	char		**map;
@@ -105,9 +105,9 @@ void	ft_error(char *s, bool free, t_mlx *mlx);
 int		ft_ischarset(char c, char *charset);
 
 /* PLAYER */
-void	init_player(t_player *player);
-int		key_press(int keysym, t_player *player);
-int		key_release(int keysym, t_player *player);
-void	move_player(t_player *player);
+t_player	*init_player(t_player *player);
+int			key_press(int keysym, t_player *player);
+int			key_release(int keysym, t_player *player);
+void		move_player(t_player *player);
 
 #endif
