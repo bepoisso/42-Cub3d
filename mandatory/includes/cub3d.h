@@ -1,7 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define DEBUG 0
+# define DEBUG 1
 
 # define WIDTH 1280
 # define HEIGHT 720
@@ -100,7 +100,7 @@ typedef struct s_mlx
 	int			bpp;
 	int			size_line;
 	int			endian;
-	t_player	player;
+	t_player	*player;
 	t_element	*element;
 
 }	t_mlx;
@@ -110,7 +110,7 @@ typedef struct s_mlx
 void	is_valid_map(char **map, t_mlx *mlx);
 void	init_element(char **str, t_mlx *mlx);
 char	**get_map(char **file);
-t_map	*init_map(char **file, t_mlx *mlx);
+t_map	*init_map(char **file, t_map *map, t_mlx *mlx);
 char	**get_file(char *file, t_mlx *mlx);
 void	init_color(char *str, t_color *color, t_element *element);
 void	set_colors(t_element *element);
@@ -124,9 +124,9 @@ int		ft_strslen(char **s);
 
 
 /* PLAYER */
-void	init_player(t_player *player);
-int		key_press(int keysym, t_player *player);
-int		key_release(int keysym, t_player *player);
-void	move_player(t_player *player);
+t_player	*init_player(t_player *player);
+int			key_press(int keysym, t_player *player);
+int			key_release(int keysym, t_player *player);
+void		move_player(t_player *player);
 
 #endif

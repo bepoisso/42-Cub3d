@@ -1,7 +1,9 @@
 #include "cub3d.h"
 
-void	init_player(t_player *player)
+t_player	*init_player(t_player *player)
 {
+	player = (t_player *)malloc(sizeof(t_player));
+	ft_memset(player, 0, sizeof(t_player));
 	player->x = WIDTH / 2;
 	player->y = HEIGHT / 2;
 	player->angle = PI / 2;
@@ -12,6 +14,7 @@ void	init_player(t_player *player)
 	player->key_left = false;
 	player->left_rotate = false;
 	player->right_rotate = false;
+	return (player);
 }
 
 int	key_press(int keysym, t_player *player)
