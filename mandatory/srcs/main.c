@@ -56,7 +56,7 @@ void	draw_map(t_mlx *mlx)
 	int		y;
 
 	color = 0x00FF00;
-	map = mlx->map;
+	map = mlx->map->map;
 	
 	y = 0;
 	while (map[y])
@@ -98,34 +98,35 @@ bool	touch(float px, float py, t_mlx *mlx)
 
 	x = px / TEXTURE;
 	y = py / TEXTURE;
-	if (mlx->map[y][x] == '1')
+	if (mlx->map->map[y][x] == '1')
 		return (true);
 	return (false);
 }
 
-char	**get_map(void)
-{
-	char	**map;
+// char	**get_map(void)
+// {
+// 	char	**map;
 	
-	map = (char **)malloc(sizeof(char *) * 11);
-	map[0] = "111111111111111";
-	map[1] = "100000000000001";
-	map[2] = "100100000000001";
-	map[3] = "100010000000001";
-	map[4] = "100001000000001";
-	map[5] = "100000000000001";
-	map[6] = "100000000000001";
-	map[7] = "100001111100001";
-	map[8] = "100000000100001";
-	map[9] = "111111111111111";
-	map[10] = NULL;
-	return (map);
-}
+// 	map = (char **)malloc(sizeof(char *) * 11);
+// 	map[0] = "111111111111111";
+// 	map[1] = "100000000000001";
+// 	map[2] = "100100000000001";
+// 	map[3] = "100010000000001";
+// 	map[4] = "100001000000001";
+// 	map[5] = "100000000000001";
+// 	map[6] = "100000000000001";
+// 	map[7] = "100001111100001";
+// 	map[8] = "100000000100001";
+// 	map[9] = "111111111111111";
+// 	map[10] = NULL;
+// 	return (map);
+// }
 
 void	init_mlx(t_mlx *mlx)
 {
 	init_player(&mlx->player);
-	mlx->map = get_map();
+	//mlx->map = get_map();
+	is_valid_map(mlx->map->map, mlx);
 	mlx->link = mlx_init();
 	mlx->screen = mlx_new_window(mlx->link, WIDTH, HEIGHT, "CUB3D");
 	mlx->img = mlx_new_image(mlx->link, WIDTH, HEIGHT);
@@ -200,11 +201,40 @@ int	draw_loop(t_mlx *mlx)
 	return (0);
 }
 
-int main(void)
+void	init_struct(t_mlx *mlx, char **av)
+{
+	char	**file;
+
+	file = get_file(av[1], mlx);
+	mlx->map = init_map(file, mlx);
+	mlx->element = (t_element *)malloc(sizeof(t_element));
+	mlx->element->no_img = malloc(sizeof(t_img));
+	mlx->element->so_img = malloc(sizeof(t_img));
+	mlx->element->ea_img = malloc(sizeof(t_img));
+	mlx->element->we_img = malloc(sizeof(t_img));
+
+	mlx->element->flag_element = 0;
+	init_element(file, mlx);
+}
+
+int	close_cross(t_mlx *mlx)
+{
+	//free_all(mlx);
+	mlx_destroy_window(mlx->link, mlx->screen);
+	mlx_destroy_display(mlx->link);
+	//free();
+	//free();
+	exit(0);
+}
+
+int main(int ac, char **av)
 {
 	t_mlx	mlx;
 
+	(void)ac;
+	init_struct(&mlx, av);
 	init_mlx(&mlx);
+	mlx_hook(mlx.screen, 17, 0, &close_cross, &mlx);
 	mlx_hook(mlx.screen, 2, 1L<<0, key_press, &mlx.player);
 	mlx_hook(mlx.screen, 3, 1L<<1, key_release, &mlx.player);
 	mlx_loop_hook(mlx.link, draw_loop, &mlx);

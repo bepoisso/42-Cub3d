@@ -32,6 +32,49 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 
+typedef struct s_color
+{
+	int	r_color;
+	int	g_color;
+	int	b_color;
+}	t_color;
+
+typedef struct	s_map
+{
+	int				x;
+	int				y;
+	int				x_max;
+	int				y_max;
+	char			**map;
+	struct s_mlx	*mlx;
+}	t_map;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*path;
+	char	*add;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
+typedef struct s_element
+{
+	int				flag_element;
+	int				floor_color;
+	int				cieling_color;
+	t_img			*no_img;
+	t_img			*so_img;
+	t_img			*we_img;
+	t_img			*ea_img;
+	t_color			floor;
+	t_color			ceiling;
+	struct s_mlx	*mlx;
+}	t_element;
+
 typedef struct s_player
 {
 	float	x;
@@ -52,15 +95,32 @@ typedef struct s_mlx
 	void		*link;
 	void		*screen;
 	void		*img;
-
+	t_map		*map;
 	char		*data;
 	int			bpp;
 	int			size_line;
 	int			endian;
 	t_player	player;
+	t_element	*element;
 
-	char		**map;
 }	t_mlx;
+
+
+/* PARSING and INIT */
+void	is_valid_map(char **map, t_mlx *mlx);
+void	init_element(char **str, t_mlx *mlx);
+char	**get_map(char **file);
+t_map	*init_map(char **file, t_mlx *mlx);
+char	**get_file(char *file, t_mlx *mlx);
+void	init_color(char *str, t_color *color, t_element *element);
+void	set_colors(t_element *element);
+
+
+
+/* UTILS */
+void	ft_error(char *s, bool free, t_mlx *mlx);
+int		ft_ischarset(char c, char *charset);
+int		ft_strslen(char **s);
 
 
 /* PLAYER */
