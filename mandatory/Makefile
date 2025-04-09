@@ -36,6 +36,11 @@ SRC_FILES	=	main.c\
 				parsing.c\
 				utils_error.c\
 				utils_utiles.c\
+				utils_mlx.c\
+				draw.c\
+				raycasting.c\
+				init.c\
+				
 
 
 LIBSX		=	$(addprefix $(MLX_DIR),$(MLX_NAME))

@@ -42,3 +42,13 @@ int	ftopix(float pos)
 	pixel = (abs * TEXTURE) + pix_in;
 	return (pixel);
 }
+
+float	degtorad(float	degree)
+{
+	return (degree * PI / 180);
+}
+
+float	radtodeg(float radian)
+{
+	return (radian * 180 / PI);
+}

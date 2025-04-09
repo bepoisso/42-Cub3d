@@ -1,24 +1,24 @@
 #include "cub3d.h"
 
-t_player	*init_player(t_player *player)
+t_player	*init_player(t_player *player, t_map *map)
 {
 	player = (t_player *)malloc(sizeof(t_player));
 	ft_memset(player, 0, sizeof(t_player));
-	player->x = WIDTH / 2;
-	player->y = HEIGHT / 2;
-	player->angle = PI / 2;
-
+	
 	player->key_up = false;
 	player->key_down = false;
 	player->key_right = false;
 	player->key_left = false;
 	player->left_rotate = false;
 	player->right_rotate = false;
+	player->mlx = map->mlx;
 	return (player);
 }
 
 int	key_press(int keysym, t_player *player)
 {
+	if (keysym == XK_Escape)
+		close_cross(player->mlx);
 	if (keysym == 119)
 		player->key_up = true;
 	if (keysym == 115)
@@ -92,4 +92,34 @@ void	move_player(t_player *player)
 		player->y += cos_angle * SPEED;
 		player->x -= sin_angle * SPEED;
 	}
+}
+
+void get_player_pos(t_mlx *mlx)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (mlx->map->map[y])
+	{
+		x = 0;
+		while (mlx->map->map[y][x])
+		{
+			if (ft_ischarset(mlx->map->map[y][x], "NSEW"))
+			{
+				mlx->player->x = x * TEXTURE;
+				mlx->player->y = y * TEXTURE;
+				if (mlx->map->map[y][x] == 'N')
+					mlx->player->angle = degtorad((float)270);
+				if (mlx->map->map[y][x] == 'S')
+					mlx->player->angle = degtorad((float)90);
+				if (mlx->map->map[y][x] == 'E')
+					mlx->player->angle = degtorad((float)0);
+				if (mlx->map->map[y][x] == 'W')
+					mlx->player->angle = degtorad((float)180);
+			}
+		x++;
+		}
+	y++;
+}
 }
