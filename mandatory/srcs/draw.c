@@ -100,7 +100,6 @@ int	draw_loop(t_mlx *mlx)
 	clear_image(mlx);
 	if (DEBUG)
 	{
-		printf("x = %f, y = %f\n", mlx->player->x, mlx->player->y);
 		draw_circle(mlx->player->x, mlx->player->y, 5, 0xFFFFFF, mlx);
 		draw_map(mlx);
 	}
