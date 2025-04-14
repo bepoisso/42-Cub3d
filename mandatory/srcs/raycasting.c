@@ -69,5 +69,5 @@ void	draw_line(t_player *player, t_mlx *mlx, float start_x, int i)
 		ray_y += sin_angle;
 	}
 	if (!DEBUG)
-		no_debug_draw_line(ray_x, ray_y, mlx, player, i);
+		draw_textured_wall(ray_x, ray_y, mlx, player, i);
 }

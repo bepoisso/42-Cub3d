@@ -10,6 +10,7 @@ int main(int ac, char **av)
 		ft_error("invalid argument\n", true, mlx);
 	init_struct(mlx, av);
 	init_mlx(mlx);
+	init_texture(mlx->element, mlx);
 	mlx_hook(mlx->screen, 17, 0, &close_cross, mlx);
 	mlx_hook(mlx->screen, 2, 1L<<0, key_press, mlx->player);
 	mlx_hook(mlx->screen, 3, 1L<<1, key_release, mlx->player);
