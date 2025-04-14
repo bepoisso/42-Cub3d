@@ -7,22 +7,18 @@ static float	distance(float x, float y)
 
 static bool is_no_or_so(float ray_x, float ray_y, t_mlx *mlx)
 {
+	int map_x;
+	int map_y;
 	float	x_tile;
 	float	y_tile;
-	float	dx;
-	float	dy;
 
-
-	x_tile = fmod(ray_x, TEXTURE);
-	y_tile = fmod(ray_y, TEXTURE);
-
-	if (x_tile < 0.1 || x_tile > TEXTURE - 0.1)
-		return (true);
-	if (y_tile < 0.1 || y_tile > TEXTURE - 0.1)	
+	map_x = (int)(ray_x / TEXTURE);
+	map_y = (int)(ray_y / TEXTURE);
+	x_tile = ray_x - (map_x * TEXTURE);
+	y_tile = ray_y - (map_y * TEXTURE);
+	if (x_tile < .001 || x_tile > TEXTURE - 0.001)
 		return (false);
-	dx = fabs(ray_x - mlx->player->x);
-	dy = fabs(ray_y - mlx->player->y);
-	return(dx > dy);
+	return (true);
 }
 
 int get_texture_color(t_img *texture, int tex_x, int tex_y)
@@ -69,31 +65,26 @@ void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int 
 	is_ns = is_no_or_so(ray_x, ray_y, mlx);
 	if (is_ns)
 	{
-		if(ray_y < player->y)
-			texture = mlx->element->no_img;
-		else
+		//if(ray_y > player->y)
 			texture = mlx->element->so_img;
-		wall_x = fmod(ray_x, TEXTURE);
+		//else
+		//	texture = mlx->element->so_img;
 	}
 	else
 	{
-		if (ray_x < player->x)
+		//if (ray_x < player->x)
 			texture = mlx->element->we_img;
-		else
-			texture = mlx->element->ea_img;
-		wall_x = fmod(ray_y, TEXTURE);
+		//else
+		//	texture = mlx->element->we_img;
 	}
-	int map_x = (int)(ray_x / TEXTURE);
-	int map_y = (int)(ray_y / TEXTURE);
+	
 	if (is_ns)
-		wall_x = ray_x - (map_x * TEXTURE);
-		else 
-		wall_x = ray_y - (map_y * TEXTURE);
+		wall_x = fmod(ray_x, TEXTURE);
+	else
+		wall_x = fmod(ray_y, TEXTURE);
 
-	int tex_x = (int)((wall_x / TEXTURE) * texture->width);
-	tex_x = tex_x % texture->width;
-	if (tex_x >= texture->width)
-		tex_x = texture->width - 1;
+	int tex_x = (int)(wall_x / TEXTURE * texture->width);
+
 	y = start_y;
 	while (y < end)
 	{
@@ -105,8 +96,8 @@ void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int 
 		}
 		y++;
 	}
-}
 
+}
 
 static void load_texture(t_img *img, void *mlx, char *path)
 {
