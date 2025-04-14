@@ -48,6 +48,24 @@ void	draw_square(int	x, int y, int size, int color, t_mlx *mlx)
 		put_pixel(x + i, y + size, color, mlx);
 }
 
+void	draw_circle(int x_pos, int y_pos, int radius, int color, t_mlx *mlx)
+{
+	float	i;
+	float	angle;
+	float	x1;
+	float	y1;
+
+	i = 0;
+	while (i < 360)
+	{
+		angle = i;
+		x1 = radius * cos(angle * PI / 180);
+		y1 = radius * sin(angle * PI / 180);
+		put_pixel(x_pos + x1, y_pos + y1, color, mlx);
+		i += 0.1;
+	}
+}
+
 void	draw_map(t_mlx *mlx)
 {
 	char	**map;
@@ -83,7 +101,7 @@ int	draw_loop(t_mlx *mlx)
 	if (DEBUG)
 	{
 		printf("x = %f, y = %f\n", mlx->player->x, mlx->player->y);
-		draw_square(mlx->player->x, mlx->player->y, 10, 0xFFFFFF, mlx);
+		draw_circle(mlx->player->x, mlx->player->y, 5, 0xFFFFFF, mlx);
 		draw_map(mlx);
 	}
 	fraction = PI / 3 / WIDTH;

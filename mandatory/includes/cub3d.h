@@ -34,6 +34,15 @@
 
 typedef struct s_mlx	t_mlx;
 
+typedef struct s_draw
+{
+	int	x_pos;
+	int	y_pos;
+	int	radius;
+	int	color;
+}	t_draw;
+
+
 typedef struct s_color
 {
 	int	r_color;
