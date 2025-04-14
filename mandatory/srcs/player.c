@@ -67,6 +67,8 @@ void	move_player(t_player *player)
 {
 	float	cos_angle;
 	float	sin_angle;
+	float	x;
+	float	y;
 
 	cos_angle = cos(player->angle);
 	sin_angle = sin(player->angle);
@@ -74,23 +76,39 @@ void	move_player(t_player *player)
 
 	if (player->key_up)
 	{
-		player->y += sin_angle * SPEED;
-		player->x += cos_angle * SPEED;
+		y = player->y + sin_angle * SPEED;
+		x = player->x + cos_angle * SPEED;
+		if (player->mlx->map->map[(int)floorf(pixtof(y))][(int)floorf(pixtof(x))] == '1')
+			return;
+		player->y = y;
+		player->x = x;
 	}
 	if (player->key_down)
 	{
-		player->y -= sin_angle * SPEED;
-		player->x -= cos_angle * SPEED;
+		y = player->y - sin_angle * SPEED;
+		x = player->x - cos_angle * SPEED;
+		if (player->mlx->map->map[(int)floorf(pixtof(y))][(int)floorf(pixtof(x))] == '1')
+			return;
+		player->y = y;
+		player->x = x;
 	}
 	if (player->key_left)
 	{
-		player->y -= cos_angle * SPEED;
-		player->x += sin_angle * SPEED;
+		y = player->y - cos_angle * SPEED;
+		x = player->x + sin_angle * SPEED;
+		if (player->mlx->map->map[(int)floorf(pixtof(y))][(int)floorf(pixtof(x))] == '1')
+			return;
+		player->y = y;
+		player->x = x;
 	}
 	if (player->key_right)
 	{
-		player->y += cos_angle * SPEED;
-		player->x -= sin_angle * SPEED;
+		y = player->y + cos_angle * SPEED;
+		x = player->x - sin_angle * SPEED;
+		if (player->mlx->map->map[(int)floorf(pixtof(y))][(int)floorf(pixtof(x))] == '1')
+			return;
+		player->y = y;
+		player->x = x;
 	}
 }
 

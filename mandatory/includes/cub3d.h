@@ -1,7 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define DEBUG 1
+# define DEBUG 0
 
 # define WIDTH 1280
 # define HEIGHT 720
@@ -34,6 +34,15 @@
 # include "arnaud.h"
 
 typedef struct s_mlx	t_mlx;
+
+typedef struct s_draw
+{
+	int	x_pos;
+	int	y_pos;
+	int	radius;
+	int	color;
+}	t_draw;
+
 
 typedef struct s_color
 {
