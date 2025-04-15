@@ -10,14 +10,24 @@ void	init_struct(t_mlx *mlx, char **av)
 	get_player_pos(mlx);
 	is_valid_map(mlx->map->map, mlx);
 	mlx->element = (t_element *)malloc(sizeof(t_element));
+	ft_memset(mlx->element, 0 , sizeof(t_element));
 	mlx->element->no_img = malloc(sizeof(t_img));
+	mlx->element->no_img->mlx = mlx;
+	ft_memset(mlx->element->no_img, 0 , sizeof(t_img));
 	mlx->element->so_img = malloc(sizeof(t_img));
+	mlx->element->so_img->mlx = mlx;
+	ft_memset(mlx->element->so_img, 0 , sizeof(t_img));
 	mlx->element->ea_img = malloc(sizeof(t_img));
+	mlx->element->ea_img->mlx = mlx;
+	ft_memset(mlx->element->ea_img, 0 , sizeof(t_img));
 	mlx->element->we_img = malloc(sizeof(t_img));
+	mlx->element->we_img->mlx = mlx;
+	ft_memset(mlx->element->we_img, 0 , sizeof(t_img));
 	mlx->dda = malloc(sizeof(t_dda));
-
+	ft_memset(mlx->dda, 0 , sizeof(t_dda));
 	mlx->element->flag_element = 0;
 	init_element(file, mlx);
+	ft_freef("%d", file);
 }
 
 void	init_mlx(t_mlx *mlx)
@@ -47,6 +57,6 @@ void init_texture(t_element *element, t_mlx *mlx)
 	load_texture(element->we_img, mlx->link, element->we_img->path);
 	load_texture(element->ea_img, mlx->link, element->ea_img->path);
 	if (!mlx->element->we_img)
-    	printf("Error: WE texture not loaded!\n");
+		printf("Error: WE texture not loaded!\n");
 }
 

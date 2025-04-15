@@ -32,6 +32,7 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include "arnaud.h"
+# include "free.h"
 
 typedef struct s_mlx	t_mlx;
 
@@ -71,6 +72,7 @@ typedef struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
+	t_mlx	*mlx;
 }	t_img;
 
 typedef struct s_element

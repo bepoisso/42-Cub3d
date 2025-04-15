@@ -6,13 +6,13 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 14:16:07 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/04/01 11:58:03 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:24:31 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../includes/libft.h"
-// #include "../../includes/free_struct.h"
+#include "../../includes/free.h"
 
 static void	check_freef_format(char format, va_list ap)
 {
@@ -24,6 +24,8 @@ static void	check_freef_format(char format, va_list ap)
 		free_2d(va_arg(ap, char **));
 	else if (format == 'i')
 		free(va_arg(ap, int *));
+	else if (format == 'g')
+		free_img(va_arg(ap, t_img *));
 }
 
 /* 
@@ -38,6 +40,8 @@ static void	check_freef_format(char format, va_list ap)
 		%d : char ** (double strs)
 		%i : int * (tab)
 		... : you need to put the variable to free
+		PERSONAL ADD :
+		%g : t_img *
 
 	Exemple :
 		ft_freef("%s%d%p", str, tab, ptr);

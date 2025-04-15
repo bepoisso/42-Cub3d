@@ -42,6 +42,7 @@ SRC_FILES	=	main.c\
 				init.c\
 				tmp_arnaud.c\
 				tmp_arnaud_texture.c\
+				free.c\
 
 
 LIBSX		=	$(addprefix $(MLX_DIR),$(MLX_NAME))
@@ -83,7 +84,7 @@ fclean: clean
 re: fclean all
 
 val: re
-	@valgrind $(VAL_ARGS) ./$(NAME) $(ARGS);
+	valgrind $(VAL_ARGS) ./$(NAME) $(ARGS);
 
 debug: re
 	@gdb -tui -q $(NAME);
