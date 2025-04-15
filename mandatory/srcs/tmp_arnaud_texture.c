@@ -1,23 +1,11 @@
 #include "cub3d.h"
 
-void	put_pixel(int x, int y, int color, t_mlx *mlx)
-{
-	int	index;
-	
-	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
-		return ;
-	index = y * mlx->size_line + x * mlx->bpp / 8;
-	mlx->data[index] = color & 0xFF;
-	mlx->data[index + 1] = (color >> 8) & 0xFF; 
-	mlx->data[index + 2] = (color >> 16) & 0xFF;
-}
 
 
 static float	distance(float x, float y)
 {
 	return (sqrt(x * x + y * y));
 }
-
 
 static bool is_no_or_so(float ray_x, float ray_y, t_mlx *mlx)
 {
@@ -30,7 +18,7 @@ static bool is_no_or_so(float ray_x, float ray_y, t_mlx *mlx)
 	map_y = (int)(ray_y / TEXTURE);
 	x_tile = ray_x - (map_x * TEXTURE);
 	y_tile = ray_y - (map_y * TEXTURE);
-	if (x_tile < 0.001 || x_tile > TEXTURE - 0.001)
+	if (x_tile < 0.0001 || x_tile > TEXTURE - 0.0001)
 		return (false);
 	return (true);
 }
@@ -70,24 +58,26 @@ void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int 
 	is_ns = is_no_or_so(ray_x, ray_y, mlx);
   	if (is_ns) 
 	{
-        if (ray_y < player->y)
-            texture = mlx->element->no_img;
-        else
-            texture = mlx->element->so_img;
-    } 
+		if (ray_y < player->y)
+			texture = mlx->element->no_img;
+		else
+			texture = mlx->element->so_img;
+	} 
 	else 
 	{
-        if (ray_x < player->x)
-            texture = mlx->element->we_img;
-        else
-            texture = mlx->element->ea_img;
-    }
+		if (ray_x < player->x)
+			texture = mlx->element->we_img;
+		else
+			texture = mlx->element->ea_img;
+	}
 	if (is_ns)
 		wall_x = fmod(ray_x, TEXTURE);
 	else
 		wall_x = fmod(ray_y, TEXTURE);
 
 	tex_x = (int)(wall_x / TEXTURE * texture->width);
+	if (tex_x >= texture->width)
+		tex_x = texture->width - 1;
 	y = start_y;
 	while (y < end)
 	{
@@ -100,27 +90,5 @@ void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int 
 		y++;
 	}
 
-}
-
-
-static void load_texture(t_img *img, void *mlx, char *path)
-{
-	img->img = mlx_xpm_file_to_image(mlx, path, &img->width, &img->height);
-	if (!img->img)
-		ft_error("failed to load texture\n", true, mlx);
-	img->add = mlx_get_data_addr(img->img, &img->bpp, &img->line_len, &img->endian);
-	if (!img->add)
-		ft_error("failed to load pixel adress\n", true, mlx);
-
-}
-
-void init_texture(t_element *element, t_mlx *mlx)
-{
-	load_texture(element->no_img, mlx->link, element->no_img->path);
-	load_texture(element->so_img, mlx->link, element->so_img->path);
-	load_texture(element->we_img, mlx->link, element->we_img->path);
-	load_texture(element->ea_img, mlx->link, element->ea_img->path);
-	if (!mlx->element->we_img)
-    	printf("Error: WE texture not loaded!\n");
 }
 

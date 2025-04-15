@@ -28,3 +28,25 @@ void	init_mlx(t_mlx *mlx)
 	mlx->data = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->size_line, &mlx->endian);
 	mlx_put_image_to_window(mlx->link, mlx->screen, mlx->img, 0, 0);
 }
+
+static void load_texture(t_img *img, void *mlx, char *path)
+{
+	img->img = mlx_xpm_file_to_image(mlx, path, &img->width, &img->height);
+	if (!img->img)
+		ft_error("failed to load texture\n", true, mlx);
+	img->add = mlx_get_data_addr(img->img, &img->bpp, &img->line_len, &img->endian);
+	if (!img->add)
+		ft_error("failed to load pixel adress\n", true, mlx);
+
+}
+
+void init_texture(t_element *element, t_mlx *mlx)
+{
+	load_texture(element->no_img, mlx->link, element->no_img->path);
+	load_texture(element->so_img, mlx->link, element->so_img->path);
+	load_texture(element->we_img, mlx->link, element->we_img->path);
+	load_texture(element->ea_img, mlx->link, element->ea_img->path);
+	if (!mlx->element->we_img)
+    	printf("Error: WE texture not loaded!\n");
+}
+
