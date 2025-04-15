@@ -4,11 +4,10 @@
 int get_texture_color(t_img *texture, int tex_x, int tex_y)
 {
 	int pixel_pos;
-    if (tex_x < 0 || tex_x >= texture->width || tex_y < 0 || tex_y >= texture->height)
-        return (0x000000); 
-    
-    pixel_pos = tex_y * texture->line_len + tex_x * (texture->bpp / 8);
-    return (*(int *)(texture->add + pixel_pos));
+	if (tex_x < 0 || tex_x >= texture->width || tex_y < 0 || tex_y >= texture->height)
+		return (0x000000); 
+	pixel_pos = tex_y * texture->line_len + tex_x * (texture->bpp / 8);
+	return (*(int *)(texture->add + pixel_pos));
 }
 
 

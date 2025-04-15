@@ -1,7 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define DEBUG 0
+# define DEBUG 1
 
 # define WIDTH 1280
 # define HEIGHT 720

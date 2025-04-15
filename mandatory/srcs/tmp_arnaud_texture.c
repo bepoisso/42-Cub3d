@@ -56,14 +56,14 @@ void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int 
 	start_y = (HEIGHT - height) / 2;
 	end = start_y + height;
 	is_ns = is_no_or_so(ray_x, ray_y, mlx);
-  	if (is_ns) 
+	if (is_ns)
 	{
 		if (ray_y < player->y)
 			texture = mlx->element->no_img;
 		else
 			texture = mlx->element->so_img;
-	} 
-	else 
+	}
+	else
 	{
 		if (ray_x < player->x)
 			texture = mlx->element->we_img;
@@ -89,6 +89,5 @@ void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int 
 		}
 		y++;
 	}
-
 }
 

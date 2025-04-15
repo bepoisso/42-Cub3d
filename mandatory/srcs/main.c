@@ -17,6 +17,5 @@ int main(int ac, char **av)
 	mlx_hook(mlx->screen, 17, 0, close_cross, mlx->player);
 	mlx_loop_hook(mlx->link, draw_loop, mlx);
 	mlx_loop(mlx->link);
-	free_all(mlx);
 	return (0);
 }

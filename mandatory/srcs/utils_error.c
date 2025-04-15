@@ -17,7 +17,7 @@ void	ft_error(char *s, bool free, t_mlx *mlx)
 	ft_putstr_fd(""RESET, 2);
 	if (free == true)
 	{
-		/* free function */
+		free_all(mlx);
 		exit(1);
 	}
 }
