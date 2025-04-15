@@ -6,13 +6,12 @@
 /*   By: bepoisso <bepoisso@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 14:16:07 by bepoisso          #+#    #+#             */
-/*   Updated: 2025/04/15 15:24:31 by bepoisso         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:54:23 by bepoisso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include "../includes/libft.h"
-#include "../../includes/free.h"
 
 static void	check_freef_format(char format, va_list ap)
 {
@@ -24,8 +23,6 @@ static void	check_freef_format(char format, va_list ap)
 		free_2d(va_arg(ap, char **));
 	else if (format == 'i')
 		free(va_arg(ap, int *));
-	else if (format == 'g')
-		free_img(va_arg(ap, t_img *));
 }
 
 /* 
