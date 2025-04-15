@@ -1,125 +1,181 @@
 #include "cub3d.h"
 
-void	put_pixel(int x, int y, int color, t_mlx *mlx)
-{
-	int	index;
-	
-	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
-		return ;
-	index = y * mlx->size_line + x * mlx->bpp / 8;
-	mlx->data[index] = color & 0xFF;
-	mlx->data[index + 1] = (color >> 8) & 0xFF; 
-	mlx->data[index + 2] = (color >> 16) & 0xFF;
-}
 
+// static float	distance(float x, float y)
+// {
+// 	return (sqrt(x * x + y * y));
+// }
 
-static float	distance(float x, float y)
-{
-	return (sqrt(x * x + y * y));
-}
-
-static bool is_no_or_so(float ray_x, float ray_y, t_mlx *mlx)
-{
-	int map_x;
-	int map_y;
-	float	x_tile;
-	float	y_tile;
-
-	map_x = (int)(ray_x / TEXTURE);
-	map_y = (int)(ray_y / TEXTURE);
-	x_tile = ray_x - (map_x * TEXTURE);
-	y_tile = ray_y - (map_y * TEXTURE);
-	if (x_tile < .001 || x_tile > TEXTURE - 0.001)
-		return (false);
-	return (true);
-}
 
 int get_texture_color(t_img *texture, int tex_x, int tex_y)
 {
+	int pixel_pos;
     if (tex_x < 0 || tex_x >= texture->width || tex_y < 0 || tex_y >= texture->height)
-        return (0x000000); // Noir si hors limites
+        return (0x000000); 
     
-    int pixel_pos = tex_y * texture->line_len + tex_x * (texture->bpp / 8);
+    pixel_pos = tex_y * texture->line_len + tex_x * (texture->bpp / 8);
     return (*(int *)(texture->add + pixel_pos));
 }
 
 
-static float	fixed_dist(float x1, float y1, float x2, float y2, t_mlx *mlx)
+void	draw_line_2d(float x0, float y0, float x1, float y1, t_mlx *mlx, int color)
 {
-	float delta_x;
-	float delta_y;
-	float angle;
-	float fix_dist;
-
-	delta_x = x2 - x1;
-	delta_y = y2 - y1;
-	angle = atan2(delta_y, delta_x) - mlx->player->angle;
-	fix_dist = distance(delta_x, delta_y) * cos(angle);
-	return (fix_dist);
+	float dx = x1 - x0;
+	float dy = y1 - y0;
+	float steps = fmax(fabs(dx), fabs(dy));
+	float x_inc = dx / steps;
+	float y_inc = dy / steps;
+	
+	float x = x0;
+	float y = y0;
+	for (int i = 0; i <= steps; i++)
+	{
+		put_pixel(x, y, color, mlx);
+		x += x_inc;
+		y += y_inc;
+	}
 }
 
-void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int i)
+// static float	fixed_dist(float x1, float y1, float x2, float y2, t_mlx *mlx)
+// {
+// 	float delta_x;
+// 	float delta_y;
+// 	float angle;
+// 	float fix_dist;
+
+// 	delta_x = x2 - x1;
+// 	delta_y = y2 - y1;
+// 	angle = atan2(delta_y, delta_x) - mlx->player->angle;
+// 	fix_dist = distance(delta_x, delta_y) * cos(angle);
+// 	return (fix_dist);
+// }
+
+// static void	no_debug_draw_line(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int i)
+// {
+// 	float	dist;
+// 	float	height;
+// 	int		start_y;
+// 	int		end;
+
+// 	dist = fixed_dist(player->x, player->y, ray_x, ray_y, mlx);
+// 	height = (TEXTURE / dist) * (WIDTH / 2);
+// 	start_y = (HEIGHT - height) / 2;
+// 	end = start_y + height;
+// 	while (start_y < end)
+// 	{
+// 		put_pixel(i, start_y, 0x00FF00, mlx);
+// 		start_y++;
+// 	}
+// }
+void draw_floor_and_cieling (t_mlx *mlx)
 {
-	float	dist;
-	float	height;
-	int		start_y;
-	int		end;
-	bool	is_ns;
-	t_img	*texture;
-	float	wall_x;
-	int		y;
-	int		color;
-	int		tex_y;
-	int		tex_x;
+	int x;
+	int y;
 
-	dist = fixed_dist(player->x, player->y, ray_x, ray_y, mlx);
-	height = (TEXTURE / dist) * (WIDTH / 2);
-	start_y = (HEIGHT - height) / 2;
-	end = start_y + height;
-	is_ns = is_no_or_so(ray_x, ray_y, mlx);
-	if (is_ns)
-		texture = mlx->element->so_img;
-	else
-		texture = mlx->element->we_img;
-	if (is_ns)
-		wall_x = fmod(ray_x, TEXTURE);
-	else
-		wall_x = fmod(ray_y, TEXTURE);
+	y = 0;
 
-	tex_x = (int)(wall_x / TEXTURE * texture->width);
-	y = start_y;
-	while (y < end)
+
+	while (y < HEIGHT)
 	{
-		if (y >= 0 && y < HEIGHT)
+		x = 0;
+		while (x < WIDTH)
 		{
-			tex_y = (int)((y - start_y) * texture->height / height);
-			color = get_texture_color(texture, tex_x, tex_y);
-			put_pixel(i, y, color, mlx);
+			if (y < HEIGHT / 2)
+				put_pixel(x, y, 0xFF0000, mlx);
+			else
+				put_pixel(x, y, 0xFF0000, mlx);
+			x++;
 		}
 		y++;
 	}
-
 }
 
-
-static void load_texture(t_img *img, void *mlx, char *path)
+void	print_game(int ray_x, int ray_y, t_player *player, t_mlx *mlx, int i)
 {
-	img->img = mlx_xpm_file_to_image(mlx, path, &img->width, &img->height);
-	if (!img->img)
-		ft_error("failed to load texture\n", true, mlx);
-	img->add = mlx_get_data_addr(img->img, &img->bpp, &img->line_len, &img->endian);
-	if (!img->add)
-		ft_error("failed to load pixel adress\n", true, mlx);
-
+	if (DEBUG)
+		draw_line_2d(player->x, player->y, ray_x, ray_y, mlx, 0xFF0000);
+	if (!DEBUG)
+	{
+		//draw_floor_and_cieling(mlx->element);
+		draw_textured_wall(ray_x, ray_y, mlx, player, i);
+	}
 }
 
-void init_texture(t_element *element, t_mlx *mlx)
+void	draw_line(t_player *player, t_mlx *mlx, float start_x, int i)
 {
-	load_texture(element->no_img, mlx->link, element->no_img->path);
-	load_texture(element->so_img, mlx->link, element->so_img->path);
-	load_texture(element->we_img, mlx->link, element->we_img->path);
-	load_texture(element->ea_img, mlx->link, element->ea_img->path);
-	if (!mlx->element->we_img)
-    	printf("Error: WE texture not loaded!\n");
+	mlx->dda->map_x = (int)(player->x / TEXTURE);
+	mlx->dda->map_y = (int)(player->y / TEXTURE);
+	mlx->dda->cos_angle = cos(start_x);
+	mlx->dda->sin_angle = sin(start_x);
+	mlx->dda->ray_x = player->x;
+	mlx->dda->ray_y = player->y;
+	mlx->dda->delta_x = fabs(1 / mlx->dda->cos_angle) * TEXTURE;
+	mlx->dda->delta_y = fabs(1 / mlx->dda->sin_angle) * TEXTURE;
+
+	if (mlx->dda->cos_angle < 0)
+	{
+		mlx->dda->step_x = -1;
+		mlx->dda->side_x = (mlx->dda->ray_x - mlx->dda->map_x * TEXTURE) 
+			* mlx->dda->delta_x / TEXTURE;
+	}
+	else
+	{
+		mlx->dda->step_x = 1;
+		mlx->dda->side_x = ((mlx->dda->map_x + 1) * TEXTURE - mlx->dda->ray_x) 
+			* mlx->dda->delta_x / TEXTURE;
+	}
+	if (mlx->dda->sin_angle < 0)
+	{
+		mlx->dda->step_y = -1;
+		mlx->dda->side_y = (mlx->dda->ray_y - mlx->dda->map_y * TEXTURE) 
+			* mlx->dda->delta_y / TEXTURE;
+	}
+	else
+	{
+		mlx->dda->step_y = 1;
+		mlx->dda->side_y = ((mlx->dda->map_y + 1) * TEXTURE - mlx->dda->ray_y) 
+			* mlx->dda->delta_y / TEXTURE;
+	}
+
+	while (true)
+	{
+		if (mlx->dda->side_x < mlx->dda->side_y)
+		{
+			mlx->dda->side_x += mlx->dda->delta_x;
+			mlx->dda->map_x += mlx->dda->step_x;
+			mlx->dda->side = 0;
+		}
+		else
+		{
+			mlx->dda->side_y += mlx->dda->delta_y;
+			mlx->dda->map_y += mlx->dda->step_y;
+			mlx->dda->side = 1;
+		}
+		if (mlx->map->map[mlx->dda->map_y][mlx->dda->map_x] == '1')
+			break;
+		if (DEBUG)
+			put_pixel(mlx->dda->ray_x, mlx->dda->ray_y, 0xFF0000, mlx);
+	}
+
+	if (mlx->dda->side == 0)
+	{
+		mlx->dda->ray_x = mlx->dda->map_x * TEXTURE;
+		if (mlx->dda->step_x < 0)
+			mlx->dda->ray_x += TEXTURE;
+		mlx->dda->ray_y = player->y + (mlx->dda->ray_x - player->x) 
+			* mlx->dda->sin_angle / mlx->dda->cos_angle;
+	}
+	else
+	{
+		mlx->dda->ray_y = mlx->dda->map_y * TEXTURE;
+		if (mlx->dda->step_y < 0)
+			mlx->dda->ray_y += TEXTURE;
+		mlx->dda->ray_x = player->x + (mlx->dda->ray_y - player->y) 
+			* mlx->dda->cos_angle / mlx->dda->sin_angle;
+	}
+
+	print_game(mlx->dda->ray_x, mlx->dda->ray_y, player, mlx, i);
 }
+
+
 

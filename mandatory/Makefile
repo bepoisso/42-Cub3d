@@ -41,6 +41,7 @@ SRC_FILES	=	main.c\
 				raycasting.c\
 				init.c\
 				tmp_arnaud.c\
+				tmp_arnaud_texture.c\
 
 
 LIBSX		=	$(addprefix $(MLX_DIR),$(MLX_NAME))

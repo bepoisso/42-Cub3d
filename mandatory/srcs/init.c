@@ -14,6 +14,7 @@ void	init_struct(t_mlx *mlx, char **av)
 	mlx->element->so_img = malloc(sizeof(t_img));
 	mlx->element->ea_img = malloc(sizeof(t_img));
 	mlx->element->we_img = malloc(sizeof(t_img));
+	mlx->dda = malloc(sizeof(t_dda));
 
 	mlx->element->flag_element = 0;
 	init_element(file, mlx);

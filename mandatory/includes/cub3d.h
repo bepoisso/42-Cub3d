@@ -115,6 +115,7 @@ typedef struct s_mlx
 	int			endian;
 	t_player	*player;
 	t_element	*element;
+	t_dda		*dda;
 
 }	t_mlx;
 
