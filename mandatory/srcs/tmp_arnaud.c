@@ -59,7 +59,7 @@ void	print_game(int ray_x, int ray_y, t_player *player, t_mlx *mlx, int i)
 	if (!DEBUG)
 	{
 		//draw_floor_and_cieling(mlx->element);
-		draw_textured_wall(ray_x, ray_y, mlx, player, i);
+		//draw_textured_wall(ray_x, ray_y, mlx, player, i);
 	}
 }
 
@@ -136,7 +136,8 @@ void	draw_line(t_player *player, t_mlx *mlx, float start_x, int i)
 			* mlx->dda->cos_angle / mlx->dda->sin_angle;
 	}
 
-	print_game(mlx->dda->ray_x, mlx->dda->ray_y, player, mlx, i);
+	draw_textured_wall(mlx->dda->ray_x, mlx->dda->ray_y, mlx, player, i, mlx->dda->side);
+
 }
 
 

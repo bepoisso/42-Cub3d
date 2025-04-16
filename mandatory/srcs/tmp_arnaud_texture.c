@@ -37,7 +37,7 @@ static float	fixed_dist(float x1, float y1, float x2, float y2, t_mlx *mlx)
 	return (fix_dist);
 }
 
-void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int i)
+void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int i, int side)
 {
 	float	dist;
 	float	height;
@@ -56,12 +56,13 @@ void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int 
 	start_y = (HEIGHT - height) / 2;
 	end = start_y + height;
 	is_ns = is_no_or_so(ray_x, ray_y, mlx);
-	if (is_ns)
+	if (side == 1)
 	{
 		if (ray_y < player->y)
 			texture = mlx->element->no_img;
 		else
 			texture = mlx->element->so_img;
+		wall_x = ray_x;
 	}
 	else
 	{
@@ -69,15 +70,12 @@ void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int 
 			texture = mlx->element->we_img;
 		else
 			texture = mlx->element->ea_img;
+			wall_x = ray_y;
 	}
-	if (is_ns)
-		wall_x = fmod(ray_x, TEXTURE);
-	else
-		wall_x = fmod(ray_y, TEXTURE);
-
+	wall_x = fmod(wall_x, TEXTURE);
 	tex_x = (int)(wall_x / TEXTURE * texture->width);
-	if (tex_x >= texture->width)
-		tex_x = texture->width - 1;
+	if (tex_x < 0) tex_x = 0;
+	if (tex_x >= texture->width) tex_x = texture->width - 1;	
 	y = start_y;
 	while (y < end)
 	{
