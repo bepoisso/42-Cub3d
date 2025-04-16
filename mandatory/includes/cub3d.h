@@ -31,10 +31,27 @@
 # include <errno.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
-# include "arnaud.h"
 # include "free.h"
 
 typedef struct s_mlx	t_mlx;
+
+typedef struct s_dda
+{
+	double	cos_angle;
+	double	sin_angle;
+	int		map_x;
+	int		map_y;
+	double	ray_x;
+	double	ray_y;
+	double	delta_x;
+	double	delta_y;
+	double	side_x;
+	double	side_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+}	t_dda;
+
 
 typedef struct s_draw
 {
@@ -162,5 +179,12 @@ void	clear_image(t_mlx *mlx);
 void	draw_square(int	x, int y, int size, int color, t_mlx *mlx);
 void	draw_map(t_mlx *mlx);
 int		draw_loop(t_mlx *mlx);
+
+
+
+void	init_texture(t_element *element, t_mlx *mlx);
+int		get_texture_color(t_img *texture, int tex_x, int tex_y);
+void	draw_floor_and_cieling (t_mlx *mlx);
+void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int i, int side);
 
 #endif

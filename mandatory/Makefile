@@ -38,9 +38,9 @@ SRC_FILES	=	main.c\
 				utils_utiles.c\
 				utils_mlx.c\
 				draw.c\
+				draw_3d.c\
 				raycasting.c\
 				init.c\
-				tmp_arnaud_texture.c\
 				free.c\
 
 
