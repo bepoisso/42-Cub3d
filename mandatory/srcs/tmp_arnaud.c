@@ -43,9 +43,9 @@ void draw_floor_and_cieling (t_mlx *mlx)
 		while (x < WIDTH)
 		{
 			if (y < HEIGHT / 2)
-				put_pixel(x, y, 0xFF0000, mlx);
+				put_pixel(x, y, mlx->element->cieling_color, mlx);
 			else
-				put_pixel(x, y, 0xFF0000, mlx);
+				put_pixel(x, y, mlx->element->floor_color, mlx);
 			x++;
 		}
 		y++;
@@ -58,7 +58,6 @@ void	print_game(int ray_x, int ray_y, t_player *player, t_mlx *mlx, int i)
 		draw_line_2d(player->x, player->y, ray_x, ray_y, mlx, 0xFF0000);
 	if (!DEBUG)
 	{
-		//draw_floor_and_cieling(mlx->element);
 		draw_textured_wall(mlx->dda->ray_x, mlx->dda->ray_y, mlx, player, i, mlx->dda->side);
 	}
 }
@@ -135,7 +134,8 @@ void	draw_line(t_player *player, t_mlx *mlx, float start_x, int i)
 		mlx->dda->ray_x = player->x + (mlx->dda->ray_y - player->y) 
 			* mlx->dda->cos_angle / mlx->dda->sin_angle;
 	}
-	print_game(mlx->dda->ray_x, mlx->dda->ray_y, mlx->player, mlx, i);
+
+	print_game(mlx->dda->ray_x, mlx->dda->ray_y, player, mlx, i);
 }
 
 

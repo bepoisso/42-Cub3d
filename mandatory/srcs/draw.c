@@ -103,6 +103,8 @@ int	draw_loop(t_mlx *mlx)
 		draw_circle(mlx->player->x, mlx->player->y, 5, 0xFFFFFF, mlx);
 		draw_map(mlx);
 	}
+	else
+		draw_floor_and_cieling(mlx);
 	fraction = PI / 3 / WIDTH;
 	start_x = mlx->player->angle - PI / 6;
 	i = 0;
