@@ -54,7 +54,6 @@ static void cpy_ea_texture(char *str, t_element *element)
 	int i;
 
 	i = 2;
-	printf("test\n");
 	while (str[i] == ' ')
 		i++;
 	element->ea_img->path = ft_substr(str, i, ft_strlen(str) - i - 1);
@@ -75,7 +74,8 @@ void init_element(char **str, t_mlx *mlx)
 	
 	while (str[i])
 	{
-		printf("%s\n", str[i]);
+		if (DEBUG)
+			printf("%s", str[i]);
 		if ((ft_strncmp(str[i], "NO", 2) == 0))
 			cpy_no_texture(str[i], mlx->element);
 		if ((ft_strncmp(str[i], "SO", 2) == 0))
@@ -90,11 +90,14 @@ void init_element(char **str, t_mlx *mlx)
 			init_color(str[i], &mlx->element->ceiling, mlx->element);
 		i++;
 	}
-	// if (mlx->element->flag_element != 6)
-	// 	ft_error("bad type of elements\n", true, mlx);
-	// printf("path NO texture = %s\n", mlx->element->no_img->path);
-	// printf("path SO texture = %s\n", mlx->element->so_img->path);
-	// printf("path WE texture = %s\n", mlx->element->we_img->path);
-	// printf("path EA texture = %s\n", mlx->element->ea_img->path);
+	if (mlx->element->flag_element != 6)
+		ft_error("bad type of elements\n", true, mlx);
+	if (DEBUG)
+	{
+		printf("path NO texture = %s\n", mlx->element->no_img->path);
+		printf("path SO texture = %s\n", mlx->element->so_img->path);
+		printf("path WE texture = %s\n", mlx->element->we_img->path);
+		printf("path EA texture = %s\n", mlx->element->ea_img->path);
+	}
 	set_colors(mlx->element);
 }
