@@ -40,7 +40,6 @@ SRC_FILES	=	main.c\
 				draw.c\
 				raycasting.c\
 				init.c\
-				tmp_arnaud.c\
 				tmp_arnaud_texture.c\
 				free.c\
 

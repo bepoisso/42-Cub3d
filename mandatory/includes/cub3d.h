@@ -5,9 +5,9 @@
 
 # define WIDTH 1280
 # define HEIGHT 720
-# define TEXTURE 128
+# define TEXTURE 64
 # define ELEM "01SENW \n"
-# define SPEED 3
+# define SPEED 6
 # define A_SPEED 0.03
 
 # define PI 3.14159265359
