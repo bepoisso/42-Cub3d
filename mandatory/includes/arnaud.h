@@ -27,6 +27,6 @@ typedef struct s_dda
 }	t_dda;
 
 void init_texture(t_element *element, t_mlx *mlx);
-void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int i);
+void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int i, int side);
 
 #endif
