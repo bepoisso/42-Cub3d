@@ -1,9 +1,9 @@
 #include "cub3d.h"
 
-static void cpy_no_texture(char *str, t_element *element)
+static void	cpy_no_texture(char *str, t_element *element)
 {
-	int fd;
-	int i;
+	int	fd;
+	int	i;
 
 	i = 2;
 	while (str[i] == ' ')
@@ -16,10 +16,10 @@ static void cpy_no_texture(char *str, t_element *element)
 	element->flag_element++;
 }
 
-static void cpy_so_texture(char *str, t_element *element)
+static void	cpy_so_texture(char *str, t_element *element)
 {
-	int fd;
-	int i;
+	int	fd;
+	int	i;
 
 	i = 2;
 	while (str[i] == ' ')
@@ -32,10 +32,10 @@ static void cpy_so_texture(char *str, t_element *element)
 	element->flag_element++;
 }
 
-static void cpy_we_texture(char *str, t_element *element)
+static void	cpy_we_texture(char *str, t_element *element)
 {
-	int fd;
-	int i;
+	int	fd;
+	int	i;
 
 	i = 2;
 	while (str[i] == ' ')
@@ -48,10 +48,10 @@ static void cpy_we_texture(char *str, t_element *element)
 	element->flag_element++;
 }
 
-static void cpy_ea_texture(char *str, t_element *element)
+static void	cpy_ea_texture(char *str, t_element *element)
 {
-	int fd;
-	int i;
+	int	fd;
+	int	i;
 
 	i = 2;
 	while (str[i] == ' ')
@@ -64,14 +64,11 @@ static void cpy_ea_texture(char *str, t_element *element)
 	element->flag_element++;
 }
 
-
-
-void init_element(char **str, t_mlx *mlx)
+void	init_element(char **str, t_mlx *mlx)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	
 	while (str[i])
 	{
 		if (DEBUG)

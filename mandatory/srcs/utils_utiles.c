@@ -31,10 +31,10 @@ float	pixtof(int pixel)
 
 int	ftopix(float pos)
 {
-	int abs = 0;
-	float only = 0;
-	float pix_in = 0;
-	int	pixel = 0;
+	int		abs;
+	float	only;
+	float	pix_in;
+	int		pixel;
 
 	abs = (int)floorf(pos);
 	only = pos - (int)floorf(pos);
@@ -43,7 +43,7 @@ int	ftopix(float pos)
 	return (pixel);
 }
 
-float	degtorad(float	degree)
+float	degtorad(float degree)
 {
 	return (degree * PI / 180);
 }

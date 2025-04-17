@@ -32,7 +32,6 @@ char	**get_map(char **file)
 	int		i;
 	int		j;
 
-
 	i = 0;
 	j = count_map_size(file);
 	map = (char **)malloc(sizeof(char *) * (j + 1));
@@ -43,7 +42,7 @@ char	**get_map(char **file)
 	i--;
 	while (file[i][0] == '\n')
 		i--;
-	while(file[i][0] != '\n')
+	while (file[i][0] != '\n')
 	{
 		map[j] = ft_strdup(file[i]);
 		i--;

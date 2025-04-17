@@ -1,8 +1,9 @@
 #include "cub3d.h"
 
-static void check_valid_case(t_mlx *mlx, int x, int y, int len)
+static void	check_valid_case(t_mlx *mlx, int x, int y, int len)
 {
-	if (y == 0 || y == len - 1 || x == 0 || x == (int)ft_strlen(mlx->map->map[y]) - 1)
+	if (y == 0 || y == len - 1 || x == 0
+		|| x == (int)ft_strlen(mlx->map->map[y]) - 1)
 		ft_error("invalid map\n", true, mlx);
 	if (ft_ischarset(mlx->map->map[y + 1][x], " \n"))
 		ft_error("invalid map\n", true, mlx);
@@ -16,8 +17,8 @@ static void check_valid_case(t_mlx *mlx, int x, int y, int len)
 
 static char	**ft_copy_strs(char **strs)
 {
-	int i;
-	int len;
+	int		i;
+	int		len;
 	char	**cpy;
 
 	len = 0;
@@ -36,50 +37,49 @@ static char	**ft_copy_strs(char **strs)
 	return (cpy);
 }
 
-static void flood_fill(char **map, int x, int y, t_mlx *mlx)
-{	
-	int len;
+static void	flood_fill(char **map, int x, int y, t_mlx *mlx)
+{
+	int	len;
 
 	len = 0;
 	while (map[len])
 		len++;
 	if (y < 0 || y >= len || x < 0)
-		return;
+		return ;
 	if (!map[y])
-	 	return;
+		return ;
 	if (x >= (int)ft_strlen(map[y]))
-		return;
+		return ;
 	if (map[y][x] == 'F')
-		return;
+		return ;
 	if (map[y][x] == '0')
 		check_valid_case(mlx, x, y, len);
 	map[y][x] = 'F';
-	if (x )
+	if (x)
 	flood_fill(map, x + 1, y, mlx);
 	flood_fill(map, x - 1, y, mlx);
 	flood_fill(map, x, y + 1, mlx);
 	flood_fill(map, x, y - 1, mlx);
 }
 
-void ft_print_map(char **map)
+void	ft_print_map(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map[i])
 	{
-		printf("y %d \t:\t %s", i , map[i]);
+		ft_printf("y %d \t:\t %s", i, map[i]);
 		i++;
 	}
-	printf( "-----------\n" );
+	ft_printf("-----------\n");
 }
 
-void is_valid_map(char **map, t_mlx *mlx)
+void	is_valid_map(char **map, t_mlx *mlx)
 {
-	char **map_cpy;
+	char	**map_cpy;
 
-	map_cpy= ft_copy_strs(map);
-	//ft_print_map(map_cpy);
+	map_cpy = ft_copy_strs(map);
 	flood_fill(map_cpy, 0, 0, mlx);
 	ft_freef("%d", map_cpy);
 }

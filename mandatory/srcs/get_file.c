@@ -12,7 +12,8 @@ static int	files_count_line(char *file_name, t_mlx *mlx)
 	readed = 1;
 	fd = open(file_name, O_RDWR);
 	if (errno == EISDIR)
-		ft_error("the specified path is a directory, not a file.\n\n", true, mlx);
+		ft_error("the specified path is a directory,\
+not a file.\n\n", true, mlx);
 	if (fd == -1)
 		return (-1);
 	while (readed != 0)
@@ -25,12 +26,11 @@ static int	files_count_line(char *file_name, t_mlx *mlx)
 	return (count);
 }
 
-static char **file_to_char(int fd, int size)
+static char	**file_to_char(int fd, int size)
 {
 	char	**res;
 	char	*line;
 	int		i;
-
 
 	i = 0;
 	res = (char **)malloc(sizeof(char *) * size);
@@ -45,7 +45,7 @@ static char **file_to_char(int fd, int size)
 	return (res);
 }
 
-char **get_file(char *file, t_mlx *mlx)
+char	**get_file(char *file, t_mlx *mlx)
 {
 	int		size;
 	int		fd;

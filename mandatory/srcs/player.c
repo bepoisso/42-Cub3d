@@ -4,7 +4,6 @@ t_player	*init_player(t_player *player, t_map *map)
 {
 	player = (t_player *)malloc(sizeof(t_player));
 	ft_memset(player, 0, sizeof(t_player));
-	
 	player->key_up = false;
 	player->key_down = false;
 	player->key_right = false;
@@ -37,7 +36,7 @@ int	key_press(int keysym, t_player *player)
 	return (0);
 }
 
-int	key_release(int	keysym, t_player *player)
+int	key_release(int keysym, t_player *player)
 {
 	if (keysym == 119)
 		player->key_up = false;
@@ -78,13 +77,13 @@ void	move_player(t_player *player)
 	cos_angle = cos(player->angle);
 	sin_angle = sin(player->angle);
 	angle_player(player);
-
 	if (player->key_up)
 	{
 		y = player->y + sin_angle * SPEED * player->shift;
-		x = player->x + cos_angle * SPEED  * player->shift;
-		if (player->mlx->map->map[(int)floorf(pixtof(y))][(int)floorf(pixtof(x))] == '1')
-			return;
+		x = player->x + cos_angle * SPEED * player->shift;
+		if (player->mlx->map->map[(int)floorf(pixtof(y))]
+			[(int)floorf(pixtof(x))] == '1')
+			return ;
 		player->y = y;
 		player->x = x;
 	}
@@ -92,8 +91,9 @@ void	move_player(t_player *player)
 	{
 		y = player->y - sin_angle * SPEED * player->shift;
 		x = player->x - cos_angle * SPEED * player->shift;
-		if (player->mlx->map->map[(int)floorf(pixtof(y))][(int)floorf(pixtof(x))] == '1')
-			return;
+		if (player->mlx->map->map[(int)floorf(pixtof(y))]
+			[(int)floorf(pixtof(x))] == '1')
+			return ;
 		player->y = y;
 		player->x = x;
 	}
@@ -101,8 +101,9 @@ void	move_player(t_player *player)
 	{
 		y = player->y - cos_angle * SPEED * player->shift;
 		x = player->x + sin_angle * SPEED * player->shift;
-		if (player->mlx->map->map[(int)floorf(pixtof(y))][(int)floorf(pixtof(x))] == '1')
-			return;
+		if (player->mlx->map->map[(int)floorf(pixtof(y))]
+			[(int)floorf(pixtof(x))] == '1')
+			return ;
 		player->y = y;
 		player->x = x;
 	}
@@ -110,20 +111,21 @@ void	move_player(t_player *player)
 	{
 		y = player->y + cos_angle * SPEED * player->shift;
 		x = player->x - sin_angle * SPEED * player->shift;
-		if (player->mlx->map->map[(int)floorf(pixtof(y))][(int)floorf(pixtof(x))] == '1')
-			return;
+		if (player->mlx->map->map[(int)floorf(pixtof(y))]
+			[(int)floorf(pixtof(x))] == '1')
+			return ;
 		player->y = y;
 		player->x = x;
 	}
 }
 
-void get_player_pos(t_mlx *mlx)
+void	get_player_pos(t_mlx *mlx)
 {
 	int	x;
 	int	y;
 
-	y = 0;
-	while (mlx->map->map[y])
+	y = -1;
+	while (mlx->map->map[++y])
 	{
 		x = 0;
 		while (mlx->map->map[y][x])
@@ -141,8 +143,7 @@ void get_player_pos(t_mlx *mlx)
 				if (mlx->map->map[y][x] == 'W')
 					mlx->player->angle = degtorad((float)180);
 			}
-		x++;
+			x++;
 		}
-	y++;
-}
+	}
 }

@@ -3,12 +3,12 @@
 void	put_pixel(int x, int y, int color, t_mlx *mlx)
 {
 	int	index;
-	
+
 	if (x >= WIDTH || y >= HEIGHT || x < 0 || y < 0)
 		return ;
 	index = y * mlx->size_line + x * mlx->bpp / 8;
 	mlx->data[index] = color & 0xFF;
-	mlx->data[index + 1] = (color >> 8) & 0xFF; 
+	mlx->data[index + 1] = (color >> 8) & 0xFF;
 	mlx->data[index + 2] = (color >> 16) & 0xFF;
 }
 
@@ -30,7 +30,7 @@ void	clear_image(t_mlx *mlx)
 	}
 }
 
-void	draw_square(int	x, int y, int size, int color, t_mlx *mlx)
+void	draw_square(int x, int y, int size, int color, t_mlx *mlx)
 {
 	int	i;
 
@@ -75,7 +75,6 @@ void	draw_map(t_mlx *mlx)
 
 	color = 0x00FF00;
 	map = mlx->map->map;
-	
 	y = 0;
 	while (map[y])
 	{
@@ -95,7 +94,7 @@ int	draw_loop(t_mlx *mlx)
 	float		fraction;
 	float		start_x;
 	int			i;
-	
+
 	move_player(mlx->player);
 	clear_image(mlx);
 	if (DEBUG)
