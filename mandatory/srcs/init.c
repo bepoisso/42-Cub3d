@@ -23,6 +23,8 @@ void	init_struct(t_mlx *mlx, char **av)
 	mlx->element->we_img = malloc(sizeof(t_img));
 	mlx->element->we_img->mlx = mlx;
 	ft_memset(mlx->element->we_img, 0 , sizeof(t_img));
+	// mlx->draw = malloc(sizeof(t_draw));  // rajouter le free
+	// ft_memset(mlx->draw, 0 , sizeof(t_draw));
 	mlx->dda = malloc(sizeof(t_dda));
 	ft_memset(mlx->dda, 0 , sizeof(t_dda));
 	mlx->element->flag_element = 0;

@@ -6,67 +6,65 @@ static float	distance(float x, float y)
 }
 
 
-static float	fixed_dist(float x1, float y1, float x2, float y2, t_mlx *mlx)
+static float	fixed_dist(float raw_dist, float ray_angle, float player_angle)
 {
-	float delta_x;
-	float delta_y;
-	float angle;
-	float fix_dist;
-
-	delta_x = x2 - x1;
-	delta_y = y2 - y1;
-	angle = atan2(delta_y, delta_x) - mlx->player->angle;
-	fix_dist = distance(delta_x, delta_y) * cos(angle);
-	return (fix_dist);
+	return (raw_dist * cos(ray_angle - player_angle));
+}
+void	draw_on_screen(t_mlx *mlx, t_img *texture, int i)
+{
+	while (mlx->draw.y < mlx->draw.end)
+	{
+		if (mlx->draw.y >= 0 && mlx->draw.y < HEIGHT)
+		{
+			mlx->draw.tex_y = (int)((mlx->draw.y - mlx->draw.start_y) 
+				* texture->height / mlx->draw.height);
+			mlx->draw.color = get_texture_color(texture, mlx->draw.tex_x, 
+				mlx->draw.tex_y);
+			put_pixel(i, mlx->draw.y, mlx->draw.color, mlx);
+		}
+		mlx->draw.y++;
+	}
 }
 
-void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int i, int side)
+t_img	*texture_in_map(t_mlx *mlx, t_player *player, t_img *texture)
 {
-	float	dist;
-	float	height;
-	int		start_y;
-	int		end;
-	float	wall_x;
-	int		y;
-	int		color;
-	int		tex_y;
-	int		tex_x;
-	t_img	*texture;
-
-	dist = fixed_dist(player->x, player->y, ray_x, ray_y, mlx);
-	height = (TEXTURE / dist) * (WIDTH / 2);
-	start_y = (HEIGHT - height) / 2;
-	end = start_y + height;
-	if (side == 1)
+	if (mlx->dda->side == 1)
 	{
-		if (ray_y < player->y)
+		if (mlx->dda->ray_y < player->y)
 			texture = mlx->element->no_img;
 		else
 			texture = mlx->element->so_img;
-		wall_x = ray_x;
+		mlx->draw.wall_x = mlx->dda->ray_x;
 	}
 	else
 	{
-		if (ray_x < player->x)
+		if (mlx->dda->ray_x < player->x)
 			texture = mlx->element->we_img;
 		else
 			texture = mlx->element->ea_img;
-		wall_x = ray_y;
+		mlx->draw.wall_x = mlx->dda->ray_y;
 	}
-	wall_x = fmod(wall_x, TEXTURE);
-	tex_x = (int)(wall_x / TEXTURE * texture->width);
-	if (tex_x < 0) tex_x = 0;
-	if (tex_x >= texture->width) tex_x = texture->width - 1;	
-	y = start_y;
-	while (y < end)
-	{
-		if (y >= 0 && y < HEIGHT)
-		{
-			tex_y = (int)((y - start_y) * texture->height / height);
-			color = get_texture_color(texture, tex_x, tex_y);
-			put_pixel(i, y, color, mlx);
-		}
-		y++;
-	}
+	return (texture);
+}
+void	draw_textured_wall(t_mlx *mlx, t_player *player, int i, float ray_angle)
+{
+	t_img	*texture;
+
+	texture = NULL;
+	mlx->draw.fov_v = (2 * atan(tan(FOV / 2) * ((float)HEIGHT / (float)WIDTH)));
+	mlx->draw.raw_dist = distance(mlx->dda->ray_x 
+		- player->x, mlx->dda->ray_y - player->y);
+	mlx->draw.dist = fixed_dist(mlx->draw.raw_dist, ray_angle, player->angle);
+	mlx->draw.height = (TEXTURE / mlx->draw.dist) 
+		* (HEIGHT / (2 * tan(mlx->draw.fov_v / 2)));	
+	mlx->draw.start_y = (HEIGHT - mlx->draw.height) / 2;
+	mlx->draw.end = mlx->draw.start_y + mlx->draw.height;
+	texture = texture_in_map(mlx, player, texture);
+	mlx->draw.wall_x = fmod(mlx->draw.wall_x, TEXTURE);
+	mlx->draw.tex_x = (int)(mlx->draw.wall_x / TEXTURE * texture->width);
+	if (mlx->draw.tex_x < 0) mlx->draw.tex_x = 0;
+	if (mlx->draw.tex_x >= texture->width) mlx->draw.tex_x = texture->width - 1;
+	mlx->draw.y = mlx->draw.start_y;
+	draw_on_screen(mlx, texture, i);
 }
 

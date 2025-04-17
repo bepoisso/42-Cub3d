@@ -7,8 +7,11 @@
 # define HEIGHT 720
 # define TEXTURE 64
 # define ELEM "01SENW \n"
-# define SPEED 6
+# define SPEED 3
 # define A_SPEED 0.03
+# define FOV (M_PI / 3)
+
+
 
 # define PI 3.14159265359
 
@@ -39,14 +42,14 @@ typedef struct s_dda
 {
 	double	cos_angle;
 	double	sin_angle;
-	int		map_x;
-	int		map_y;
 	double	ray_x;
 	double	ray_y;
 	double	delta_x;
 	double	delta_y;
 	double	side_x;
 	double	side_y;
+	int		map_x;
+	int		map_y;
 	int		step_x;
 	int		step_y;
 	int		side;
@@ -55,10 +58,17 @@ typedef struct s_dda
 
 typedef struct s_draw
 {
-	int	x_pos;
-	int	y_pos;
-	int	radius;
-	int	color;
+	float	dist;
+	float	height;
+	float	wall_x;
+	float	raw_dist;
+	float	fov_v;
+	int		start_y;
+	int		end;
+	int		y;
+	int		color;
+	int		tex_y;
+	int		tex_x;
 }	t_draw;
 
 
@@ -108,8 +118,8 @@ typedef struct s_element
 
 typedef struct s_player
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 	float	angle;
 
 	bool	key_up;
@@ -136,6 +146,7 @@ typedef struct s_mlx
 	t_player	*player;
 	t_element	*element;
 	t_dda		*dda;
+	t_draw		draw;
 
 }	t_mlx;
 
@@ -185,6 +196,6 @@ int		draw_loop(t_mlx *mlx);
 void	init_texture(t_element *element, t_mlx *mlx);
 int		get_texture_color(t_img *texture, int tex_x, int tex_y);
 void	draw_floor_and_cieling (t_mlx *mlx);
-void	draw_textured_wall(int ray_x, int ray_y, t_mlx *mlx, t_player *player, int i, int side);
+void	draw_textured_wall(t_mlx *mlx, t_player *player, int i, float ray_angle);
 
 #endif

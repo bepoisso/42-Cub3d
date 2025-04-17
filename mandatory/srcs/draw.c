@@ -105,11 +105,11 @@ int	draw_loop(t_mlx *mlx)
 	}
 	else
 		draw_floor_and_cieling(mlx);
-	fraction = PI / 3 / WIDTH;
-	start_x = mlx->player->angle - PI / 6;
 	i = 0;
 	while (i < WIDTH)
 	{
+		fraction = 2.0 * i / (float)WIDTH - 1.0;
+		start_x = mlx->player->angle + atan(fraction * tan(FOV / 2));
 		draw_line(mlx->player, mlx, start_x, i);
 		start_x += fraction;
 		i++;
