@@ -55,7 +55,6 @@ static void	flood_fill(char **map, int x, int y, t_mlx *mlx)
 	if (map[y][x] == '0')
 		check_valid_case(mlx, x, y, len);
 	map[y][x] = 'F';
-	if (x)
 	flood_fill(map, x + 1, y, mlx);
 	flood_fill(map, x - 1, y, mlx);
 	flood_fill(map, x, y + 1, mlx);
