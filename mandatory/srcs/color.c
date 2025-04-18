@@ -39,13 +39,13 @@ static void	check_color(t_color *color, t_element *element)
 
 static int	create_rgb(int r, int g, int b)
 {
-	return((r << 16) | (g << 8) | b);
+	return ((r << 16) | (g << 8) | b);
 }
 
 void	init_color(char *str, t_color *color, t_element *element)
 {
 	char	**colors;
-	int	i;
+	int		i;
 
 	i = 1;
 	while (str[i] == ' ')
@@ -64,6 +64,8 @@ void	init_color(char *str, t_color *color, t_element *element)
 
 void	set_colors(t_element *element)
 {
-	element->floor_color = create_rgb(element->floor.r_color, element->floor.g_color, element->floor.b_color);
-	element->cieling_color = create_rgb(element->ceiling.r_color, element->ceiling.g_color, element->ceiling.b_color);
+	element->floor_color = create_rgb(element->floor.r_color,
+			element->floor.g_color, element->floor.b_color);
+	element->cieling_color = create_rgb(element->ceiling.r_color,
+			element->ceiling.g_color, element->ceiling.b_color);
 }

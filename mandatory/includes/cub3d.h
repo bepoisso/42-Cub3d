@@ -1,15 +1,15 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define DEBUG 0
+# define DEBUG 1
 
 # define WIDTH 1280
 # define HEIGHT 720
 # define TEXTURE 64
 # define ELEM "01SENW \n"
-# define SPEED 3
+# define SPEED 6
 # define A_SPEED 0.03
-# define FOV (M_PI / 3)
+# define FOV (PI / 3)
 
 
 
@@ -65,10 +65,13 @@ typedef struct s_draw
 	float	fov_v;
 	int		start_y;
 	int		end;
+	int		x;
 	int		y;
 	int		color;
 	int		tex_y;
 	int		tex_x;
+	int		size;
+	int		radius;
 }	t_draw;
 
 
@@ -187,7 +190,8 @@ void	draw_line(t_player *player, t_mlx *mlx, float start_x, int i);
 /* DRAW */
 void	put_pixel(int x, int y, int color, t_mlx *mlx);
 void	clear_image(t_mlx *mlx);
-void	draw_square(int	x, int y, int size, int color, t_mlx *mlx);
+void	draw_square(t_draw *sqrt, t_mlx *mlx);
+void	draw_circle(t_draw *circle, t_mlx *mlx);
 void	draw_map(t_mlx *mlx);
 int		draw_loop(t_mlx *mlx);
 

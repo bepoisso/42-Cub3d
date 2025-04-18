@@ -1,5 +1,26 @@
 #include "cub3d.h"
 
+t_element	*alloc_ellement(t_mlx *mlx)
+{
+	t_element	*element;
+
+	element = (t_element *)malloc(sizeof(t_element));
+	ft_memset(element, 0, sizeof(t_element));
+	element->no_img = malloc(sizeof(t_img));
+	element->no_img->mlx = mlx;
+	ft_memset(element->no_img, 0, sizeof(t_img));
+	element->so_img = malloc(sizeof(t_img));
+	element->so_img->mlx = mlx;
+	ft_memset(element->so_img, 0, sizeof(t_img));
+	element->ea_img = malloc(sizeof(t_img));
+	element->ea_img->mlx = mlx;
+	ft_memset(element->ea_img, 0, sizeof(t_img));
+	element->we_img = malloc(sizeof(t_img));
+	element->we_img->mlx = mlx;
+	ft_memset(element->we_img, 0, sizeof(t_img));
+	return (element);
+}
+
 void	init_struct(t_mlx *mlx, char **av)
 {
 	char	**file;
@@ -9,25 +30,9 @@ void	init_struct(t_mlx *mlx, char **av)
 	mlx->player = init_player(mlx->player, mlx->map);
 	get_player_pos(mlx);
 	is_valid_map(mlx->map->map, mlx);
-	mlx->element = (t_element *)malloc(sizeof(t_element));
-	ft_memset(mlx->element, 0, sizeof(t_element));
-	mlx->element->no_img = malloc(sizeof(t_img));
-	mlx->element->no_img->mlx = mlx;
-	ft_memset(mlx->element->no_img, 0, sizeof(t_img));
-	mlx->element->so_img = malloc(sizeof(t_img));
-	mlx->element->so_img->mlx = mlx;
-	ft_memset(mlx->element->so_img, 0, sizeof(t_img));
-	mlx->element->ea_img = malloc(sizeof(t_img));
-	mlx->element->ea_img->mlx = mlx;
-	ft_memset(mlx->element->ea_img, 0, sizeof(t_img));
-	mlx->element->we_img = malloc(sizeof(t_img));
-	mlx->element->we_img->mlx = mlx;
-	ft_memset(mlx->element->we_img, 0, sizeof(t_img));
-	// mlx->draw = malloc(sizeof(t_draw));  // rajouter le free
-	// ft_memset(mlx->draw, 0, sizeof(t_draw));
+	mlx->element = alloc_ellement(mlx);
 	mlx->dda = malloc(sizeof(t_dda));
 	ft_memset(mlx->dda, 0, sizeof(t_dda));
-	mlx->element->flag_element = 0;
 	init_element(file, mlx);
 	ft_freef("%d", file);
 }

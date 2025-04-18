@@ -30,25 +30,25 @@ void	clear_image(t_mlx *mlx)
 	}
 }
 
-void	draw_square(int x, int y, int size, int color, t_mlx *mlx)
+void	draw_square(t_draw *sqrt, t_mlx *mlx)
 {
 	int	i;
 
 	i = -1;
-	while (++i < size)
-		put_pixel(x + i, y, color, mlx);
+	while (++i < sqrt->size)
+		put_pixel(sqrt->x + i, sqrt->y, sqrt->color, mlx);
 	i = -1;
-	while (++i < size)
-		put_pixel(x, y + i, color, mlx);
+	while (++i < sqrt->size)
+		put_pixel(sqrt->x, sqrt->y + i, sqrt->color, mlx);
 	i = -1;
-	while (++i < size)
-		put_pixel(x + size, y + i, color, mlx);
+	while (++i < sqrt->size)
+		put_pixel(sqrt->x + sqrt->size, sqrt->y + i, sqrt->color, mlx);
 	i = -1;
-	while (++i < size)
-		put_pixel(x + i, y + size, color, mlx);
+	while (++i < sqrt->size)
+		put_pixel(sqrt->x + i, sqrt->y + sqrt->size, sqrt->color, mlx);
 }
 
-void	draw_circle(int x_pos, int y_pos, int radius, int color, t_mlx *mlx)
+void	draw_circle(t_draw *circle, t_mlx *mlx)
 {
 	float	i;
 	float	angle;
@@ -59,9 +59,9 @@ void	draw_circle(int x_pos, int y_pos, int radius, int color, t_mlx *mlx)
 	while (i < 360)
 	{
 		angle = i;
-		x1 = radius * cos(angle * PI / 180);
-		y1 = radius * sin(angle * PI / 180);
-		put_pixel(x_pos + x1, y_pos + y1, color, mlx);
+		x1 = circle->radius * cos(angle * PI / 180);
+		y1 = circle->radius * sin(angle * PI / 180);
+		put_pixel(circle->x + x1, circle->y + y1, circle->color, mlx);
 		i += 0.1;
 	}
 }
@@ -69,11 +69,11 @@ void	draw_circle(int x_pos, int y_pos, int radius, int color, t_mlx *mlx)
 void	draw_map(t_mlx *mlx)
 {
 	char	**map;
-	int		color;
 	int		x;
 	int		y;
+	t_draw	sqrt;
 
-	color = 0x00FF00;
+	sqrt.color = 0x00FF00;
 	map = mlx->map->map;
 	y = 0;
 	while (map[y])
@@ -82,11 +82,28 @@ void	draw_map(t_mlx *mlx)
 		while (map[y][x])
 		{
 			if (map[y][x] == '1')
-				draw_square(x * TEXTURE, y * TEXTURE, TEXTURE, color, mlx);
+			{
+				sqrt.x = x * TEXTURE;
+				sqrt.y = y * TEXTURE;
+				sqrt.size = TEXTURE;
+				draw_square(&sqrt, mlx);
+			}
 			x++;
 		}
 		y++;
 	}
+}
+
+void	debug_draw_loop(t_mlx *mlx)
+{
+	t_draw	circle;
+
+	circle.x = mlx->player->x;
+	circle.y = mlx->player->y;
+	circle.radius = 5;
+	circle.color = 0xFFFFFF;
+	draw_circle(&circle, mlx);
+	draw_map(mlx);
 }
 
 int	draw_loop(t_mlx *mlx)
@@ -98,10 +115,7 @@ int	draw_loop(t_mlx *mlx)
 	move_player(mlx->player);
 	clear_image(mlx);
 	if (DEBUG)
-	{
-		draw_circle(mlx->player->x, mlx->player->y, 5, 0xFFFFFF, mlx);
-		draw_map(mlx);
-	}
+		debug_draw_loop(mlx);
 	else
 		draw_floor_and_cieling(mlx);
 	i = 0;
