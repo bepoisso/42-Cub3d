@@ -174,6 +174,8 @@ float		degtorad(float degree);
 float		radtodeg(float radian);
 int			close_cross(t_mlx *mlx);
 void		print_debug(t_mlx *mlx);
+float		pixtof(int pixel);
+int			ftopix(float pos);
 
 /* PLAYER */
 t_player	*init_player(t_player *player, t_map *map);
