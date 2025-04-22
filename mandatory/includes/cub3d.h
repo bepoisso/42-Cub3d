@@ -1,7 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define DEBUG 1
+# define DEBUG 0
 
 # define WIDTH 1280
 # define HEIGHT 720
@@ -182,7 +182,7 @@ t_player	*init_player(t_player *player, t_map *map);
 int			key_press(int keysym, t_player *player);
 int			key_release(int keysym, t_player *player);
 void		move_player(t_player *player);
-void		get_player_pos(t_mlx *mlx);
+int			get_player_pos(t_mlx *mlx, int x, int y);
 
 /* RAYCASTING */
 void	draw_line(t_player *player, t_mlx *mlx, float start_x, int i);
