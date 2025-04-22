@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void check_value_of_color(int *color, t_element *element)
+static void	check_value_of_color(int *color, t_element *element)
 {
 	if (*color > 255)
 	{

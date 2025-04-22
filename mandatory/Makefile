@@ -45,7 +45,7 @@ SRC_FILES	=	main.c\
 				dda.c\
 				debug.c\
 				moove.c\
-
+				pix.c\
 
 LIBSX		=	$(addprefix $(MLX_DIR),$(MLX_NAME))
 SRCS		=	$(addprefix $(SRC_DIR),$(SRC_FILES))

@@ -9,9 +9,7 @@
 # define ELEM "01SENW \n"
 # define SPEED 6
 # define A_SPEED 0.03
-# define FOV (PI / 3)
-
-
+# define FOV 1.047197551
 
 # define PI 3.14159265359
 
@@ -56,7 +54,6 @@ typedef struct s_dda
 	int		side;
 }	t_dda;
 
-
 typedef struct s_draw
 {
 	float	dist;
@@ -75,7 +72,6 @@ typedef struct s_draw
 	int		radius;
 }	t_draw;
 
-
 typedef struct s_color
 {
 	int	r_color;
@@ -83,7 +79,7 @@ typedef struct s_color
 	int	b_color;
 }	t_color;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	int				x;
 	int				y;
@@ -156,30 +152,28 @@ typedef struct s_mlx
 	struct timeval	last_time;
 }	t_mlx;
 
-
-
 /* PARSING and INIT */
-void	is_valid_map(char **map, t_mlx *mlx);
-void	init_element(char **str, t_mlx *mlx);
-char	**get_map(char **file);
-t_map	*init_map(char **file, t_map *map, t_mlx *mlx);
-char	**get_file(char *file, t_mlx *mlx);
-void	init_color(char *str, t_color *color, t_element *element);
-void	set_colors(t_element *element);
-void	init_struct(t_mlx *mlx, char **av);
-void	init_mlx(t_mlx *mlx);
-
-
+void		is_valid_map(char **map, t_mlx *mlx);
+void		init_element(char **str, t_mlx *mlx);
+char		**get_map(char **file);
+t_map		*init_map(char **file, t_map *map, t_mlx *mlx);
+char		**get_file(char *file, t_mlx *mlx);
+void		init_color(char *str, t_color *color, t_element *element);
+void		set_colors(t_element *element);
+void		init_struct(t_mlx *mlx, char **av);
+void		init_mlx(t_mlx *mlx);
+void		init_drawing(t_mlx *mlx, t_player *player, float start_x);
 
 /* UTILS */
-void	ft_error(char *s, bool free, t_mlx *mlx);
-int		ft_ischarset(char c, char *charset);
-int		ft_strslen(char **s);
-float	pixtof(int pixel);
-int		ftopix(float pos);
-float	degtorad(float	degree);
-float	radtodeg(float radian);
-int		close_cross(t_mlx *mlx);
+void		ft_error(char *s, bool free, t_mlx *mlx);
+int			ft_ischarset(char c, char *charset);
+int			ft_strslen(char **s);
+float		pixtof(int pixel);
+int			ftopix(float pos);
+float		degtorad(float degree);
+float		radtodeg(float radian);
+int			close_cross(t_mlx *mlx);
+void		print_debug(t_mlx *mlx);
 
 /* PLAYER */
 t_player	*init_player(t_player *player, t_map *map);
@@ -189,21 +183,28 @@ void		move_player(t_player *player);
 int			get_player_pos(t_mlx *mlx, int x, int y);
 
 /* RAYCASTING */
-void	draw_line(t_player *player, t_mlx *mlx, float start_x, int i);
+void		draw_line(t_player *player, t_mlx *mlx, float start_x, int i);
+void		print_game(t_player *player, t_mlx *mlx, int i, float ray_angle);
+
+/* RAYCASTING */
+void		move_key_up(t_player *player, float cos_angle, float sin_angle);
+void		move_key_down(t_player *player, float cos_angle, float sin_angle);
+void		move_key_left(t_player *player, float cos_angle, float sin_angle);
+void		move_key_right(t_player *player, float cos_angle, float sin_angle);
 
 /* DRAW */
-void	put_pixel(int x, int y, int color, t_mlx *mlx);
-void	clear_image(t_mlx *mlx);
-void	draw_square(t_draw *sqrt, t_mlx *mlx);
-void	draw_circle(t_draw *circle, t_mlx *mlx);
-void	draw_map(t_mlx *mlx);
-int		draw_loop(t_mlx *mlx);
+void		put_pixel(int x, int y, int color, t_mlx *mlx);
+void		clear_image(t_mlx *mlx);
+void		draw_square(t_draw *sqrt, t_mlx *mlx);
+void		draw_circle(t_draw *circle, t_mlx *mlx);
+void		draw_map(t_mlx *mlx);
+int			draw_loop(t_mlx *mlx);
 
-
-
-void	init_texture(t_element *element, t_mlx *mlx);
-int		get_texture_color(t_img *texture, int tex_x, int tex_y);
-void	draw_floor_and_cieling (t_mlx *mlx);
-void	draw_textured_wall(t_mlx *mlx, t_player *player, int i, float ray_angle);
+/* TEXTURING */
+void		init_texture(t_element *element, t_mlx *mlx);
+int			get_texture_color(t_img *texture, int tex_x, int tex_y);
+void		draw_floor_and_cieling(t_mlx *mlx);
+void		draw_textured_wall(t_mlx *mlx, t_player *player, int i,
+				float ray_angle);
 
 #endif

@@ -67,62 +67,6 @@ static void	angle_player(t_player *player)
 		player->angle = 2 * PI;
 }
 
-void	move_key_up(t_player *player, float cos_angle, float sin_angle)
-{
-	float	x;
-	float	y;
-
-	y = player->y + sin_angle * SPEED * player->shift;
-	x = player->x + cos_angle * SPEED * player->shift;
-	if (player->mlx->map->map[(int)floorf(pixtof(y))]
-		[(int)floorf(pixtof(x))] == '1')
-		return ;
-	player->y = y;
-	player->x = x;
-}
-
-void	move_key_down(t_player *player, float cos_angle, float sin_angle)
-{
-	float	x;
-	float	y;
-
-	y = player->y - sin_angle * SPEED * player->shift;
-	x = player->x - cos_angle * SPEED * player->shift;
-	if (player->mlx->map->map[(int)floorf(pixtof(y))]
-		[(int)floorf(pixtof(x))] == '1')
-		return ;
-	player->y = y;
-	player->x = x;
-}
-
-void	move_key_left(t_player *player, float cos_angle, float sin_angle)
-{
-	float	x;
-	float	y;
-
-	y = player->y - cos_angle * SPEED * player->shift;
-	x = player->x + sin_angle * SPEED * player->shift;
-	if (player->mlx->map->map[(int)floorf(pixtof(y))]
-		[(int)floorf(pixtof(x))] == '1')
-		return ;
-	player->y = y;
-	player->x = x;
-}
-
-void	move_key_right(t_player *player, float cos_angle, float sin_angle)
-{
-	float	x;
-	float	y;
-
-	y = player->y + cos_angle * SPEED * player->shift;
-	x = player->x - sin_angle * SPEED * player->shift;
-	if (player->mlx->map->map[(int)floorf(pixtof(y))]
-		[(int)floorf(pixtof(x))] == '1')
-		return ;
-	player->y = y;
-	player->x = x;
-}
-
 void	move_player(t_player *player)
 {
 	float	cos_angle;
@@ -139,32 +83,4 @@ void	move_player(t_player *player)
 		move_key_left(player, cos_angle, sin_angle);
 	if (player->key_right)
 		move_key_right(player, cos_angle, sin_angle);
-}
-
-int	get_player_pos(t_mlx *mlx, int x, int y)
-{
-	y = -1;
-	while (mlx->map->map[++y])
-	{
-		x = 0;
-		while (mlx->map->map[y][x])
-		{
-			if (ft_ischarset(mlx->map->map[y][x], "NSEW"))
-			{
-				mlx->player->x = (x * TEXTURE) + (TEXTURE / 2);
-				mlx->player->y = (y * TEXTURE) + (TEXTURE / 2);
-				if (mlx->map->map[y][x] == 'N')
-					mlx->player->angle = degtorad((float)270);
-				if (mlx->map->map[y][x] == 'S')
-					mlx->player->angle = degtorad((float)90);
-				if (mlx->map->map[y][x] == 'E')
-					mlx->player->angle = degtorad((float)0);
-				if (mlx->map->map[y][x] == 'W')
-					mlx->player->angle = degtorad((float)180);
-				return (0);
-			}
-			x++;
-		}
-	}
-	return (1);
 }
