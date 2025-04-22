@@ -10,6 +10,8 @@
 # define SPEED 6
 # define A_SPEED 0.03
 # define FOV 1.047197551
+# define JUMP 15
+# define JUMP_MAX 150
 
 # define PI 3.14159265359
 
@@ -129,7 +131,10 @@ typedef struct s_player
 
 	bool	left_rotate;
 	bool	right_rotate;
+	
+	bool	jump;
 	int		shift;
+	int		jump_value;
 	t_mlx	*mlx;
 }	t_player;
 
@@ -193,6 +198,7 @@ void		move_key_up(t_player *player, float cos_angle, float sin_angle);
 void		move_key_down(t_player *player, float cos_angle, float sin_angle);
 void		move_key_left(t_player *player, float cos_angle, float sin_angle);
 void		move_key_right(t_player *player, float cos_angle, float sin_angle);
+void		move_key_jump(t_player *player); //NEW
 
 /* DRAW */
 void		put_pixel(int x, int y, int color, t_mlx *mlx);

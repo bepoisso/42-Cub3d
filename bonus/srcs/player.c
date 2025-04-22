@@ -12,6 +12,7 @@ t_player	*init_player(t_player *player, t_map *map)
 	player->right_rotate = false;
 	player->shift = 1;
 	player->mlx = map->mlx;
+	player->jump_value = 0;
 	return (player);
 }
 
@@ -33,6 +34,8 @@ int	key_press(int keysym, t_player *player)
 		player->right_rotate = true;
 	if (keysym == 65505)
 		player->shift = 2;
+	if (keysym == 32)
+		player->jump = true;
 	return (0);
 }
 
@@ -52,6 +55,8 @@ int	key_release(int keysym, t_player *player)
 		player->right_rotate = false;
 	if (keysym == 65505)
 		player->shift = 1;
+	if (keysym == 32)
+		player->jump = false;
 	return (0);
 }
 
@@ -83,4 +88,5 @@ void	move_player(t_player *player)
 		move_key_left(player, cos_angle, sin_angle);
 	if (player->key_right)
 		move_key_right(player, cos_angle, sin_angle);
+	move_key_jump(player);
 }
