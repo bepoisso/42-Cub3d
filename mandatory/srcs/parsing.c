@@ -64,17 +64,6 @@ static void	cpy_ea_texture(char *str, t_element *element)
 	element->flag_element++;
 }
 
-void	print_debug(t_mlx *mlx)
-{
-	if (DEBUG)
-	{
-		printf("path NO texture = %s\n", mlx->element->no_img->path);
-		printf("path SO texture = %s\n", mlx->element->so_img->path);
-		printf("path WE texture = %s\n", mlx->element->we_img->path);
-		printf("path EA texture = %s\n", mlx->element->ea_img->path);
-	}
-}
-
 void	init_element(char **str, t_mlx *mlx)
 {
 	int	i;

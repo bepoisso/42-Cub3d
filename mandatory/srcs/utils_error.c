@@ -21,3 +21,14 @@ void	ft_error(char *s, bool free, t_mlx *mlx)
 		exit(1);
 	}
 }
+
+void	print_debug(t_mlx *mlx)
+{
+	if (DEBUG)
+	{
+		printf("path NO texture = %s\n", mlx->element->no_img->path);
+		printf("path SO texture = %s\n", mlx->element->so_img->path);
+		printf("path WE texture = %s\n", mlx->element->we_img->path);
+		printf("path EA texture = %s\n", mlx->element->ea_img->path);
+	}
+}

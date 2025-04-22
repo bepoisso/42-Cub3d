@@ -42,6 +42,9 @@ SRC_FILES	=	main.c\
 				raycasting.c\
 				init.c\
 				free.c\
+				dda.c\
+				debug.c\
+				moove.c\
 
 
 LIBSX		=	$(addprefix $(MLX_DIR),$(MLX_NAME))

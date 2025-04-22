@@ -159,6 +159,7 @@ void		init_color(char *str, t_color *color, t_element *element);
 void		set_colors(t_element *element);
 void		init_struct(t_mlx *mlx, char **av);
 void		init_mlx(t_mlx *mlx);
+void		init_drawing(t_mlx *mlx, t_player *player, float start_x);
 
 /* UTILS */
 void		ft_error(char *s, bool free, t_mlx *mlx);
@@ -169,6 +170,7 @@ int			ftopix(float pos);
 float		degtorad(float degree);
 float		radtodeg(float radian);
 int			close_cross(t_mlx *mlx);
+void		print_debug(t_mlx *mlx);
 
 /* PLAYER */
 t_player	*init_player(t_player *player, t_map *map);
@@ -179,6 +181,13 @@ int			get_player_pos(t_mlx *mlx, int x, int y);
 
 /* RAYCASTING */
 void		draw_line(t_player *player, t_mlx *mlx, float start_x, int i);
+void		print_game(t_player *player, t_mlx *mlx, int i, float ray_angle);
+
+/* RAYCASTING */
+void		move_key_up(t_player *player, float cos_angle, float sin_angle);
+void		move_key_down(t_player *player, float cos_angle, float sin_angle);
+void		move_key_left(t_player *player, float cos_angle, float sin_angle);
+void		move_key_right(t_player *player, float cos_angle, float sin_angle);
 
 /* DRAW */
 void		put_pixel(int x, int y, int color, t_mlx *mlx);
