@@ -104,16 +104,20 @@ void	get_time(t_mlx *mlx)
 	//char	*fps_str;
 	struct timeval	current_time;
 	long	time_pass;
+	static int	time = 0;
 
 	gettimeofday(&current_time, NULL);
 	time_pass = time_in_ms(&current_time) - time_in_ms(&mlx->last_time);
 	mlx->frame_count++;
-	if(time_pass >= 1000)
+	if(time_pass >= 250)
 	{
-		printf("fps = %d\n", mlx->frame_count);
+		time = mlx->frame_count * 4;
+		printf("fps = %d\n", mlx->frame_count * 4);
 		mlx->frame_count = 0;
 		mlx->last_time = current_time;
 	}
+	mlx_string_put(mlx->link, mlx->screen, 5, 10, 0xFFFFFF, "FPS : ");
+	mlx_string_put(mlx->link, mlx->screen, 50, 10, 0xFFFFFF, ft_itoa(time));
 	// strfps(mlx->frame_count, mlx);
 	// if (mlx->str_fps)
 	// {
@@ -128,7 +132,6 @@ int	draw_loop(t_mlx *mlx)
 	int			i;
 
 	move_player(mlx->player);
-	get_time(mlx);
 	clear_image(mlx);
 	if (DEBUG)
 		debug_draw_loop(mlx);
@@ -144,5 +147,6 @@ int	draw_loop(t_mlx *mlx)
 		i++;
 	}
 	mlx_put_image_to_window(mlx->link, mlx->screen, mlx->img, 0, 0);
+	get_time(mlx);
 	return (0);
 }
