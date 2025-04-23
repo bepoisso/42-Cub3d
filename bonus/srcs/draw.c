@@ -101,7 +101,7 @@ void	get_time(t_mlx *mlx)
 	mlx_string_put(mlx->link, mlx->screen, 50, 10, 0xFFFFFF, ft_itoa(time));
 }
 
-void	draw_circle
+//void	draw_circle
 
 int	draw_loop(t_mlx *mlx)
 {
