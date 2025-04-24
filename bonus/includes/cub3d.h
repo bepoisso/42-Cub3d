@@ -8,7 +8,7 @@
 # define TEXTURE 64
 # define ELEM "01SENW \n"
 # define SPEED 6
-# define A_SPEED 0.03
+# define A_SPEED 0.06
 # define FOV 1.047197551
 # define JUMP 15
 # define JUMP_MAX 150
@@ -133,6 +133,7 @@ typedef struct s_player
 	bool	right_rotate;
 	
 	bool	jump;
+	bool	crouch;
 	int		shift;
 	int		jump_value;
 	t_mlx	*mlx;

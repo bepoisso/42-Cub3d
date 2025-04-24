@@ -36,6 +36,8 @@ int	key_press(int keysym, t_player *player)
 		player->shift = 2;
 	if (keysym == 32)
 		player->jump = true;
+	if (keysym == XK_Control_L)
+		player->crouch = true;
 	return (0);
 }
 
@@ -57,6 +59,8 @@ int	key_release(int keysym, t_player *player)
 		player->shift = 1;
 	if (keysym == 32)
 		player->jump = false;
+	if (keysym == XK_Control_L)
+		player->crouch = false;
 	return (0);
 }
 
