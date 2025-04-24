@@ -81,27 +81,8 @@ long	time_in_ms(struct timeval *time)
 	return(time->tv_sec * 1000 + time->tv_usec / 1000);
 }
 
-// void *strfps(int fps, t_mlx *mlx)
-// {
-// 	char	*nbr;
-// 	char	*prefix;
-
-// 	nbr = ft_itoa(fps);
-// 	if (!nbr)
-// 		return ;
-// 	prefix = "FPS : ";
-// 	mlx->str_fps = malloc(ft_strlen(nbr) + ft_strlen(prefix) + 1);
-// 	if (!mlx->str_fps)
-// 		return ;
-// 	mlx->str_fps[0] = '\0';
-// 	strcat(mlx->str_fps, prefix);
-// 	strcat(mlx->str_fps, nbr);
-// 	free(nbr);
-// }
-
 void	get_time(t_mlx *mlx)
 {
-	//char	*fps_str;
 	struct timeval	current_time;
 	long	time_pass;
 	static int	time = 0;
@@ -118,13 +99,10 @@ void	get_time(t_mlx *mlx)
 	}
 	mlx_string_put(mlx->link, mlx->screen, 5, 10, 0xFFFFFF, "FPS : ");
 	mlx_string_put(mlx->link, mlx->screen, 50, 10, 0xFFFFFF, ft_itoa(time));
-	// strfps(mlx->frame_count, mlx);
-	// if (mlx->str_fps)
-	// {
-	// 	mlx_string_put(mlx->link, mlx->screen, 10, 10, 0xFFFFFF, mlx->str_fps);
-	// 	free(mlx->str_fps);
-	// }
 }
+
+//void	draw_circle
+
 int	draw_loop(t_mlx *mlx)
 {
 	float		fraction;
