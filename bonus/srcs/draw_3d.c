@@ -50,7 +50,11 @@ t_img	*texture_in_map(t_mlx *mlx, t_player *player, t_img *texture)
 void	draw_textured_wall(t_mlx *mlx, t_player *player, int i, float ray_angle)
 {
 	t_img	*texture;
+	int		crouch;
 
+	crouch = 0;
+	if (player->crouch)
+		crouch = -100;
 	texture = NULL;
 	mlx->draw.fov_v = (2 * atan(tan(FOV / 2) * ((float)HEIGHT / (float)WIDTH)));
 	mlx->draw.raw_dist = distance(mlx->dda->ray_x
@@ -58,7 +62,7 @@ void	draw_textured_wall(t_mlx *mlx, t_player *player, int i, float ray_angle)
 	mlx->draw.dist = fixed_dist(mlx->draw.raw_dist, ray_angle, player->angle);
 	mlx->draw.height = (TEXTURE / mlx->draw.dist)
 		* (HEIGHT / (2  * tan(mlx->draw.fov_v / 2)));
-	mlx->draw.start_y = (HEIGHT - mlx->draw.height) / 2 + player->jump_value; //ADD JUMP 100
+	mlx->draw.start_y = (HEIGHT - mlx->draw.height) / 2 + player->jump_value + crouch;
 	mlx->draw.end = mlx->draw.start_y + mlx->draw.height;
 	texture = texture_in_map(mlx, player, texture);
 	mlx->draw.wall_x = fmod(mlx->draw.wall_x, TEXTURE);

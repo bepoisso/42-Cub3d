@@ -15,14 +15,18 @@ void	draw_floor_and_cieling(t_mlx *mlx)
 {
 	int	x;
 	int	y;
+	int	crouch;
 
+	crouch = 0;
+	if (mlx->player->crouch)
+		crouch = -100;
 	y = 0;
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			if (y < HEIGHT / 2 + mlx->player->jump_value) //ADD JUMP 100
+			if (y < HEIGHT / 2 + mlx->player->jump_value + crouch) //ADD JUMP 100
 				put_pixel(x, y, mlx->element->cieling_color, mlx);
 			else
 				put_pixel(x, y, mlx->element->floor_color, mlx);
