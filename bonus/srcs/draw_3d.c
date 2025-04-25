@@ -61,8 +61,9 @@ void	draw_textured_wall(t_mlx *mlx, t_player *player, int i, float ray_angle)
 			- player->x, mlx->dda->ray_y - player->y);
 	mlx->draw.dist = fixed_dist(mlx->draw.raw_dist, ray_angle, player->angle);
 	mlx->draw.height = (TEXTURE / mlx->draw.dist)
-		* (HEIGHT / (2  * tan(mlx->draw.fov_v / 2)));
-	mlx->draw.start_y = (HEIGHT - mlx->draw.height) / 2 + player->jump_value + crouch;
+		* (HEIGHT / (2 * tan(mlx->draw.fov_v / 2)));
+	mlx->draw.start_y = (HEIGHT - mlx->draw.height) / 2
+		+ player->jump_value + crouch;
 	mlx->draw.end = mlx->draw.start_y + mlx->draw.height;
 	texture = texture_in_map(mlx, player, texture);
 	mlx->draw.wall_x = fmod(mlx->draw.wall_x, TEXTURE);

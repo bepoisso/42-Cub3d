@@ -26,7 +26,7 @@ void	draw_floor_and_cieling(t_mlx *mlx)
 		x = 0;
 		while (x < WIDTH)
 		{
-			if (y < HEIGHT / 2 + mlx->player->jump_value + crouch) //ADD JUMP 100
+			if (y < HEIGHT / 2 + mlx->player->jump_value + crouch)
 				put_pixel(x, y, mlx->element->cieling_color, mlx);
 			else
 				put_pixel(x, y, mlx->element->floor_color, mlx);
