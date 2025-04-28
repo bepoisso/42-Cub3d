@@ -81,28 +81,6 @@ long	time_in_ms(struct timeval *time)
 	return(time->tv_sec * 1000 + time->tv_usec / 1000);
 }
 
-void	get_time(t_mlx *mlx)
-{
-	struct timeval	current_time;
-	long	time_pass;
-	static int	time = 0;
-
-	gettimeofday(&current_time, NULL);
-	time_pass = time_in_ms(&current_time) - time_in_ms(&mlx->last_time);
-	mlx->frame_count++;
-	if(time_pass >= 250)
-	{
-		time = mlx->frame_count * 4;
-		printf("fps = %d\n", mlx->frame_count * 4);
-		mlx->frame_count = 0;
-		mlx->last_time = current_time;
-	}
-	mlx_string_put(mlx->link, mlx->screen, 5, 10, 0xFFFFFF, "FPS : ");
-	mlx_string_put(mlx->link, mlx->screen, 50, 10, 0xFFFFFF, ft_itoa(time));
-}
-
-//void	draw_circle
-
 int	draw_loop(t_mlx *mlx)
 {
 	float		fraction;
