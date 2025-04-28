@@ -28,6 +28,7 @@ void	draw_on_screen(t_mlx *mlx, t_img *texture, int i)
 
 t_img	*texture_in_map(t_mlx *mlx, t_player *player, t_img *texture)
 {
+
 	if (mlx->dda->side == 1)
 	{
 		if (mlx->dda->ray_y < player->y)
@@ -44,6 +45,8 @@ t_img	*texture_in_map(t_mlx *mlx, t_player *player, t_img *texture)
 			texture = mlx->element->ea_img;
 		mlx->draw.wall_x = mlx->dda->ray_y;
 	}
+	if (mlx->map->map[mlx->dda->map_y][mlx->dda->map_x] == 'P')
+			texture = mlx->element->door;
 	return (texture);
 }
 
@@ -58,7 +61,7 @@ void	draw_textured_wall(t_mlx *mlx, t_player *player, int i, float ray_angle)
 	mlx->draw.dist = fixed_dist(mlx->draw.raw_dist, ray_angle, player->angle);
 	mlx->draw.height = (TEXTURE / mlx->draw.dist)
 		* (HEIGHT / (2  * tan(mlx->draw.fov_v / 2)));
-	mlx->draw.start_y = (HEIGHT - mlx->draw.height) / 2 + player->jump_value; //ADD JUMP 100
+	mlx->draw.start_y = (HEIGHT - mlx->draw.height) / 2 + player->jump_value;
 	mlx->draw.end = mlx->draw.start_y + mlx->draw.height;
 	texture = texture_in_map(mlx, player, texture);
 	mlx->draw.wall_x = fmod(mlx->draw.wall_x, TEXTURE);

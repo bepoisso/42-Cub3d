@@ -68,7 +68,7 @@ void	init_texture(t_element *element, t_mlx *mlx)
 	load_texture(element->so_img, mlx->link, element->so_img->path);
 	load_texture(element->we_img, mlx->link, element->we_img->path);
 	load_texture(element->ea_img, mlx->link, element->ea_img->path);
-	//load_texture(element->door, mlx->link, "./assets/textures/door.xpm");
+	load_texture(element->door, mlx->link, "./assets/textures/door.xpm");
 	if (!mlx->element->we_img)
 		printf("Error: WE texture not loaded!\n");
 }
