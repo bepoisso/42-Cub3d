@@ -12,6 +12,7 @@
 # define FOV 1.047197551
 # define JUMP 15
 # define JUMP_MAX 150
+# define SENSIBILITY 2000
 
 # define PI 3.14159265359
 
@@ -121,6 +122,7 @@ typedef struct s_element
 typedef struct s_player
 {
 	double	x;
+	double	prev_x;
 	double	y;
 	float	angle;
 
@@ -136,6 +138,8 @@ typedef struct s_player
 	bool	crouch;
 	int		shift;
 	int		jump_value;
+
+	bool	debug;
 	t_mlx	*mlx;
 }	t_player;
 
@@ -150,6 +154,7 @@ typedef struct s_mlx
 	int				bpp;
 	int				size_line;
 	int				endian;
+	int				time;
 	t_map			*map;
 	t_player		*player;
 	t_element		*element;
@@ -182,6 +187,7 @@ int			close_cross(t_mlx *mlx);
 void		print_debug(t_mlx *mlx);
 float		pixtof(int pixel);
 int			ftopix(float pos);
+void		print_hud(t_mlx *mlx);
 
 /* PLAYER */
 t_player	*init_player(t_player *player, t_map *map);
@@ -189,6 +195,7 @@ int			key_press(int keysym, t_player *player);
 int			key_release(int keysym, t_player *player);
 void		move_player(t_player *player);
 int			get_player_pos(t_mlx *mlx, int x, int y);
+int			mouse_move(int x, int y, t_mlx *mlx);
 
 /* RAYCASTING */
 void		draw_line(t_player *player, t_mlx *mlx, float start_x, int i);
@@ -215,5 +222,9 @@ int			get_texture_color(t_img *texture, int tex_x, int tex_y);
 void		draw_floor_and_cieling(t_mlx *mlx);
 void		draw_textured_wall(t_mlx *mlx, t_player *player, int i,
 				float ray_angle);
+
+/* TIME */
+void		get_time(t_mlx *mlx);
+long		time_in_ms(struct timeval *time);
 
 #endif

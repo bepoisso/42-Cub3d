@@ -33,7 +33,7 @@ static char	**file_to_char(int fd, int size)
 	int		i;
 
 	i = 0;
-	res = (char **)malloc(sizeof(char *) * size);
+	res = (char **)malloc(sizeof(char *) * (size + 1));
 	line = get_next_line(fd);
 	while (line)
 	{

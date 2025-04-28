@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 t_player	*init_player(t_player *player, t_map *map)
 {

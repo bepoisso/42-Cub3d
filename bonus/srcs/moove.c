@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 void	move_key_up(t_player *player, float cos_angle, float sin_angle)
 {

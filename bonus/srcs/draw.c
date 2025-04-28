@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 void	draw_square(t_draw *sqrt, t_mlx *mlx)
 {
@@ -76,31 +76,6 @@ void	debug_draw_loop(t_mlx *mlx)
 	draw_map(mlx);
 }
 
-long	time_in_ms(struct timeval *time)
-{
-	return (time->tv_sec * 1000 + time->tv_usec / 1000);
-}
-
-void	get_time(t_mlx *mlx)
-{
-	struct timeval	current_time;
-	long			time_pass;
-	static int		time = 0;
-
-	gettimeofday(&current_time, NULL);
-	time_pass = time_in_ms(&current_time) - time_in_ms(&mlx->last_time);
-	mlx->frame_count++;
-	if (time_pass >= 250)
-	{
-		time = mlx->frame_count * 4;
-		printf("fps = %d\n", mlx->frame_count * 4);
-		mlx->frame_count = 0;
-		mlx->last_time = current_time;
-	}
-	mlx_string_put(mlx->link, mlx->screen, 5, 10, 0xFFFFFF, "FPS : ");
-	mlx_string_put(mlx->link, mlx->screen, 50, 10, 0xFFFFFF, ft_itoa(time));
-}
-
 int	draw_loop(t_mlx *mlx)
 {
 	float		fraction;
@@ -108,7 +83,6 @@ int	draw_loop(t_mlx *mlx)
 	int			i;
 
 	move_player(mlx->player);
-	clear_image(mlx);
 	if (mlx->player->debug)
 		debug_draw_loop(mlx);
 	else
@@ -124,5 +98,6 @@ int	draw_loop(t_mlx *mlx)
 	}
 	mlx_put_image_to_window(mlx->link, mlx->screen, mlx->img, 0, 0);
 	get_time(mlx);
+	print_hud(mlx);
 	return (0);
 }
