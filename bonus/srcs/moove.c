@@ -75,7 +75,7 @@ void	move_key_right(t_player *player, float cos_angle, float sin_angle)
 void	move_key_jump(t_player *player)
 {
 	static bool	pressed = false;
-	static bool top = false;
+	static bool	top = false;
 
 	if (!(pressed) && player->jump)
 		pressed = true;

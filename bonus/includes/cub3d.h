@@ -131,7 +131,7 @@ typedef struct s_player
 
 	bool	left_rotate;
 	bool	right_rotate;
-	
+
 	bool	jump;
 	bool	crouch;
 	int		shift;
@@ -141,20 +141,20 @@ typedef struct s_player
 
 typedef struct s_mlx
 {
-	void		*link;
-	void		*screen;
-	void		*img;
-	char		*data;
-	char		*str_fps;
-	int			frame_count;
-	int			bpp;
-	int			size_line;
-	int			endian;
-	t_map		*map;
-	t_player	*player;
-	t_element	*element;
-	t_dda		*dda;
-	t_draw		draw;
+	void			*link;
+	void			*screen;
+	void			*img;
+	char			*data;
+	char			*str_fps;
+	int				frame_count;
+	int				bpp;
+	int				size_line;
+	int				endian;
+	t_map			*map;
+	t_player		*player;
+	t_element		*element;
+	t_dda			*dda;
+	t_draw			draw;
 	struct timeval	last_time;
 }	t_mlx;
 
