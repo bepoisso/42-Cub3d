@@ -1,17 +1,32 @@
 #include "cub3d.h"
 
+static void	check_valid_pos(t_mlx *mlx, int x, int y, int len)
+{
+	if (y == 0 || y == len - 1 || x == 0
+		|| x == (int)ft_strlen(mlx->map->map[y]) - 1)
+		ft_error("invalid map\n", true, mlx);
+	if (!ft_ischarset(mlx->map->map[y + 1][x], "10"))
+		ft_error("invalid map\n", true, mlx);
+	if (!ft_ischarset(mlx->map->map[y - 1][x], "10"))
+		ft_error("invalid map\n", true, mlx);
+	if (!ft_ischarset(mlx->map->map[y][x + 1], "10"))
+		ft_error("invalid map\n", true, mlx);
+	if (!ft_ischarset(mlx->map->map[y][x - 1], "10"))
+		ft_error("invalid map\n", true, mlx);
+}
+
 static void	check_valid_case(t_mlx *mlx, int x, int y, int len)
 {
 	if (y == 0 || y == len - 1 || x == 0
 		|| x == (int)ft_strlen(mlx->map->map[y]) - 1)
 		ft_error("invalid map\n", true, mlx);
-	if (ft_ischarset(mlx->map->map[y + 1][x], " \n"))
+	if (!ft_ischarset(mlx->map->map[y + 1][x], "10WSNOP"))
 		ft_error("invalid map\n", true, mlx);
-	if (ft_ischarset(mlx->map->map[y - 1][x], " \n"))
+	if (!ft_ischarset(mlx->map->map[y - 1][x], "10WSNOP"))
 		ft_error("invalid map\n", true, mlx);
-	if (ft_ischarset(mlx->map->map[y][x + 1], " \n"))
+	if (!ft_ischarset(mlx->map->map[y][x + 1], "10WSNOP"))
 		ft_error("invalid map\n", true, mlx);
-	if (ft_ischarset(mlx->map->map[y][x - 1], " \n"))
+	if (!ft_ischarset(mlx->map->map[y][x - 1], "10WSNOP"))
 		ft_error("invalid map\n", true, mlx);
 }
 
@@ -74,11 +89,37 @@ void	ft_print_map(char **map)
 	ft_printf("-----------\n");
 }
 
+void check_char_in_map(char **map, t_mlx *mlx)
+{
+	int x;
+	int y;
+	int	len;
+
+	len = 0;
+	while (map[len])
+		len++;
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (!ft_ischarset(map[y][y], " 10NOWSP"))
+				ft_error("bad char in map", true, mlx);
+			if (ft_ischarset(map[y][y], " NOWSP"))
+				check_valid_pos(mlx, x, y, len);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	is_valid_map(char **map, t_mlx *mlx)
 {
 	char	**map_cpy;
 
 	map_cpy = ft_copy_strs(map);
+	check_char_in_map(map_cpy, mlx);
 	flood_fill(map_cpy, 0, 0, mlx);
 	ft_freef("%d", map_cpy);
 }

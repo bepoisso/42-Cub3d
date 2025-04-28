@@ -48,6 +48,7 @@ SRC_FILES	=	main.c\
 				pix.c\
 				minimap.c\
 				fps.c\
+				door.c\
 
 
 LIBSX		=	$(addprefix $(MLX_DIR),$(MLX_NAME))
