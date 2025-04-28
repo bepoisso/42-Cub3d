@@ -10,7 +10,9 @@
 # define FOV 1.047197551
 # define JUMP 15
 # define JUMP_MAX 150
-# define MM_SCALE TEXTURE / 3
+# define RATIO_MINIMAP 7
+# define ZOOM_MM 4
+# define MM_SCALE TEXTURE / ZOOM_MM
 
 # define PI 3.14159265359
 
@@ -222,6 +224,9 @@ void		draw_textured_wall(t_mlx *mlx, t_player *player, int i,
 /* BONUS */
 int		mouse_move_handler(int x, int y, t_mlx *mlx);
 bool	is_in_circle(int x, int y, t_draw circle);
+t_draw	init_circle_minimap(void);
+void	draw_line_minimap(t_mlx *mlx, int color, int i);
+
 
 
 #endif

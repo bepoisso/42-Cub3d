@@ -55,37 +55,18 @@ void	draw_line_2d(t_mlx *mlx, int color, int i)
 	}
 }
 
-void	draw_line_minimap(t_mlx *mlx, int color, int i)
-{
-	float	steps;
-	float	x_inc;
-	float	y_inc;
-	float	x;
-	float	y;
-
-	steps = fmax(fabs(mlx->dda->ray_x - mlx->player->x / 3),
-			fabs((mlx->dda->ray_y - mlx->player->y) / 3));
-	y_inc = ((mlx->dda->ray_y - mlx->player->y) / 3) / steps;
-	x_inc = ((mlx->dda->ray_x - mlx->player->x) / 3) / steps;
-	x = 300;
-	y = 300;
-	while (i <= steps)
-	{
-		put_pixel(x, y, color, mlx);
-		x += x_inc;
-		y += y_inc;
-		i++;
-	}
-}
 
 void	print_game(t_player *player, t_mlx *mlx, int i, float ray_angle)
 {
+	t_draw	circle;
+
+	circle = init_circle_minimap();
 	if (player->debug)
 		draw_line_2d(mlx, 0xFF0000, 0);
 	if (!player->debug)
 	{
-		draw_line_minimap(mlx, 0xFF0000, 0);
 		draw_textured_wall(mlx, player, i, ray_angle);
+		draw_line_minimap(mlx, 0x404040, 0);
 	}
 }
 

@@ -102,5 +102,6 @@ int	draw_loop(t_mlx *mlx)
 	get_time(mlx);
 	if (!mlx->player->debug)
 		draw_circle_minimap(mlx);
+
 	return (0);
 }
