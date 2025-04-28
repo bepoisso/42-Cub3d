@@ -14,6 +14,9 @@ int	main(int ac, char **av)
 	mlx_hook(mlx->screen, 17, 0, &close_cross, mlx);
 	mlx_hook(mlx->screen, 2, 1L << 0, key_press, mlx->player);
 	mlx_hook(mlx->screen, 3, 1L << 1, key_release, mlx->player);
+	mlx_mouse_hide(mlx->link, mlx->screen);
+	mlx_mouse_move(mlx->link, mlx->screen, WIDTH / 2, HEIGHT / 2);
+	mlx_hook(mlx->screen, 6, 0, mouse_move_handler, mlx);
 	mlx_hook(mlx->screen, 17, 0, close_cross, mlx->player);
 	gettimeofday(&mlx->last_time, NULL);
 	mlx_loop_hook(mlx->link, draw_loop, mlx);

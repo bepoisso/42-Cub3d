@@ -1,8 +1,6 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define DEBUG 0
-
 # define WIDTH 1280
 # define HEIGHT 720
 # define TEXTURE 64
@@ -12,6 +10,7 @@
 # define FOV 1.047197551
 # define JUMP 15
 # define JUMP_MAX 150
+# define MM_SCALE TEXTURE / 3
 
 # define PI 3.14159265359
 
@@ -135,6 +134,8 @@ typedef struct s_player
 	bool	jump;
 	int		shift;
 	int		jump_value;
+	
+	bool	debug;
 	t_mlx	*mlx;
 }	t_player;
 
@@ -181,6 +182,8 @@ int			close_cross(t_mlx *mlx);
 void		print_debug(t_mlx *mlx);
 float		pixtof(int pixel);
 int			ftopix(float pos);
+void		get_time(t_mlx *mlx);
+
 
 /* PLAYER */
 t_player	*init_player(t_player *player, t_map *map);
@@ -207,6 +210,7 @@ void		draw_square(t_draw *sqrt, t_mlx *mlx);
 void		draw_circle(t_draw *circle, t_mlx *mlx);
 void		draw_map(t_mlx *mlx);
 int			draw_loop(t_mlx *mlx);
+void		draw_circle_minimap(t_mlx *mlx);
 
 /* TEXTURING */
 void		init_texture(t_element *element, t_mlx *mlx);
@@ -214,5 +218,10 @@ int			get_texture_color(t_img *texture, int tex_x, int tex_y);
 void		draw_floor_and_cieling(t_mlx *mlx);
 void		draw_textured_wall(t_mlx *mlx, t_player *player, int i,
 				float ray_angle);
+
+/* BONUS */
+int		mouse_move_handler(int x, int y, t_mlx *mlx);
+bool	is_in_circle(int x, int y, t_draw circle);
+
 
 #endif

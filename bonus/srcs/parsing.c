@@ -71,7 +71,7 @@ void	init_element(char **str, t_mlx *mlx)
 	i = 0;
 	while (str[i])
 	{
-		if (DEBUG)
+		if (mlx->player->debug)
 			printf("%s", str[i]);
 		if ((ft_strncmp(str[i], "NO", 2) == 0))
 			cpy_no_texture(str[i], mlx->element);

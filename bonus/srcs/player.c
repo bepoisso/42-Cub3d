@@ -4,15 +4,8 @@ t_player	*init_player(t_player *player, t_map *map)
 {
 	player = (t_player *)malloc(sizeof(t_player));
 	ft_memset(player, 0, sizeof(t_player));
-	player->key_up = false;
-	player->key_down = false;
-	player->key_right = false;
-	player->key_left = false;
-	player->left_rotate = false;
-	player->right_rotate = false;
 	player->shift = 1;
 	player->mlx = map->mlx;
-	player->jump_value = 0;
 	return (player);
 }
 
@@ -36,6 +29,13 @@ int	key_press(int keysym, t_player *player)
 		player->shift = 2;
 	if (keysym == 32)
 		player->jump = true;
+	if (keysym == XK_m)
+	{
+		if (player->debug == true)
+			player->debug = false;
+		else
+			player->debug = true;
+	}
 	return (0);
 }
 

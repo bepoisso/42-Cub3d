@@ -3,7 +3,7 @@
 void	draw_square(t_draw *sqrt, t_mlx *mlx)
 {
 	int	i;
-
+	
 	i = -1;
 	while (++i < sqrt->size)
 		put_pixel(sqrt->x + i, sqrt->y, sqrt->color, mlx);
@@ -76,55 +76,7 @@ void	debug_draw_loop(t_mlx *mlx)
 	draw_map(mlx);
 }
 
-long	time_in_ms(struct timeval *time)
-{
-	return(time->tv_sec * 1000 + time->tv_usec / 1000);
-}
 
-// void *strfps(int fps, t_mlx *mlx)
-// {
-// 	char	*nbr;
-// 	char	*prefix;
-
-// 	nbr = ft_itoa(fps);
-// 	if (!nbr)
-// 		return ;
-// 	prefix = "FPS : ";
-// 	mlx->str_fps = malloc(ft_strlen(nbr) + ft_strlen(prefix) + 1);
-// 	if (!mlx->str_fps)
-// 		return ;
-// 	mlx->str_fps[0] = '\0';
-// 	strcat(mlx->str_fps, prefix);
-// 	strcat(mlx->str_fps, nbr);
-// 	free(nbr);
-// }
-
-void	get_time(t_mlx *mlx)
-{
-	//char	*fps_str;
-	struct timeval	current_time;
-	long	time_pass;
-	static int	time = 0;
-
-	gettimeofday(&current_time, NULL);
-	time_pass = time_in_ms(&current_time) - time_in_ms(&mlx->last_time);
-	mlx->frame_count++;
-	if(time_pass >= 250)
-	{
-		time = mlx->frame_count * 4;
-		printf("fps = %d\n", mlx->frame_count * 4);
-		mlx->frame_count = 0;
-		mlx->last_time = current_time;
-	}
-	mlx_string_put(mlx->link, mlx->screen, 5, 10, 0xFFFFFF, "FPS : ");
-	mlx_string_put(mlx->link, mlx->screen, 50, 10, 0xFFFFFF, ft_itoa(time));
-	// strfps(mlx->frame_count, mlx);
-	// if (mlx->str_fps)
-	// {
-	// 	mlx_string_put(mlx->link, mlx->screen, 10, 10, 0xFFFFFF, mlx->str_fps);
-	// 	free(mlx->str_fps);
-	// }
-}
 int	draw_loop(t_mlx *mlx)
 {
 	float		fraction;
@@ -133,7 +85,7 @@ int	draw_loop(t_mlx *mlx)
 
 	move_player(mlx->player);
 	clear_image(mlx);
-	if (DEBUG)
+	if (mlx->player->debug)
 		debug_draw_loop(mlx);
 	else
 		draw_floor_and_cieling(mlx);
@@ -148,5 +100,7 @@ int	draw_loop(t_mlx *mlx)
 	}
 	mlx_put_image_to_window(mlx->link, mlx->screen, mlx->img, 0, 0);
 	get_time(mlx);
+	if (!mlx->player->debug)
+		draw_circle_minimap(mlx);
 	return (0);
 }
