@@ -1,18 +1,19 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define DEBUG 0
-
 # define WIDTH 1280
 # define HEIGHT 720
 # define TEXTURE 64
-# define ELEM "01SENW \n"
+# define ELEM "012PSENW \n"
 # define SPEED 6
 # define A_SPEED 0.06
 # define FOV 1.047197551
 # define JUMP 15
 # define JUMP_MAX 150
 # define SENSIBILITY 2000
+# define RATIO_MINIMAP 7
+# define ZOOM_MM 4
+# define MM_SCALE TEXTURE / ZOOM_MM
 
 # define PI 3.14159265359
 
@@ -39,6 +40,11 @@
 # include "free.h"
 
 typedef struct s_mlx	t_mlx;
+
+typedef struct	s_door
+{
+	float	open_progress;
+}	t_door;
 
 typedef struct s_dda
 {
@@ -116,6 +122,7 @@ typedef struct s_element
 	t_img			*ea_img;
 	t_img			*bopcat1;
 	t_img			*bopcat2;
+	t_img			*door;
 	t_color			floor;
 	t_color			ceiling;
 	struct s_mlx	*mlx;
@@ -162,6 +169,7 @@ typedef struct s_mlx
 	t_element		*element;
 	t_dda			*dda;
 	t_draw			draw;
+	t_door		***door;
 	struct timeval	last_time;
 }	t_mlx;
 
@@ -190,6 +198,8 @@ void		print_debug(t_mlx *mlx);
 float		pixtof(int pixel);
 int			ftopix(float pos);
 void		print_hud(t_mlx *mlx);
+void		get_time(t_mlx *mlx);
+
 
 /* PLAYER */
 t_player	*init_player(t_player *player, t_map *map);
@@ -217,6 +227,7 @@ void		draw_square(t_draw *sqrt, t_mlx *mlx);
 void		draw_circle(t_draw *circle, t_mlx *mlx);
 void		draw_map(t_mlx *mlx);
 int			draw_loop(t_mlx *mlx);
+void		draw_circle_minimap(t_mlx *mlx);
 
 /* TEXTURING */
 void		init_texture(t_element *element, t_mlx *mlx);
@@ -228,5 +239,16 @@ void		draw_textured_wall(t_mlx *mlx, t_player *player, int i,
 /* TIME */
 void		get_time(t_mlx *mlx);
 long		time_in_ms(struct timeval *time);
+
+/* BONUS */
+int		mouse_move_handler(int x, int y, t_mlx *mlx);
+bool	is_in_circle(int x, int y, t_draw circle);
+t_draw	init_circle_minimap(void);
+void	draw_line_minimap(t_mlx *mlx, int color, int i);
+void	init_door(t_mlx *mlx);
+void	update_door(t_mlx *mlx, t_player *player);
+void	free_door(t_mlx *mlx);
+
+
 
 #endif

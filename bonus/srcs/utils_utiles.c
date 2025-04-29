@@ -33,3 +33,18 @@ float	radtodeg(float radian)
 {
 	return (radian * 180 / PI);
 }
+
+void	map_max(t_map *map)
+{
+	map->y_max = 0;
+	while (map->map[map->y_max])
+	{
+		map->x_max = 0;
+		while (map->map[map->y_max][map->x_max])
+		{
+			map->x_max++;
+		}
+		map->y_max++;
+	}
+	map->x_max = ft_strlen(map->map[0]);
+}

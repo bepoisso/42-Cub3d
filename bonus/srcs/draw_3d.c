@@ -18,8 +18,18 @@ void	draw_on_screen(t_mlx *mlx, t_img *texture, int i)
 		{
 			mlx->draw.tex_y = (int)((mlx->draw.y - mlx->draw.start_y)
 					* texture->height / mlx->draw.height);
-			mlx->draw.color = get_texture_color(texture, mlx->draw.tex_x,
-					mlx->draw.tex_y);
+			mlx->draw.color = get_texture_color(texture,
+					mlx->draw.tex_x, mlx->draw.tex_y);
+
+			if (mlx->map->map[mlx->dda->map_y][mlx->dda->map_x] == 'P')
+			{
+				float progress = mlx->door[mlx->dda->map_y][mlx->dda->map_x]->open_progress;
+				if (progress > 0.99f)
+					return ; // porte complètement ouverte = invisible
+				if (progress > 0.0f && mlx->draw.tex_x > texture->width * (1.0f - progress))
+					return ; // partie coulissante = transparente
+			}
+
 			put_pixel(i, mlx->draw.y, mlx->draw.color, mlx);
 		}
 		mlx->draw.y++;
@@ -30,6 +40,7 @@ t_img	*texture_in_map(t_mlx *mlx, t_player *player, t_img *texture)
 {
 	static int	i = 0;
 	static int	check = 0;
+	float	progress;
 
 	if (mlx->dda->side == 1)
 	{
@@ -47,6 +58,8 @@ t_img	*texture_in_map(t_mlx *mlx, t_player *player, t_img *texture)
 		texture = mlx->element->ea_img;
 		mlx->draw.wall_x = mlx->dda->ray_y;
 	}
+	if (mlx->map->map[mlx->dda->map_y][mlx->dda->map_x] == 'P')
+		texture = mlx->element->door;
 	if (mlx->map->map[mlx->dda->map_y][mlx->dda->map_x] == '2')
 	{
 		i++;
@@ -67,6 +80,8 @@ t_img	*texture_in_map(t_mlx *mlx, t_player *player, t_img *texture)
 void	draw_textured_wall(t_mlx *mlx, t_player *player, int i, float ray_angle)
 {
 	t_img	*texture;
+	float progress;
+	int offset;
 	int		crouch;
 
 	crouch = 0;
@@ -85,6 +100,12 @@ void	draw_textured_wall(t_mlx *mlx, t_player *player, int i, float ray_angle)
 	texture = texture_in_map(mlx, player, texture);
 	mlx->draw.wall_x = fmod(mlx->draw.wall_x, TEXTURE);
 	mlx->draw.tex_x = (int)(mlx->draw.wall_x / TEXTURE * texture->width);
+	if (mlx->map->map[mlx->dda->map_y][mlx->dda->map_x] == 'P')
+	{
+		progress = mlx->door[mlx->dda->map_y][mlx->dda->map_x]->open_progress;
+		offset = (int)(progress * texture->width);
+		mlx->draw.tex_x += offset;
+	}
 	if (mlx->draw.tex_x < 0)
 		mlx->draw.tex_x = 0;
 	if (mlx->draw.tex_x >= texture->width)

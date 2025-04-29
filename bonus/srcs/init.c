@@ -24,6 +24,9 @@ t_element	*alloc_ellement(t_mlx *mlx)
 	element->bopcat2 = malloc(sizeof(t_img));
 	element->bopcat2->mlx = mlx;
 	ft_memset(element->bopcat2, 0, sizeof(t_img));
+	element->door = malloc(sizeof(t_img));
+	element->door->mlx = mlx;
+	ft_memset(element->door, 0, sizeof(t_img));
 	return (element);
 }
 
@@ -73,6 +76,7 @@ void	init_texture(t_element *element, t_mlx *mlx)
 	load_texture(element->ea_img, mlx->link, element->ea_img->path);
 	load_texture(element->bopcat1, mlx->link, "./assets/textures/bopcat1.xpm");
 	load_texture(element->bopcat2, mlx->link, "./assets/textures/bopcat2.xpm");
+	load_texture(element->door, mlx->link, "./assets/textures/door.xpm");
 	if (!mlx->element->we_img)
 		printf("Error: WE texture not loaded!\n");
 }

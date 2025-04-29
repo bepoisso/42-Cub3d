@@ -24,7 +24,7 @@ void	ft_error(char *s, bool free, t_mlx *mlx)
 
 void	print_debug(t_mlx *mlx)
 {
-	if (DEBUG)
+	if (mlx->player->debug)
 	{
 		printf("path NO texture = %s\n", mlx->element->no_img->path);
 		printf("path SO texture = %s\n", mlx->element->so_img->path);

@@ -83,6 +83,8 @@ int	draw_loop(t_mlx *mlx)
 	int			i;
 
 	move_player(mlx->player);
+	update_door(mlx, mlx->player);
+	clear_image(mlx);
 	if (mlx->player->debug)
 		debug_draw_loop(mlx);
 	else
@@ -98,6 +100,8 @@ int	draw_loop(t_mlx *mlx)
 	}
 	mlx_put_image_to_window(mlx->link, mlx->screen, mlx->img, 0, 0);
 	get_time(mlx);
+	if (!mlx->player->debug)
+		draw_circle_minimap(mlx);
 	print_hud(mlx);
 	return (0);
 }

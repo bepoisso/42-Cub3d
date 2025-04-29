@@ -59,13 +59,18 @@ void	draw_line_2d(t_mlx *mlx, int color, int i)
 	}
 }
 
+
 void	print_game(t_player *player, t_mlx *mlx, int i, float ray_angle)
 {
-	if (DEBUG)
+	t_draw	circle;
+
+	circle = init_circle_minimap();
+	if (player->debug)
 		draw_line_2d(mlx, 0xFF0000, 0);
-	if (!DEBUG)
+	if (!player->debug)
 	{
 		draw_textured_wall(mlx, player, i, ray_angle);
+		draw_line_minimap(mlx, 0x404040, 0);
 	}
 }
 

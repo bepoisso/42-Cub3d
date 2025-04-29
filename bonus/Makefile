@@ -48,6 +48,9 @@ SRC_FILES	=	main.c\
 				hud.c\
 				mouse.c\
 				time.c\
+				minimap.c\
+				fps.c\
+				door.c\
 
 
 LIBSX		=	$(addprefix $(MLX_DIR),$(MLX_NAME))
