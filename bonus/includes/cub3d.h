@@ -114,6 +114,8 @@ typedef struct s_element
 	t_img			*so_img;
 	t_img			*we_img;
 	t_img			*ea_img;
+	t_img			*bopcat1;
+	t_img			*bopcat2;
 	t_color			floor;
 	t_color			ceiling;
 	struct s_mlx	*mlx;

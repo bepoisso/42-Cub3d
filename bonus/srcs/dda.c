@@ -36,7 +36,8 @@ static void	ray_dda(t_mlx *mlx)
 			mlx->dda->map_y += mlx->dda->step_y;
 			mlx->dda->side = 1;
 		}
-		if (mlx->map->map[mlx->dda->map_y][mlx->dda->map_x] == '1')
+		if (mlx->map->map[mlx->dda->map_y][mlx->dda->map_x] == '1'
+			|| mlx->map->map[mlx->dda->map_y][mlx->dda->map_x] == '2')
 			break ;
 	}
 }

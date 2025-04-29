@@ -28,22 +28,39 @@ void	draw_on_screen(t_mlx *mlx, t_img *texture, int i)
 
 t_img	*texture_in_map(t_mlx *mlx, t_player *player, t_img *texture)
 {
+	static int	i = 0;
+	static int	check = 0;
+
 	if (mlx->dda->side == 1)
 	{
 		if (mlx->dda->ray_y < player->y)
-			texture = mlx->element->no_img;
+		texture = mlx->element->no_img;
 		else
-			texture = mlx->element->so_img;
+		texture = mlx->element->so_img;
 		mlx->draw.wall_x = mlx->dda->ray_x;
 	}
 	else
 	{
 		if (mlx->dda->ray_x < player->x)
-			texture = mlx->element->we_img;
+		texture = mlx->element->we_img;
 		else
-			texture = mlx->element->ea_img;
+		texture = mlx->element->ea_img;
 		mlx->draw.wall_x = mlx->dda->ray_y;
 	}
+	if (mlx->map->map[mlx->dda->map_y][mlx->dda->map_x] == '2')
+	{
+		i++;
+		if (i > 5000)
+		{
+			i = 0;
+			check = (check + 1) % 2;
+		}
+		if (check)
+			texture = mlx->element->bopcat1;
+		else
+			texture = mlx->element->bopcat2;
+	}
+
 	return (texture);
 }
 
