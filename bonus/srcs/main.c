@@ -4,10 +4,9 @@ int	main(int ac, char **av)
 {
 	t_mlx	*mlx;
 
-	mlx = (t_mlx *)malloc(sizeof(t_mlx));
-	ft_memset(mlx, 0, sizeof(t_mlx));
 	if (ac != 2)
-		ft_error("invalid argument\n", true, mlx);
+		return (ft_putstr_fd("invalid argument\n", 2), 1);
+	mlx = alloc_all();
 	init_struct(mlx, av);
 	init_mlx(mlx);
 	init_texture(mlx->element, mlx);

@@ -59,7 +59,6 @@ void	draw_line_2d(t_mlx *mlx, int color, int i)
 	}
 }
 
-
 void	print_game(t_player *player, t_mlx *mlx, int i, float ray_angle)
 {
 	t_draw	circle;
@@ -71,7 +70,7 @@ void	print_game(t_player *player, t_mlx *mlx, int i, float ray_angle)
 	{
 		draw_textured_wall(mlx, player, i, ray_angle);
 		if (player->view)
-			draw_line_minimap(mlx, 0x404040, 0);
+			draw_line_minimap(mlx, 0x404040, 0, 0);
 	}
 }
 

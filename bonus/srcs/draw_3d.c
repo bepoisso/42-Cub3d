@@ -1,16 +1,6 @@
 #include "../includes/cub3d.h"
 
-static float	distance(float x, float y)
-{
-	return (sqrt(x * x + y * y));
-}
-
-static float	fixed_dist(float raw_dist, float ray_angle, float player_angle)
-{
-	return (raw_dist * cos(ray_angle - player_angle));
-}
-
-void	draw_on_screen(t_mlx *mlx, t_img *texture, int i)
+static void	draw_on_screen(t_mlx *mlx, t_img *texture, int i)
 {
 	while (mlx->draw.y < mlx->draw.end)
 	{
@@ -26,43 +16,45 @@ void	draw_on_screen(t_mlx *mlx, t_img *texture, int i)
 	}
 }
 
-t_img	*texture_in_map(t_mlx *mlx, t_player *player, t_img *texture)
+static t_img	*bopcat_texture(t_mlx *mlx)
 {
 	static int	i = 0;
 	static int	check = 0;
 
+	i++;
+	if (i > 5000)
+	{
+		i = 0;
+		check = (check + 1) % 2;
+	}
+	if (check)
+		return (mlx->element->bopcat1);
+	else
+		return (mlx->element->bopcat2);
+}
+
+static t_img	*texture_in_map(t_mlx *mlx, t_player *player, t_img *texture)
+{
 	if (mlx->dda->side == 1)
 	{
 		if (mlx->dda->ray_y < player->y)
-		texture = mlx->element->no_img;
+			texture = mlx->element->no_img;
 		else
-		texture = mlx->element->so_img;
+			texture = mlx->element->so_img;
 		mlx->draw.wall_x = mlx->dda->ray_x;
 	}
 	else
 	{
 		if (mlx->dda->ray_x < player->x)
-		texture = mlx->element->we_img;
+			texture = mlx->element->we_img;
 		else
-		texture = mlx->element->ea_img;
+			texture = mlx->element->ea_img;
 		mlx->draw.wall_x = mlx->dda->ray_y;
 	}
 	if (mlx->map->map[mlx->dda->map_y][mlx->dda->map_x] == 'P')
 		texture = mlx->element->door;
 	if (mlx->map->map[mlx->dda->map_y][mlx->dda->map_x] == '2')
-	{
-		i++;
-		if (i > 5000)
-		{
-			i = 0;
-			check = (check + 1) % 2;
-		}
-		if (check)
-			texture = mlx->element->bopcat1;
-		else
-			texture = mlx->element->bopcat2;
-	}
-
+		texture = bopcat_texture(mlx);
 	return (texture);
 }
 

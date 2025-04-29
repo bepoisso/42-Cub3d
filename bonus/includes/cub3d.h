@@ -143,7 +143,7 @@ typedef struct s_player
 	int		shift;
 	int		jump_value;
 
-	bool	view;
+	int		view;
 	bool	debug;
 	t_mlx	*mlx;
 }	t_player;
@@ -169,10 +169,11 @@ typedef struct s_mlx
 }	t_mlx;
 
 /* PARSING and INIT */
+t_mlx		*alloc_all(void);
 void		is_valid_map(char **map, t_mlx *mlx);
 void		init_element(char **str, t_mlx *mlx);
 char		**get_map(char **file);
-t_map		*init_map(char **file, t_map *map, t_mlx *mlx);
+void		init_map(char **file, t_map *map, t_mlx *mlx);
 char		**get_file(char *file, t_mlx *mlx);
 void		init_color(char *str, t_color *color, t_element *element);
 void		set_colors(t_element *element);
@@ -194,10 +195,11 @@ float		pixtof(int pixel);
 int			ftopix(float pos);
 void		print_hud(t_mlx *mlx);
 void		get_time(t_mlx *mlx);
+char		**ft_copy_strs(char **strs);
 
 
 /* PLAYER */
-t_player	*init_player(t_player *player, t_map *map);
+void		init_player(t_player *player, t_map *map);
 int			key_press(int keysym, t_player *player);
 int			key_release(int keysym, t_player *player);
 void		move_player(t_player *player);
@@ -207,6 +209,10 @@ int			mouse_move(int x, int y, t_mlx *mlx);
 /* RAYCASTING */
 void		draw_line(t_player *player, t_mlx *mlx, float start_x, int i);
 void		print_game(t_player *player, t_mlx *mlx, int i, float ray_angle);
+
+/* FISHEYE */
+float		distance(float x, float y);
+float		fixed_dist(float raw_dist, float ray_angle, float player_angle);
 
 /* RAYCASTING */
 void		move_key_up(t_player *player, float cos_angle, float sin_angle);
@@ -223,6 +229,8 @@ void		draw_circle(t_draw *circle, t_mlx *mlx);
 void		draw_map(t_mlx *mlx);
 int			draw_loop(t_mlx *mlx);
 void		draw_circle_minimap(t_mlx *mlx);
+t_draw		init_sqrt_minimap(void);
+t_draw		init_circle_minimap(void);
 
 /* TEXTURING */
 void		init_texture(t_element *element, t_mlx *mlx);
@@ -235,10 +243,10 @@ void		draw_textured_wall(t_mlx *mlx, t_player *player, int i,
 void		get_time(t_mlx *mlx);
 long		time_in_ms(struct timeval *time);
 
-/* BONUS */
+/* MINIMAP */
 bool		is_in_circle(int x, int y, t_draw circle);
 t_draw		init_circle_minimap(void);
-void		draw_line_minimap(t_mlx *mlx, int color, int i);
+void		draw_line_minimap(t_mlx *mlx, int color, int i, float steps);
 void		door_handling(t_mlx *mlx, t_player *player);
 
 

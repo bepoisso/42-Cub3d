@@ -1,47 +1,39 @@
 #include <cub3d.h>
 
-void draw_square_minimap(t_draw *sqrt, t_draw circle, t_mlx *mlx)
+void	draw_square_minimap(t_draw *sqrt, t_draw circle, t_mlx *mlx)
 {
-	int i = -1;
+	int	i;
 
+	i = -1;
 	while (++i < sqrt->size)
-	{
 		if (is_in_circle(sqrt->x + i, sqrt->y, circle))
 			put_pixel(sqrt->x + i, sqrt->y, sqrt->color, mlx);
-	}
 	i = -1;
 	while (++i < sqrt->size)
-	{
 		if (is_in_circle(sqrt->x + i, sqrt->y + sqrt->size, circle))
 			put_pixel(sqrt->x + i, sqrt->y + sqrt->size, sqrt->color, mlx);
-	}
 	i = -1;
 	while (++i < sqrt->size)
-	{
 		if (is_in_circle(sqrt->x, sqrt->y + i, circle))
 			put_pixel(sqrt->x, sqrt->y + i, sqrt->color, mlx);
-	}
 	i = -1;
 	while (++i < sqrt->size)
-	{
 		if (is_in_circle(sqrt->x + sqrt->size, sqrt->y + i, circle))
 			put_pixel(sqrt->x + sqrt->size, sqrt->y + i, sqrt->color, mlx);
-	}
 }
 
-
-void draw_filled_circle(t_draw *circle, t_mlx *mlx)
+void	draw_filled_circle(t_draw *circle, t_mlx *mlx)
 {
-	int x;
-	int y;
-	int radius;
+	int	x;
+	int	y;
+	int	radius;
 
 	radius = circle->radius * circle->radius;
 	y = -circle->radius;
 	while (y <= circle->radius)
 	{
 		x = -circle->radius;
-		while(x <= circle->radius)
+		while (x <= circle->radius)
 		{
 			if (x * x + y * y <= radius)
 			{
@@ -51,39 +43,10 @@ void draw_filled_circle(t_draw *circle, t_mlx *mlx)
 		}
 		y++;
 	}
-	
 }
 
-static t_draw	init_sqrt_minimap(void)
+void	draw_line_minimap(t_mlx *mlx, int color, int i, float steps)
 {
-	t_draw	sqrt;
-
-	sqrt.size = TEXTURE / ZOOM_MM;
-	sqrt.color = 0x808080;
-	return (sqrt);
-}
-
-t_draw	init_circle_minimap(void)
-{
-	t_draw	circle;
-
-	circle.x = WIDTH / RATIO_MINIMAP;
-	circle.y = WIDTH / RATIO_MINIMAP;
-	circle.radius = circle.x * 0.66;
-	circle.color = 0xFFFFFF;
-	return (circle);
-}
-
-bool	is_in_circle(int x, int y, t_draw circle)
-{
-	int dx = x - circle.x;
-	int dy = y - circle.y;
-	return (dx * dx + dy * dy <= circle.radius * circle.radius);
-}
-
-void	draw_line_minimap(t_mlx *mlx, int color, int i)
-{
-	float	steps;
 	float	x_inc;
 	float	y_inc;
 	float	x;
@@ -109,9 +72,9 @@ void	draw_line_minimap(t_mlx *mlx, int color, int i)
 
 void	check_square_position(t_mlx *mlx, t_draw sqrt, t_draw circle)
 {
-	int	map_x;
-	int	map_y;
-	char **map;
+	int		map_x;
+	int		map_y;
+	char	**map;
 
 	map = mlx->map->map;
 	map_max(mlx->map);
@@ -121,9 +84,11 @@ void	check_square_position(t_mlx *mlx, t_draw sqrt, t_draw circle)
 		map_x = 0;
 		while (map[map_y][map_x])
 		{
-			sqrt.x = (map_x * MM_SCALE) - (int)(mlx->player->x / ZOOM_MM) + WIDTH / RATIO_MINIMAP;
-			sqrt.y = (map_y * MM_SCALE) - (int)(mlx->player->y / ZOOM_MM) + WIDTH / RATIO_MINIMAP;
-			if (map[map_y][map_x] == '1')
+			sqrt.x = (map_x * MM_SCALE)
+				- (int)(mlx->player->x / ZOOM_MM) + WIDTH / RATIO_MINIMAP;
+			sqrt.y = (map_y * MM_SCALE)
+				- (int)(mlx->player->y / ZOOM_MM) + WIDTH / RATIO_MINIMAP;
+			if (map[map_y][map_x] == '1' || map[map_y][map_x] == '2')
 				draw_square_minimap(&sqrt, circle, mlx);
 			map_x++;
 		}

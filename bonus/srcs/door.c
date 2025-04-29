@@ -43,25 +43,6 @@ static void	get_door_pos(int *x, int *y, t_mlx *mlx)
 	}
 }
 
-static void	deswith_door(int x, int y, t_mlx *mlx)
-{
-	int	my;
-	int	mx;
-
-	if (check_door_prox(x, y, mlx, 'P'))
-		return ;
-	my = -1;
-	while (mlx->map->map[++my])
-	{
-		mx = -1;
-		while (mlx->map->map[my][++mx])
-		{
-			if (mlx->map->map[my][mx] == 'Q' && !check_door_prox(mx, my, mlx, 'P'))
-				mlx->map->map[my][mx] = 'P';
-		}
-	}
-}
-
 void	door_handling(t_mlx *mlx, t_player *player)
 {
 	int			x;

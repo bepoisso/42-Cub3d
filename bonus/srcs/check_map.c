@@ -30,28 +30,6 @@ static void	check_valid_case(t_mlx *mlx, int x, int y, int len)
 		ft_error("invalid map\n", true, mlx);
 }
 
-static char	**ft_copy_strs(char **strs)
-{
-	int		i;
-	int		len;
-	char	**cpy;
-
-	len = 0;
-	while (strs[len])
-		len++;
-	cpy = (char **)malloc(sizeof(char *) * (len + 1));
-	if (!cpy)
-		return (NULL);
-	i = 0;
-	while (strs[i])
-	{
-		cpy[i] = ft_strdup(strs[i]);
-		i++;
-	}
-	cpy[i] = NULL;
-	return (cpy);
-}
-
 static void	flood_fill(char **map, int x, int y, t_mlx *mlx)
 {
 	int	len;
@@ -76,23 +54,10 @@ static void	flood_fill(char **map, int x, int y, t_mlx *mlx)
 	flood_fill(map, x, y - 1, mlx);
 }
 
-void	ft_print_map(char **map)
+void	check_char_in_map(char **map, t_mlx *mlx)
 {
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		ft_printf("y %d \t:\t %s", i, map[i]);
-		i++;
-	}
-	ft_printf("-----------\n");
-}
-
-void check_char_in_map(char **map, t_mlx *mlx)
-{
-	int x;
-	int y;
+	int	x;
+	int	y;
 	int	len;
 
 	len = 0;
@@ -105,7 +70,7 @@ void check_char_in_map(char **map, t_mlx *mlx)
 		while (map[y][x])
 		{
 			if (!ft_ischarset(map[y][x], " 120NEWSP\n"))
-				ft_error("bad char in map", true, mlx);
+				ft_error("bad char in map\n", true, mlx);
 			if (ft_ischarset(map[y][x], "NEWSP"))
 				check_valid_pos(mlx, x, y, len);
 			x++;

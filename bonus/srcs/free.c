@@ -19,13 +19,22 @@ void	free_img(t_img *img, t_mlx *mlx)
 
 void	free_ellement(t_element *elm, t_mlx *mlx)
 {
-	free_img(elm->ea_img, mlx);
-	free_img(elm->so_img, mlx);
-	free_img(elm->no_img, mlx);
-	free_img(elm->we_img, mlx);
-	free_img(elm->bopcat1, mlx);
-	free_img(elm->bopcat2, mlx);
-	free_img(elm->door, mlx);
+	if (!elm)
+		return ;
+	if (elm->ea_img)
+		free_img(elm->ea_img, mlx);
+	if (elm->so_img)
+		free_img(elm->so_img, mlx);
+	if (elm->no_img)
+		free_img(elm->no_img, mlx);
+	if (elm->we_img)
+		free_img(elm->we_img, mlx);
+	if (elm->bopcat1)
+		free_img(elm->bopcat1, mlx);
+	if (elm->bopcat2)
+		free_img(elm->bopcat2, mlx);
+	if(elm->door)
+		free_img(elm->door, mlx);
 	free(elm);
 }
 

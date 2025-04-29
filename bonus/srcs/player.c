@@ -1,12 +1,9 @@
 #include "../includes/cub3d.h"
 
-t_player	*init_player(t_player *player, t_map *map)
+void	init_player(t_player *player, t_map *map)
 {
-	player = (t_player *)malloc(sizeof(t_player));
-	ft_memset(player, 0, sizeof(t_player));
 	player->shift = 1;
 	player->mlx = map->mlx;
-	return (player);
 }
 
 int	key_press(int keysym, t_player *player)
@@ -32,12 +29,7 @@ int	key_press(int keysym, t_player *player)
 	if (keysym == XK_Control_L)
 		player->crouch = true;
 	if (keysym == XK_v)
-	{
-		if (player->view == true)
-			player->view = false;
-		else
-			player->view = true;
-	}
+		player->view = (player->view + 1) % 2;
 	return (0);
 }
 

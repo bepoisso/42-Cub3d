@@ -35,3 +35,35 @@ void	clear_image(t_mlx *mlx)
 		y++;
 	}
 }
+
+char	**ft_copy_strs(char **strs)
+{
+	int		i;
+	int		len;
+	char	**cpy;
+
+	len = 0;
+	while (strs[len])
+		len++;
+	cpy = (char **)malloc(sizeof(char *) * (len + 1));
+	if (!cpy)
+		return (NULL);
+	i = 0;
+	while (strs[i])
+	{
+		cpy[i] = ft_strdup(strs[i]);
+		i++;
+	}
+	cpy[i] = NULL;
+	return (cpy);
+}
+
+bool	is_in_circle(int x, int y, t_draw circle)
+{
+	int	dx;
+	int	dy;
+
+	dx = x - circle.x;
+	dy = y - circle.y;
+	return (dx * dx + dy * dy <= circle.radius * circle.radius);
+}

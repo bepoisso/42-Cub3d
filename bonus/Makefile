@@ -10,7 +10,7 @@ NAME = cub3D
 
 CC			= cc
 CFLAGS		= -Wall -Wextra -g #-Werror
-ARGS		= assets/maps/map_ray.cub
+ARGS		= assets/maps/debug/map_ray.cub
 MLX_NAME	= libmlx.a
 MLX_FLAGS	= -l mlx -l Xext -l X11
 
@@ -28,6 +28,7 @@ MLX_DIR	= ./minilibx-linux/
 #_________________FILES_________________
 
 SRC_FILES	=	main.c\
+				alloc.c\
 				player.c\
 				color.c\
 				check_map.c\
@@ -38,18 +39,20 @@ SRC_FILES	=	main.c\
 				utils_utiles.c\
 				utils_mlx.c\
 				draw.c\
+				init_draw.c\
 				draw_3d.c\
 				raycasting.c\
 				init.c\
 				free.c\
 				dda.c\
-				moove.c\
+				move.c\
 				pix.c\
 				hud.c\
 				mouse.c\
 				time.c\
 				minimap.c\
 				door.c\
+				fisheye.c\
 
 
 LIBSX		=	$(addprefix $(MLX_DIR),$(MLX_NAME))
