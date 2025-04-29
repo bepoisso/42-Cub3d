@@ -81,6 +81,7 @@ void	init_element(char **str, t_mlx *mlx)
 			cpy_we_texture(str[i], mlx->element);
 		if ((ft_strncmp(str[i], "EA", 2) == 0))
 			cpy_ea_texture(str[i], mlx->element);
+		mlx->element->mlx = mlx;
 		if ((ft_strncmp(str[i], "F", 1) == 0))
 			init_color(str[i], &mlx->element->floor, mlx->element);
 		if ((ft_strncmp(str[i], "C", 1) == 0))

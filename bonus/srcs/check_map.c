@@ -81,10 +81,8 @@ void	check_char_in_map(char **map, t_mlx *mlx)
 
 void	is_valid_map(char **map, t_mlx *mlx)
 {
-	char	**map_cpy;
-
-	map_cpy = ft_copy_strs(map);
-	check_char_in_map(map_cpy, mlx);
-	flood_fill(map_cpy, 0, 0, mlx);
-	ft_freef("%d", map_cpy);
+	mlx->map->temp_map = ft_copy_strs(map);
+	check_char_in_map(mlx->map->temp_map, mlx);
+	flood_fill(mlx->map->temp_map, 0, 0, mlx);
+	ft_freef("%d", mlx->map->temp_map);
 }

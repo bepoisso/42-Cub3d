@@ -13,17 +13,15 @@ static void	alloc_ellement(t_mlx *mlx, t_element *element)
 
 void	init_struct(t_mlx *mlx, char **av)
 {
-	char		**file;
-
-	file = get_file(av[1], mlx);
-	init_map(file, mlx->map, mlx);
+	mlx->temp_file = get_file(av[1], mlx);
+	init_map(mlx->temp_file, mlx->map, mlx);
 	init_player(mlx->player, mlx->map);
 	alloc_ellement(mlx, mlx->element);
-	init_element(file, mlx);
+	init_element(mlx->temp_file, mlx);
 	if (get_player_pos(mlx, 0, -1))
 		ft_error("no player in map", true, mlx);
 	is_valid_map(mlx->map->map, mlx);
-	ft_freef("%d", file);
+	ft_freef("%d", mlx->temp_file);
 }
 
 void	init_mlx(t_mlx *mlx)
@@ -49,13 +47,14 @@ static void	load_texture(t_img *img, void *mlx, char *path)
 
 void	init_texture(t_element *element, t_mlx *mlx)
 {
+	mlx->element->bopcat1->path = ft_strdup("./assets/textures/bopcat1.xpm");
+	mlx->element->bopcat2->path = ft_strdup("./assets/textures/bopcat2.xpm");
+	mlx->element->door->path = ft_strdup("./assets/textures/door.xpm");
 	load_texture(element->no_img, mlx->link, element->no_img->path);
 	load_texture(element->so_img, mlx->link, element->so_img->path);
 	load_texture(element->we_img, mlx->link, element->we_img->path);
 	load_texture(element->ea_img, mlx->link, element->ea_img->path);
-	load_texture(element->bopcat1, mlx->link, "./assets/textures/bopcat1.xpm");
-	load_texture(element->bopcat2, mlx->link, "./assets/textures/bopcat2.xpm");
-	load_texture(element->door, mlx->link, "./assets/textures/door.xpm");
-	if (!mlx->element->we_img)
-		printf("Error: WE texture not loaded!\n");
+	load_texture(element->bopcat1, mlx->link, mlx->element->bopcat1->path);
+	load_texture(element->bopcat2, mlx->link, mlx->element->bopcat2->path);
+	load_texture(element->door, mlx->link, mlx->element->door->path);
 }

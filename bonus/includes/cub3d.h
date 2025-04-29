@@ -90,6 +90,7 @@ typedef struct s_map
 	int				x_max;
 	int				y_max;
 	char			**map;
+	char			**temp_map;
 	struct s_mlx	*mlx;
 }	t_map;
 
@@ -160,6 +161,7 @@ typedef struct s_mlx
 	int				size_line;
 	int				endian;
 	int				time;
+	char			**temp_file;
 	t_map			*map;
 	t_player		*player;
 	t_element		*element;

@@ -50,7 +50,11 @@ char	**get_file(char *file, t_mlx *mlx)
 	int		size;
 	int		fd;
 	char	**res;
+	int		i;
 
+	i = ft_strlen(file) - 4;
+	if (ft_strncmp(file + i, ".cub", 4))
+		ft_error("invalid extention need *.cub\n", true, mlx);
 	if (!file || file[0] == '\0')
 		ft_error("invalid map\n", true, mlx);
 	size = files_count_line(file, mlx) + 1;
