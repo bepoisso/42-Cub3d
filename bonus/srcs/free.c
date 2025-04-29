@@ -48,6 +48,8 @@ void	free_all(t_mlx *mlx)
 		free_ellement(mlx->element, mlx);
 	if (mlx->player)
 		free(mlx->player);
+	if (mlx->door)
+		free_door(mlx);
 	if (mlx->map)
 		free_map(mlx->map);
 	if (mlx)

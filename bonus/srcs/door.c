@@ -47,8 +47,10 @@ void	free_door(t_mlx *mlx)
 			}
 			x++;
 		}
+		free(mlx->door[y]);
 		y++;
 	}
+	free(mlx->door);
 }
 
 void	check_open_progress(t_mlx *mlx, float dist, int x, int y)

@@ -235,6 +235,7 @@ t_draw	init_circle_minimap(void);
 void	draw_line_minimap(t_mlx *mlx, int color, int i);
 void	init_door(t_mlx *mlx);
 void	update_door(t_mlx *mlx, t_player *player);
+void	free_door(t_mlx *mlx);
 
 
 
