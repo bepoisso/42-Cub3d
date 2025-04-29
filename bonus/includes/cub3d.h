@@ -40,6 +40,11 @@
 
 typedef struct s_mlx	t_mlx;
 
+typedef struct	s_door
+{
+	float	open_progress;
+}	t_door;
+
 typedef struct s_dda
 {
 	double	cos_angle;
@@ -158,6 +163,7 @@ typedef struct s_mlx
 	t_element	*element;
 	t_dda		*dda;
 	t_draw		draw;
+	t_door		***door;
 	struct timeval	last_time;
 }	t_mlx;
 
@@ -227,6 +233,8 @@ int		mouse_move_handler(int x, int y, t_mlx *mlx);
 bool	is_in_circle(int x, int y, t_draw circle);
 t_draw	init_circle_minimap(void);
 void	draw_line_minimap(t_mlx *mlx, int color, int i);
+void	init_door(t_mlx *mlx);
+void	update_door(t_mlx *mlx, t_player *player);
 
 
 

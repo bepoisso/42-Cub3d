@@ -3,7 +3,7 @@
 void	draw_square(t_draw *sqrt, t_mlx *mlx)
 {
 	int	i;
-	
+
 	i = -1;
 	while (++i < sqrt->size)
 		put_pixel(sqrt->x + i, sqrt->y, sqrt->color, mlx);
@@ -88,6 +88,7 @@ int	draw_loop(t_mlx *mlx)
 	int			i;
 
 	move_player(mlx->player);
+	update_door(mlx, mlx->player);
 	clear_image(mlx);
 	if (mlx->player->debug)
 		debug_draw_loop(mlx);

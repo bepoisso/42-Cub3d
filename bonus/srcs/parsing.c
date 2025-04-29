@@ -91,4 +91,5 @@ void	init_element(char **str, t_mlx *mlx)
 		ft_error("bad type of elements\n", true, mlx);
 	print_debug(mlx);
 	set_colors(mlx->element);
+	init_door(mlx);
 }
