@@ -23,6 +23,9 @@ void	free_ellement(t_element *elm, t_mlx *mlx)
 	free_img(elm->so_img, mlx);
 	free_img(elm->no_img, mlx);
 	free_img(elm->we_img, mlx);
+	free_img(elm->bopcat1, mlx);
+	free_img(elm->bopcat2, mlx);
+	free_img(elm->door, mlx);
 	free(elm);
 }
 
@@ -48,8 +51,6 @@ void	free_all(t_mlx *mlx)
 		free_ellement(mlx->element, mlx);
 	if (mlx->player)
 		free(mlx->player);
-	if (mlx->door)
-		free_door(mlx);
 	if (mlx->map)
 		free_map(mlx->map);
 	if (mlx)

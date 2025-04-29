@@ -31,12 +31,12 @@ int	key_press(int keysym, t_player *player)
 		player->jump = true;
 	if (keysym == XK_Control_L)
 		player->crouch = true;
-	if (keysym == XK_m)
+	if (keysym == XK_v)
 	{
-		if (player->debug == true)
-			player->debug = false;
+		if (player->view == true)
+			player->view = false;
 		else
-			player->debug = true;
+			player->view = true;
 	}
 	return (0);
 }

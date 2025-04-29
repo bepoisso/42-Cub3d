@@ -11,7 +11,7 @@ int	main(int ac, char **av)
 	init_struct(mlx, av);
 	init_mlx(mlx);
 	init_texture(mlx->element, mlx);
-	mlx_mouse_hide(mlx->link, mlx->screen);
+	// mlx_mouse_hide(mlx->link, mlx->screen);
 	mlx_hook(mlx->screen, 6, 1L << 6, &mouse_move, mlx);
 	mlx_hook(mlx->screen, 17, 0, &close_cross, mlx);
 	mlx_hook(mlx->screen, 2, 1L << 0, key_press, mlx->player);

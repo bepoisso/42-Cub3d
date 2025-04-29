@@ -1,99 +1,89 @@
 #include "cub3d.h"
 
-void	init_door(t_mlx *mlx)
+static bool	check_door_prox(int x, int y, t_mlx *mlx, char c)
 {
-	int		x;
-	int		y;
-	char	**map;
-
-	mlx->door = malloc(sizeof(t_door **) * mlx->map->y_max);
-	if (!mlx->door)
-		ft_error("error malloc door", true, mlx);
-	map = mlx->map->map;
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		mlx->door[y] = malloc(sizeof(t_door *) * mlx->map->x_max);
-		while (map[y][x])
-		{
-			if (map[y][x] == 'P')
-			{
-				mlx->door[y][x] = malloc(sizeof(t_door));
-				mlx->door[y][x]->open_progress = 0.0f;
-			}
-			x++;
-		}
-		y++;
-	}
-}
-
-void	free_door(t_mlx *mlx)
-{
-	int		x;
-	int		y;
 	char	**map;
 
 	map = mlx->map->map;
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (map[y][x] == 'P')
-			{
-				free(mlx->door[y][x]);
-			}
-			x++;
-		}
-		free(mlx->door[y]);
-		y++;
-	}
-	free(mlx->door);
+	if (map[y][x] == c
+		|| map[y - 1][x] == c
+		|| map[y + 1][x] == c
+		|| map[y][x + 1] == c
+		|| map[y][x - 1] == c)
+		return (true);
+	return (false);
 }
 
-void	check_open_progress(t_mlx *mlx, float dist, int x, int y)
+static void	get_door_pos(int *x, int *y, t_mlx *mlx)
 {
-	if (dist < 1.5f)
+	char	**map;
+
+	map = mlx->map->map;
+	if (map[*y][*x] == 'P')
+		return ;
+	if (map[(*y) - 1][*x] == 'P')
 	{
-		mlx->door[y][x]->open_progress += 0.02f;
-		if (mlx->door[y][x]->open_progress > 1.0f)
-			mlx->door[y][x]->open_progress = 1.0f;
+		(*y)--;
+		return ;
 	}
-	else
+	if (map[(*y) + 1][*x] == 'P')
 	{
-		mlx->door[y][x]->open_progress -= 0.02f;
-		if (mlx->door[y][x]->open_progress < 0.0f)
-			mlx->door[y][x]->open_progress = 0.0f;
+		(*y)++;
+		return ;
+	}
+	if (map[*y][(*x) + 1] == 'P')
+	{
+		(*x)++;
+		return ;
+	}
+	if (map[*y][(*x) - 1] == 'P')
+	{
+		(*x)--;
+		return ;
 	}
 }
 
-void	update_door(t_mlx *mlx, t_player *player)
+static void	deswith_door(int x, int y, t_mlx *mlx)
 {
-	int		x;
-	int		y;
-	float	dist;
-	float	dx;
-	float	dy;
+	int	my;
+	int	mx;
 
-	y = -1;
-	while (++y < mlx->map->y_max)
+	if (check_door_prox(x, y, mlx, 'P'))
+		return ;
+	my = -1;
+	while (mlx->map->map[++my])
 	{
-		x = -1;
-		while (++x < mlx->map->x_max)
+		mx = -1;
+		while (mlx->map->map[my][++mx])
 		{
-			if (mlx->map->map[y][x] == 'P' || mlx->map->map[y][x] == 'Q')
-			{
-				if (mlx->door[y][x]->open_progress != 0.0f)
-					mlx->map->map[y][x] = 'Q';
-				else
-					mlx->map->map[y][x] = 'P';
-				dx = (player->x / TEXTURE) - (x + 1.5f);
-				dy = (player->y / TEXTURE) - (y + 1.5f);
-				dist = sqrtf(dx * dx + dy * dy);
-				check_open_progress(mlx, dist, x, y);
-			}
+			if (mlx->map->map[my][mx] == 'Q' && !check_door_prox(mx, my, mlx, 'P'))
+				mlx->map->map[my][mx] = 'P';
 		}
+	}
+}
+
+void	door_handling(t_mlx *mlx, t_player *player)
+{
+	int			x;
+	int			y;
+	static int	px = 0;
+	static int	py = 0;
+
+	x = (int)floor(pixtof(player->x));
+	y = (int)floor(pixtof(player->y));
+	if (!check_door_prox(x, y, mlx, 'P') && !check_door_prox(x, y, mlx, 'Q'))
+	{
+		if (mlx->map->map[py][px] == 'Q')
+			mlx->map->map[py][px] = 'P';
+		py = 0;
+		px = 0;
+		return ;
+	}
+	else if (check_door_prox(x, y, mlx, 'P'))
+	{
+		px = x;
+		py = y;
+		get_door_pos(&px, &py, mlx);
+		mlx->map->map[py][px] = 'Q';
 	}
 }

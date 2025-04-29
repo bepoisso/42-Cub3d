@@ -138,11 +138,9 @@ void	draw_circle_minimap(t_mlx *mlx)
 
 	sqrt = init_sqrt_minimap();
 	circle = init_circle_minimap();
-	//draw_filled_circle(&circle, mlx);
 	draw_circle(&circle, mlx);
 	check_square_position(mlx, sqrt, circle);
 	circle.radius = 5;
 	circle.color = 0xFFFFFF;
 	draw_circle(&circle, mlx);
 }
-

@@ -49,7 +49,6 @@ SRC_FILES	=	main.c\
 				mouse.c\
 				time.c\
 				minimap.c\
-				fps.c\
 				door.c\
 
 

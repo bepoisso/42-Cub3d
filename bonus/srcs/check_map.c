@@ -5,13 +5,13 @@ static void	check_valid_pos(t_mlx *mlx, int x, int y, int len)
 	if (y == 0 || y == len - 1 || x == 0
 		|| x == (int)ft_strlen(mlx->map->map[y]) - 1)
 		ft_error("invalid map\n", true, mlx);
-	if (!ft_ischarset(mlx->map->map[y + 1][x], "10"))
+	if (!ft_ischarset(mlx->map->map[y + 1][x], "120"))
 		ft_error("invalid map\n", true, mlx);
-	if (!ft_ischarset(mlx->map->map[y - 1][x], "10"))
+	if (!ft_ischarset(mlx->map->map[y - 1][x], "120"))
 		ft_error("invalid map\n", true, mlx);
-	if (!ft_ischarset(mlx->map->map[y][x + 1], "10"))
+	if (!ft_ischarset(mlx->map->map[y][x + 1], "120"))
 		ft_error("invalid map\n", true, mlx);
-	if (!ft_ischarset(mlx->map->map[y][x - 1], "10"))
+	if (!ft_ischarset(mlx->map->map[y][x - 1], "120"))
 		ft_error("invalid map\n", true, mlx);
 }
 
@@ -20,13 +20,13 @@ static void	check_valid_case(t_mlx *mlx, int x, int y, int len)
 	if (y == 0 || y == len - 1 || x == 0
 		|| x == (int)ft_strlen(mlx->map->map[y]) - 1)
 		ft_error("invalid map\n", true, mlx);
-	if (!ft_ischarset(mlx->map->map[y + 1][x], "10WSNOP"))
+	if (!ft_ischarset(mlx->map->map[y + 1][x], "120WSNEP"))
 		ft_error("invalid map\n", true, mlx);
-	if (!ft_ischarset(mlx->map->map[y - 1][x], "10WSNOP"))
+	if (!ft_ischarset(mlx->map->map[y - 1][x], "120WSNEP"))
 		ft_error("invalid map\n", true, mlx);
-	if (!ft_ischarset(mlx->map->map[y][x + 1], "10WSNOP"))
+	if (!ft_ischarset(mlx->map->map[y][x + 1], "120WSNEP"))
 		ft_error("invalid map\n", true, mlx);
-	if (!ft_ischarset(mlx->map->map[y][x - 1], "10WSNOP"))
+	if (!ft_ischarset(mlx->map->map[y][x - 1], "120WSNEP"))
 		ft_error("invalid map\n", true, mlx);
 }
 
@@ -104,9 +104,9 @@ void check_char_in_map(char **map, t_mlx *mlx)
 		x = 0;
 		while (map[y][x])
 		{
-			if (!ft_ischarset(map[y][y], " 10NOWSP"))
+			if (!ft_ischarset(map[y][x], " 120NEWSP\n"))
 				ft_error("bad char in map", true, mlx);
-			if (ft_ischarset(map[y][y], " NOWSP"))
+			if (ft_ischarset(map[y][x], "NEWSP"))
 				check_valid_pos(mlx, x, y, len);
 			x++;
 		}

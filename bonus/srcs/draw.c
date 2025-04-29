@@ -83,8 +83,7 @@ int	draw_loop(t_mlx *mlx)
 	int			i;
 
 	move_player(mlx->player);
-	update_door(mlx, mlx->player);
-	clear_image(mlx);
+	door_handling(mlx, mlx->player);
 	if (mlx->player->debug)
 		debug_draw_loop(mlx);
 	else
