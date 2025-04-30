@@ -70,6 +70,12 @@ $(NAME): $(OBJS) $(LIBFT_LIB) $(LIBSX)
 $(OBJ_DIR)%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -I$(INC_DIR) -I$(MLX_DIR) -c $< -o $@
 
+$(LIBFT_LIB):
+	@make -C $(LIBFT_DIR)
+
+$(MLX_DIR)$(MLX_NAME):
+	@make -C $(MLX_DIR)
+
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 	@make -C $(MLX_DIR) > /dev/null 2>&1
