@@ -182,6 +182,8 @@ void		set_colors(t_element *element);
 void		init_struct(t_mlx *mlx, char **av);
 void		init_mlx(t_mlx *mlx);
 void		init_drawing(t_mlx *mlx, t_player *player, float start_x);
+void			check_double_player(t_map *map);
+void		init_texture_default(t_mlx *mlx);
 
 /* UTILS */
 void		ft_error(char *s, bool free, t_mlx *mlx);
@@ -221,7 +223,7 @@ void		move_key_up(t_player *player, float cos_angle, float sin_angle);
 void		move_key_down(t_player *player, float cos_angle, float sin_angle);
 void		move_key_left(t_player *player, float cos_angle, float sin_angle);
 void		move_key_right(t_player *player, float cos_angle, float sin_angle);
-void		move_key_jump(t_player *player); //NEW
+void		move_key_jump(t_player *player);
 
 /* DRAW */
 void		put_pixel(int x, int y, int color, t_mlx *mlx);

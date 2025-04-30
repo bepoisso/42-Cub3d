@@ -1,4 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bepoisso <bepoisso@student.perpignan.fr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 12:31:14 by bepoisso          #+#    #+#             */
+/*   Updated: 2025/04/30 12:31:15 by bepoisso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/cub3d.h"
 
 int	get_player_pos(t_mlx *mlx, int x, int y)
 {
@@ -74,4 +86,31 @@ char	**get_map(char **file)
 		j--;
 	}
 	return (map);
+}
+
+void	check_double_player(t_map *map)
+{
+	int		x;
+	int		y;
+	bool	check;
+
+	y = -1;
+	check = false;
+	while (map->map[++y])
+	{
+		x = -1;
+		while (map->map[y][++x])
+		{
+			if (!check)
+			{
+				if (ft_ischarset(map->map[y][x], "NSEW"))
+					check = true;
+			}
+			else if (check)
+			{
+				if (ft_ischarset(map->map[y][x], "NSEW"))
+					ft_error("Double player detected\n", true, map->mlx);
+			}
+		}
+	}
 }

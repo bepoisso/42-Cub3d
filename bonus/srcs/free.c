@@ -1,4 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bepoisso <bepoisso@student.perpignan.fr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 12:30:17 by bepoisso          #+#    #+#             */
+/*   Updated: 2025/04/30 12:30:18 by bepoisso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/cub3d.h"
 
 void	free_map(t_map *map)
 {
@@ -20,8 +32,11 @@ void	free_img(t_img *img, t_mlx *mlx)
 	free(img);
 }
 
-void	free_ellement(t_element *elm, t_mlx *mlx)
+void	free_ellement(t_mlx *mlx)
 {
+	t_element	*elm;
+
+	elm = mlx->element;
 	if (!elm)
 		return ;
 	if (elm->ea_img)
@@ -36,7 +51,7 @@ void	free_ellement(t_element *elm, t_mlx *mlx)
 		free_img(elm->bopcat1, mlx);
 	if (elm->bopcat2)
 		free_img(elm->bopcat2, mlx);
-	if(elm->door)
+	if (elm->door)
 		free_img(elm->door, mlx);
 	free(elm);
 }
@@ -60,11 +75,11 @@ void	free_mlx(t_mlx *mlx)
 void	free_all(t_mlx *mlx)
 {
 	if (!mlx)
-		return;
+		return ;
 	if (mlx->dda)
 		free(mlx->dda);
 	if (mlx->element)
-		free_ellement(mlx->element, mlx);
+		free_ellement(mlx);
 	if (mlx->player)
 		free(mlx->player);
 	if (mlx->map)

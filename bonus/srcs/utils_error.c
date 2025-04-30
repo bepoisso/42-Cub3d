@@ -1,4 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_error.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bepoisso <bepoisso@student.perpignan.fr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 12:31:41 by bepoisso          #+#    #+#             */
+/*   Updated: 2025/04/30 12:33:06 by bepoisso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/cub3d.h"
 
 void	ft_error(char *s, bool free, t_mlx *mlx)
 {
@@ -31,4 +43,13 @@ void	print_debug(t_mlx *mlx)
 		printf("path WE texture = %s\n", mlx->element->we_img->path);
 		printf("path EA texture = %s\n", mlx->element->ea_img->path);
 	}
+}
+
+/* Pardon maisj'ai plus de place */
+void	init_texture_default(t_mlx *mlx)
+{
+	mlx->element->no_img->path = ft_strdup(" ");
+	mlx->element->so_img->path = ft_strdup(" ");
+	mlx->element->we_img->path = ft_strdup(" ");
+	mlx->element->ea_img->path = ft_strdup(" ");
 }

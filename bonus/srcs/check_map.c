@@ -1,4 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bepoisso <bepoisso@student.perpignan.fr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 12:30:45 by bepoisso          #+#    #+#             */
+/*   Updated: 2025/04/30 12:30:46 by bepoisso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/cub3d.h"
 
 static void	check_valid_pos(t_mlx *mlx, int x, int y, int len)
 {
@@ -83,6 +95,6 @@ void	is_valid_map(char **map, t_mlx *mlx)
 {
 	mlx->map->temp_map = ft_copy_strs(map);
 	check_char_in_map(mlx->map->temp_map, mlx);
+	check_double_player(mlx->map);
 	flood_fill(mlx->map->temp_map, 0, 0, mlx);
-	ft_freef("%d", mlx->map->temp_map);
 }

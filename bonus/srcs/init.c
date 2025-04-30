@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bepoisso <bepoisso@student.perpignan.fr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 12:31:19 by bepoisso          #+#    #+#             */
+/*   Updated: 2025/04/30 12:31:20 by bepoisso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 static void	alloc_ellement(t_mlx *mlx, t_element *element)
@@ -17,11 +29,10 @@ void	init_struct(t_mlx *mlx, char **av)
 	init_map(mlx->temp_file, mlx->map, mlx);
 	init_player(mlx->player, mlx->map);
 	alloc_ellement(mlx, mlx->element);
+	is_valid_map(mlx->map->map, mlx);
 	init_element(mlx->temp_file, mlx);
 	if (get_player_pos(mlx, 0, -1))
 		ft_error("no player in map", true, mlx);
-	is_valid_map(mlx->map->map, mlx);
-	ft_freef("%d", mlx->temp_file);
 }
 
 void	init_mlx(t_mlx *mlx)

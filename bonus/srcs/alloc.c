@@ -1,6 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   alloc.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bepoisso <bepoisso@student.perpignan.fr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 12:30:25 by bepoisso          #+#    #+#             */
+/*   Updated: 2025/04/30 12:30:26 by bepoisso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
-t_mlx *alloc_all(void)
+static void	alloc_element(t_mlx *mlx)
+{
+	ft_memset(mlx->element->so_img, 0, sizeof(t_img));
+	mlx->element->we_img = (t_img *)malloc(sizeof(t_img));
+	ft_memset(mlx->element->we_img, 0, sizeof(t_img));
+	mlx->element->ea_img = (t_img *)malloc(sizeof(t_img));
+	ft_memset(mlx->element->ea_img, 0, sizeof(t_img));
+	mlx->element->bopcat1 = (t_img *)malloc(sizeof(t_img));
+	ft_memset(mlx->element->bopcat1, 0, sizeof(t_img));
+	mlx->element->bopcat2 = (t_img *)malloc(sizeof(t_img));
+	ft_memset(mlx->element->bopcat2, 0, sizeof(t_img));
+	mlx->element->door = (t_img *)malloc(sizeof(t_img));
+	ft_memset(mlx->element->door, 0, sizeof(t_img));
+}
+
+static void	handling_linkage(t_mlx *mlx)
+{
+	mlx->player->mlx = mlx;
+	mlx->map->mlx = mlx;
+	mlx->element->mlx = mlx;
+	mlx->element->no_img->mlx = mlx;
+	mlx->element->so_img->mlx = mlx;
+	mlx->element->ea_img->mlx = mlx;
+	mlx->element->we_img->mlx = mlx;
+}
+
+t_mlx	*alloc_all(void)
 {
 	t_mlx	*mlx;
 
@@ -17,16 +55,7 @@ t_mlx *alloc_all(void)
 	mlx->element->no_img = (t_img *)malloc(sizeof(t_img));
 	ft_memset(mlx->element->no_img, 0, sizeof(t_img));
 	mlx->element->so_img = (t_img *)malloc(sizeof(t_img));
-	ft_memset(mlx->element->so_img, 0, sizeof(t_img));
-	mlx->element->we_img = (t_img *)malloc(sizeof(t_img));
-	ft_memset(mlx->element->we_img, 0, sizeof(t_img));
-	mlx->element->ea_img = (t_img *)malloc(sizeof(t_img));
-	ft_memset(mlx->element->ea_img, 0, sizeof(t_img));
-	mlx->element->bopcat1 = (t_img *)malloc(sizeof(t_img));
-	ft_memset(mlx->element->bopcat1, 0, sizeof(t_img));
-	mlx->element->bopcat2 = (t_img *)malloc(sizeof(t_img));
-	ft_memset(mlx->element->bopcat2, 0, sizeof(t_img));
-	mlx->element->door = (t_img *)malloc(sizeof(t_img));
-	ft_memset(mlx->element->door, 0, sizeof(t_img));
+	alloc_element(mlx);
+	handling_linkage(mlx);
 	return (mlx);
 }

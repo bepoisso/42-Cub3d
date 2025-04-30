@@ -1,4 +1,16 @@
-#include <cub3d.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bepoisso <bepoisso@student.perpignan.fr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 12:31:25 by bepoisso          #+#    #+#             */
+/*   Updated: 2025/04/30 12:32:45 by bepoisso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/cub3d.h"
 
 void	draw_square_minimap(t_draw *sqrt, t_draw circle, t_mlx *mlx)
 {

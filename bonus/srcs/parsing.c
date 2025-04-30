@@ -1,4 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bepoisso <bepoisso@student.perpignan.fr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 12:31:31 by bepoisso          #+#    #+#             */
+/*   Updated: 2025/04/30 12:31:32 by bepoisso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/cub3d.h"
 
 static void	cpy_no_texture(char *str, t_element *element)
 {
@@ -8,6 +20,7 @@ static void	cpy_no_texture(char *str, t_element *element)
 	i = 2;
 	while (str[i] == ' ')
 		i++;
+	free(element->no_img->path);
 	element->no_img->path = ft_substr(str, i, ft_strlen(str) - i - 1);
 	fd = open(element->no_img->path, O_RDONLY);
 	if (fd < 0)
@@ -24,6 +37,7 @@ static void	cpy_so_texture(char *str, t_element *element)
 	i = 2;
 	while (str[i] == ' ')
 		i++;
+	free(element->so_img->path);
 	element->so_img->path = ft_substr(str, i, ft_strlen(str) - i - 1);
 	fd = open(element->so_img->path, O_RDONLY);
 	if (fd < 0)
@@ -40,6 +54,7 @@ static void	cpy_we_texture(char *str, t_element *element)
 	i = 2;
 	while (str[i] == ' ')
 		i++;
+	free(element->we_img->path);
 	element->we_img->path = ft_substr(str, i, ft_strlen(str) - i - 1);
 	fd = open(element->we_img->path, O_RDONLY);
 	if (fd < 0)
@@ -56,6 +71,7 @@ static void	cpy_ea_texture(char *str, t_element *element)
 	i = 2;
 	while (str[i] == ' ')
 		i++;
+	free(element->ea_img->path);
 	element->ea_img->path = ft_substr(str, i, ft_strlen(str) - i - 1);
 	fd = open(element->ea_img->path, O_RDONLY);
 	if (fd < 0)
@@ -68,8 +84,9 @@ void	init_element(char **str, t_mlx *mlx)
 {
 	int	i;
 
-	i = 0;
-	while (str[i])
+	i = -1;
+	init_texture_default(mlx);
+	while (str[++i])
 	{
 		if (mlx->player->debug)
 			printf("%s", str[i]);
@@ -86,10 +103,8 @@ void	init_element(char **str, t_mlx *mlx)
 			init_color(str[i], &mlx->element->floor, mlx->element);
 		if ((ft_strncmp(str[i], "C", 1) == 0))
 			init_color(str[i], &mlx->element->ceiling, mlx->element);
-		i++;
 	}
 	if (mlx->element->flag_element != 6)
 		ft_error("bad type of elements\n", true, mlx);
-	print_debug(mlx);
 	set_colors(mlx->element);
 }
