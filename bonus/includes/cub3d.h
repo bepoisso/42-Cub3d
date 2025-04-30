@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bepoisso <bepoisso@student.perpignan.fr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 12:35:39 by bepoisso          #+#    #+#             */
+/*   Updated: 2025/04/30 12:35:40 by bepoisso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -13,7 +25,7 @@
 # define SENSIBILITY 2000
 # define RATIO_MINIMAP 7
 # define ZOOM_MM 4
-# define MM_SCALE TEXTURE / ZOOM_MM
+# define MM_SCALE 16
 
 # define PI 3.14159265359
 
@@ -182,7 +194,7 @@ void		set_colors(t_element *element);
 void		init_struct(t_mlx *mlx, char **av);
 void		init_mlx(t_mlx *mlx);
 void		init_drawing(t_mlx *mlx, t_player *player, float start_x);
-void			check_double_player(t_map *map);
+void		check_double_player(t_map *map);
 void		init_texture_default(t_mlx *mlx);
 
 /* UTILS */
@@ -200,7 +212,6 @@ int			ftopix(float pos);
 void		print_hud(t_mlx *mlx);
 void		get_time(t_mlx *mlx);
 char		**ft_copy_strs(char **strs);
-
 
 /* PLAYER */
 void		init_player(t_player *player, t_map *map);
@@ -252,7 +263,5 @@ bool		is_in_circle(int x, int y, t_draw circle);
 t_draw		init_circle_minimap(void);
 void		draw_line_minimap(t_mlx *mlx, int color, int i, float steps);
 void		door_handling(t_mlx *mlx, t_player *player);
-
-
 
 #endif
