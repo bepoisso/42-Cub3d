@@ -1,0 +1,13 @@
+NO ./assets/textures/mur_1.xpm
+SO ./assets/textures/mur_2.xpm
+WE ./assets/textures/mur_3.xpm
+EA ./assets/textures/mur_4.xpm
+
+F 180,100,0
+C 200,30,0
+
+11111111
+10000001
+10000001
+1000N001
+11111111
