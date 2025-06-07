@@ -110,3 +110,11 @@ Player moves with WASD keys.
 ```
 
 This output represents the correct behavior of the program, where a 3D maze environment is generated, and the player can navigate using keyboard inputs.
+
+## Disclamer
+- 🇬🇧 This project has an educational purpose and you should under no circumstances copy and paste. Cheat is bad. Dont cheat
+
+- 🇫🇷 Ce projet a un but educatif et vous ne devez en auccun cas faire du copier coller. Tricher c'est mal. Ne trichez pas
+
+----
+©42Perpignan(bepoisso)
